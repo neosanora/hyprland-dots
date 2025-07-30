@@ -3,9 +3,9 @@
     "group/system-container": {
         "orientation": "horizontal",
         "modules": [
-            "group/battery-grp",
             "group/pacman-grp",
             "group/pulseaudio-grp",
+            "group/battery-grp",
             "group/backlight-grp"
         ]
     },

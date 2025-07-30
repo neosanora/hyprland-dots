@@ -95,7 +95,7 @@
     "interval": 5,
     "format": "󪥋 <b>{usage}%</b>",
     "max-length": 10,
-    "on-click": "",
+    "on-click": "alacritty -e htop",
     "tooltip": false
   },
 
@@ -103,7 +103,7 @@
     "interval": 5,
     "format": "󪥋 <b>{usage}%</b>",
     "max-length": 10,
-    "on-click": "",
+    "on-click": "alacritty -e nvtop",
     "tooltip": false
   },
 
@@ -111,6 +111,7 @@
     "interval": 60,
     "format": "󪤲 <b>{used}G</b>",
     "max-length": 10,
+    "on-click": "alacritty -e htop",
     "tooltip": false
   },
 
