@@ -6,6 +6,7 @@
     "~/.config/waybar/configs/custom_modules/system_container",
     "~/.config/waybar/configs/custom_modules/app_title"
   ],
+
   "layer": "top",
   "height": 20,
   "margin-top": 0,
@@ -18,11 +19,15 @@
     "custom/arrow-dec",
     "group/app-title-container"
   ],
+
   "modules-center": [
     
   ],
+  
   "modules-right": [
     "cpu",
+    "custom/dot",
+    "gpu",
     "custom/dot",
     "memory",
     "custom/dot",
@@ -32,6 +37,9 @@
     "custom/dot-alt",
     "group/privacy-container"
   ],
+
+
+
   "hyprland/workspaces": {
     "all-outputs": false,
     "active-only": "false",
@@ -70,12 +78,14 @@
       "default": "常"
     }
   },
+
   "hyprland/window": {
     "format": "{}",
     "icon": true,
     "separate-outputs": true,
     "max-length": 70
   },
+
   "tray": {
     "icon-size": 28,
     "spacing": 8
@@ -88,12 +98,22 @@
     "on-click": "",
     "tooltip": false
   },
+
+  "gpu": {
+    "interval": 5,
+    "format": "󪥋 <b>{usage}%</b>",
+    "max-length": 10,
+    "on-click": "",
+    "tooltip": false
+  },
+
   "memory": {
     "interval": 60,
     "format": "󪤲 <b>{used}G</b>",
     "max-length": 10,
     "tooltip": false
   },
+
   "network": {
     "format-wifi": "󪤀 <b>{essid}</b>",
     "format-ethernet": "󪥈 <b>Ethernet</b>",
