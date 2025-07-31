@@ -5,7 +5,7 @@
     "~/.config/waybar/configs/custom_modules/privacy_container",
     "~/.config/waybar/configs/custom_modules/system_container",
     "~/.config/waybar/configs/custom_modules/app_title",
-    "~/.config/waybar/configs/custom_modules/gpu_usage"
+    "~/.config/waybar/configs/custom_modules/nvtop_gpu"
   ],
 
   "layer": "top",
