@@ -1,0 +1,13 @@
+@import "../colors-waybar.css";
+
+label#custom-gpu {
+      background-color: @background;
+}
+
+
+#custom-gpu {
+    padding: 0 0px;
+    color: @on-background;
+    font-size: 14px;
+    color:@primary;
+}
