@@ -1,7 +1,6 @@
 @import "colors-waybar.css";
 
 label#cpu,
-label#custom-gpu,
 label#disk,
 label#temperature,
 label#memory
@@ -10,7 +9,6 @@ label#network {
 }
 
 #memory,
-#custom-gpu,
 #cpu,
 #disk,
 #temperature,
@@ -33,10 +31,6 @@ label#network {
 }
 
 #cpu {
-  color: @primary;
-}
-
-#custom-gpu {
   color: @primary;
 }
 

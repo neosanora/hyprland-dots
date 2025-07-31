@@ -4,7 +4,8 @@
     "~/.config/waybar/configs/custom_modules/modules",
     "~/.config/waybar/configs/custom_modules/privacy_container",
     "~/.config/waybar/configs/custom_modules/system_container",
-    "~/.config/waybar/configs/custom_modules/app_title"
+    "~/.config/waybar/configs/custom_modules/app_title",
+    "~/.config/waybar/config/custom_modules/gpu"
   ],
 
   "layer": "top",
@@ -97,15 +98,6 @@
     "format": "󪥋 <b>{usage}%</b>",
     "max-length": 10,
     "on-click": "alacritty -e htop",
-    "tooltip": false
-  },
-
-  "custom/gpu": {
-    "interval": 5,
-    "format": "󪥋 <b>{usage}%</b>",
-    "max-length": 10,
-    "exec": "~/.config/waybar/scripts/custom/gpu_usage.sh",
-    "on-click": "alacritty -e nvtop",
     "tooltip": false
   },
 
