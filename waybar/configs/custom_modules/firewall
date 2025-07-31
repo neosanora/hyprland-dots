@@ -1,0 +1,52 @@
+{
+    "include": [
+        "~/.config/waybar/configs/custom_modules/modules"
+    ],
+
+  "group/seftty-container": {
+    "orientation": "horizontal",
+    "modules": [
+        "custom/mode",
+        "custom/dot",
+        "custom/firewall",
+        "custom/dot",
+        "custom/dns",
+        "custom/dot",
+        "custom/vpn",
+        "custom/dot",
+        "custom/tor"
+    ]
+  },
+
+    "custom/mode": {
+        "format": "<b>{}</b>",
+        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh MODE",
+        "tooltip": false,
+        "interval": 5
+    },
+    "custom/firewall": {
+        "format": "<b>{}</b>",
+        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh FW",
+        "tooltip": false,
+        "interval": 5
+    },
+    "custom/dns": {
+        "format": "<b>{}</b>",
+        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh DNS",
+        "tooltip": false,
+        "interval": 5
+    },
+    "custom/vpn": {
+        "format": "<b>{}</b>",
+        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh VPN",
+        "tooltip": false,
+        "interval": 5
+    },
+    "custom/tor": {
+        "format": "<b>{}</b>",
+        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh TOR",
+        "tooltip": false,
+        "interval": 10
+    }
+
+}
