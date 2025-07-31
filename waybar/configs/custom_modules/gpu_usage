@@ -1,10 +1,10 @@
 {
-  "custom/gpu": {
+  "custom/gpu_usage": {
     "interval": 5,
-    "format": "󪥋 <b>{usage}</b>",
+    "format": "󪥋 <b>{}</b>",
     "max-length": 10,
     "exec": "bash ~/.config/waybar/scripts/custom/gpu_usage.sh",
     "on-click": "alacritty -e nvtop",
     "tooltip": false
-  },
+  }
 }

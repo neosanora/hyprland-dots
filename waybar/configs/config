@@ -5,7 +5,7 @@
     "~/.config/waybar/configs/custom_modules/privacy_container",
     "~/.config/waybar/configs/custom_modules/system_container",
     "~/.config/waybar/configs/custom_modules/app_title",
-    "~/.config/waybar/config/custom_modules/nvtop_gpu"
+    "~/.config/waybar/configs/custom_modules/gpu_usage"
   ],
 
   "layer": "top",
@@ -28,7 +28,7 @@
   "modules-right": [
     "cpu",
     "custom/dot",
-    "custom/gpu",
+    "custom/gpu_usage",
     "custom/dot",
     "memory",
     "custom/dot",

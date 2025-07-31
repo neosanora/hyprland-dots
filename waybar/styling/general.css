@@ -1,10 +1,12 @@
 @import "colors-waybar.css";
 
+/* Perbaikan koma dan tambahan GPU */
 label#cpu,
 label#disk,
 label#temperature,
-label#memory
-label#network {
+label#memory,
+label#network,
+label#custom-gpu_usage {
   background-color: @background;
 }
 
@@ -13,15 +15,26 @@ label#network {
 #disk,
 #temperature,
 #network,
+#custom-gpu_usage,
 #mode,
 #idle_inhibitor {
-  padding: 0 0px;
+  padding: 0 6px;
   color: @on-background;
   font-size: 14px;
 }
 
+#cpu,
+#memory,
+#custom-gpu_usage {
+  color: @primary;
+}
+
 #network.ethernet {
   color: @pastel-green;
+}
+
+#network.disconnected {
+  color: @secondary;
 }
 
 #window {
@@ -30,28 +43,10 @@ label#network {
   background-color: @background;
 }
 
-#cpu {
-  color: @primary;
-}
-
-#memory {
-  color: @primary;
-}
-
-#network {
-  color: @on-background;
-}
-
-#network.disconnected {
-  color: @secondary;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
+/* Workspaces positioning fix */
 .modules-left > widget:first-child > #workspaces {
   margin-left: 0;
 }
-
-/* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
   margin-right: 0;
 }
