@@ -27,7 +27,7 @@
   "modules-right": [
     "cpu",
     "custom/dot",
-    "gpu",
+    "custom/gpu",
     "custom/dot",
     "memory",
     "custom/dot",
@@ -35,7 +35,8 @@
     "custom/left-arrw",
     "group/system-container",
     "custom/dot-alt",
-    "group/privacy-container"
+    "group/privacy-container",
+    "group/launcher"
   ],
 
 
@@ -99,17 +100,18 @@
     "tooltip": false
   },
 
-  "gpu": {
+  "custom/gpu": {
     "interval": 5,
     "format": "󪥋 <b>{usage}%</b>",
     "max-length": 10,
+    "exec": "~/.config/waybar/scripts/custom/gpu_usage.sh",
     "on-click": "alacritty -e nvtop",
     "tooltip": false
   },
 
   "memory": {
     "interval": 60,
-    "format": "󪤲 <b>{used}G</b>",
+    "format": "󪤲 <b>{used:0.1f}G</b>",
     "max-length": 10,
     "on-click": "alacritty -e htop",
     "tooltip": false
