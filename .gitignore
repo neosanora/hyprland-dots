@@ -1,3 +1,4 @@
+# Arsip dan installer
 *.tar
 *.tar.*
 *.jar
@@ -6,9 +7,54 @@
 *.deb
 *.zip
 *.tgz
+*.xz
+*.7z
+
+# File log
 *.log
 *.log.*
-*.sig
 
+# Signature / checksum
+*.sig
+*.sha256
+*.sha512
+
+# Direktori umum yang diabaikan
 pkg/
 src/
+bin/
+build/
+out/
+
+# Editor/IDE
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+*.DS_Store
+*.idea/
+.vscode/
+
+# Python / Node / lainnya
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+node_modules/
+dist/
+
+# Backup config
+*.old
+*.backup
+*.bak
+*.orig
+*.pacnew
+*.pacsave
+*.un~
+
+# Dotfiles yang disymlink ke home, tapi aslinya di repo
+!.bashrc
+!.zshrc
+!.config/
+!.gitignore
