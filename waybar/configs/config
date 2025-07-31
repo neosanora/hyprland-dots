@@ -22,7 +22,9 @@
   ],
 
   "modules-center": [
-    
+    "custom/dot",
+
+    "custom/dot"
   ],
   
   "modules-right": [
@@ -37,6 +39,7 @@
     "group/system-container",
     "custom/dot-alt",
     "group/privacy-container",
+    "custom/left-arrw",
     "group/launcher"
   ],
 
