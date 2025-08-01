@@ -63,12 +63,26 @@ dns_check() {
 
 # Tor check
 tor_check() {
-    if curl --socks5-hostname 127.0.0.1:9050 -s https://check.torproject.org/ | grep -q "Congratulations"; then
-        echo "󪤎"
+    # Tes koneksi Tor lewat API JSON
+    local result
+    result=$(curl --socks5-hostname 127.0.0.1:9050 \
+                  --connect-timeout 2 --max-time 5 \
+                  -s https://check.torproject.org/api/ip 2>/dev/null)
+
+    # Kalau API balas "IsTor":true
+    if echo "$result" | grep -q '"IsTor":true'; then
+        echo "󪤎"  # Tor aktif
+
+    # Kalau curl gagal total (Tor service mati atau port salah)
+    elif [ -z "$result" ]; then
+        echo "󪦇"  # Tor tidak bisa dihubungi
+
+    # Kalau API nyala tapi bukan lewat Tor
     else
-        echo "󪦇"
+        echo "󪦇"  # Tor mati / tidak digunakan
     fi
 }
+
 
 # Mode check
 mode_check() {
