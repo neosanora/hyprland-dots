@@ -5,23 +5,49 @@
 
 MODE_FILE="/tmp/system_mode"
 
-# Firewall check
 firewall_check() {
-    if sudo nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
+    # Cek nftables
+    if command -v nft >/dev/null 2>&1 && nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
         echo "🛡️"
-    else
-        echo "󪥳"
+        return
     fi
+
+    # Cek firewalld
+    if command -v firewall-cmd >/dev/null 2>&1 && firewall-cmd --state 2>/dev/null | grep -q "running"; then
+        echo "🛡️"
+        return
+    fi
+
+    # Cek ufw
+    if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null | grep -q "Status: active"; then
+        echo "🛡️"
+        return
+    fi
+
+    # Cek iptables
+    if command -v iptables >/dev/null 2>&1 && iptables -L 2>/dev/null | grep -q "Chain"; then
+        echo "🛡️"
+        return
+    fi
+
+    # Kalau tidak ada yang aktif
+    echo "󪥳"
 }
 
-# VPN check + IP
 vpn_check() {
-    VPN_IF=$(ip link | grep -E 'wg0|tun0' | awk '{print $2}' | sed 's/://')
+    # Cari interface VPN umum: WireGuard, OpenVPN, ProtonVPN
+    VPN_IF=$(ip link | grep -E 'wg[0-9]|tun[0-9]|proton' | awk '{print $2}' | sed 's/://')
+
     if [[ -n "$VPN_IF" ]]; then
-        VPN_IP=$(curl -s --max-time 2 https://ipinfo.io/ip)
-        echo "🔒 $VPN_IP"
+        # Cek IP publik
+        VPN_IP=$(curl -s --max-time 2 https://ipinfo.io/org)
+        if [[ "$VPN_IP" =~ "Proton" || "$VPN_IP" =~ "Mullvad" || "$VPN_IP" =~ "VPN" ]]; then
+            echo "🔒" # VPN aktif
+        else
+            echo "⚠️" # VPN interface ada tapi bukan dari VPN publik
+        fi
     else
-        echo "󪤅"
+        echo "󪤅" # VPN tidak aktif
     fi
 }
 
