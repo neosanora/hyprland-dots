@@ -1,16 +1,10 @@
-@keyframes fadeInSlideDownBounce {
+@keyframes fadeInSlideUp {
     0% {
         opacity: 0;
-        transform: translateY(-100px); /* mulai jauh di atas */
-    }
-    60% {
-        opacity: 1;
-        transform: translateY(0); /* posisi normal */
-    }
-    80% {
-        transform: translateY(-8px); /* mantul sedikit ke atas */
+        transform: translateY(20px);
     }
     100% {
+        opacity: 1;
         transform: translateY(0);
     }
 }
@@ -22,10 +16,63 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     min-width: 320px;
     color: white;
-    animation: fadeInSlideDownBounce 0.45s cubic-bezier(0.25, 0.8, 0.5, 1);
+    animation: fadeInSlideUp 0.3s ease-out;
 }
 
 .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.dnd {
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+.notification-content {
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.notification-icon {
+    margin-right: 12px;
+}
+
+.notification-action {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 8px 14px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 8px;
+}
+.notification-action:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Airdrop iPhone style notification */
+.notification-popup {
+    border-radius: 20px;
+    background-color: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 18px 22px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    min-width: 380px;
+    max-width: 420px;
+    margin: auto;
+    animation: slide-down 0.35s ease-out;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Judul besar */
+.notification-popup .summary {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 6px;

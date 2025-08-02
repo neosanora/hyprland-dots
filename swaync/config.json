@@ -6,7 +6,7 @@
   "layer-shell": true,
   "cssPriority": "user",
   "timeout": -1,
-  "transition-time": 0,
+  "transition-time": 300,
   "keyboard-shortcuts": true,
   "notification-grouping": false,
   "image-visibility": "always",
