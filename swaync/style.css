@@ -53,21 +53,21 @@
     background-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Airdrop iPhone style notification */
+/* AirDrop iPhone Style Notification */
 .notification-popup {
     border-radius: 20px;
-    background-color: rgba(30, 30, 30, 0.85);
-    backdrop-filter: blur(20px);
+    background-color: rgba(28, 28, 30, 0.72);
+    backdrop-filter: blur(30px);
     color: white;
-    padding: 18px 22px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 14px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-weight: 500;
     min-width: 380px;
     max-width: 420px;
     margin: auto;
-    animation: slide-down 0.35s ease-out;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    animation: slide-down-bounce 0.45s ease-out;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -84,14 +84,20 @@
     line-height: 1.4;
 }
 
-/* Animasi slide down */
-@keyframes slide-down {
-    from {
-        transform: translateY(-30px);
+/* Animasi bounce ala iOS */
+@keyframes slide-down-bounce {
+    0% {
+        transform: translateY(-40px);
         opacity: 0;
     }
-    to {
+    60% {
         transform: translateY(0);
         opacity: 1;
+    }
+    80% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
