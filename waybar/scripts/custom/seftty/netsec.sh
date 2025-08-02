@@ -51,15 +51,18 @@ vpn_check() {
     fi
 }
 
-# DNS check
+
 dns_check() {
-    DNS_SERVERS=$(grep -E '^nameserver' /etc/resolv.conf | awk '{print $2}' | tr '\n' ',' | sed 's/,$//')
+    DNS_SERVERS=$(grep -E '^nameserver' /etc/resolv.conf | awk '{print $2}' | paste -sd ', ')
     if [[ -n "$DNS_SERVERS" ]]; then
-        echo "🌐 $DNS_SERVERS"
+        # Escape karakter khusus supaya JSON aman
+        TOOLTIP=$(echo "$DNS_SERVERS" | sed 's/"/\\"/g')
+        echo "{\"text\": \"🌐\", \"tooltip\": \"$TOOLTIP\"}"
     else
-        echo "󪤌"
+        echo "{\"text\": \"󪤌\", \"tooltip\": \"Tidak ada DNS\"}"
     fi
 }
+
 
 # Tor check
 tor_check() {

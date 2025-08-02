@@ -33,8 +33,8 @@
     "custom/dns": {
         "format": "<b>{}</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh DNS",
-        "tooltip": false,
-        "interval": 5
+        "interval": 60,
+        "return-type": "json"
     },
     "custom/vpn": {
         "format": "<b>{}</b>",
@@ -45,7 +45,6 @@
     "custom/tor": {
         "format": "<b>{}</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh TOR",
-        "tooltip": false,
         "interval": 10,
         "on-click": "bash ~/.config/waybar/scripts/custom/seftty/tor_toggle.sh"
     }
