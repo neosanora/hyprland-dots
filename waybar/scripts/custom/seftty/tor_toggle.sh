@@ -1,25 +1,40 @@
 #!/usr/bin/env bash
 
-# Cek apakah Tor terinstall
-if ! command -v tor &>/dev/null; then
-    notify-send "❌ Tor tidak ditemukan" "Silakan install Tor terlebih dahulu"
-    exit 1
-fi
-
-# Cek apakah service Tor ada di systemd
-if ! systemctl list-unit-files | grep -q "^tor.service"; then
-    notify-send "❌ Service Tor tidak ditemukan" "Pastikan Tor sudah terinstall dengan dukungan systemd"
-    exit 1
-fi
-
 ICON_ON="network-vpn"
 ICON_OFF="network-offline"
+PROXY_HOST="127.0.0.1"
+PROXY_PORT="9050"
 
-# Toggle Tor service
+# Fungsi untuk tes IP publik
+check_ip() {
+    curl --socks5-hostname "$PROXY_HOST:$PROXY_PORT" -s https://ipinfo.io/country 2>/dev/null
+}
+
+# Fungsi set proxy (GNOME & lingkungan desktop yang kompatibel)
+set_proxy() {
+    gsettings set org.gnome.system.proxy mode 'manual'
+    gsettings set org.gnome.system.proxy.socks host "$PROXY_HOST"
+    gsettings set org.gnome.system.proxy.socks port "$PROXY_PORT"
+}
+
+# Fungsi hapus proxy
+unset_proxy() {
+    gsettings set org.gnome.system.proxy mode 'none'
+}
+
+# Toggle Tor
 if systemctl is-active --quiet tor; then
     pkexec systemctl stop tor
+    unset_proxy
     notify-send "Tor" "❌ Tor dimatikan" -i "$ICON_OFF" --expire-time=2000
 else
     pkexec systemctl start tor
-    notify-send "Tor" "✅ Tor dinyalakan" -i "$ICON_ON" --expire-time=2000
+    sleep 3 # tunggu Tor siap
+    set_proxy
+    COUNTRY=$(check_ip)
+    if [[ "$COUNTRY" != "ID" && "$COUNTRY" != "" ]]; then
+        notify-send "Tor" "✅ Tor aktif - IP diubah ($COUNTRY)" -i "$ICON_ON" --expire-time=3000
+    else
+        notify-send "Tor" "⚠️ Tor aktif tapi IP belum berubah" -i "$ICON_OFF" --expire-time=3000
+    fi
 fi
