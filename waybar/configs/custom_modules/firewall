@@ -21,14 +21,16 @@
     "custom/mode": {
         "format": "<b>{}</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh MODE",
-        "tooltip": false,
-        "interval": 5
+        "interval": 5,
+        "return-type": "json"
+
     },
     "custom/firewall": {
         "format": "<b>{}</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh FW",
-        "tooltip": false,
-        "interval": 5
+        "interval": 60,
+        "return-type": "json"
+
     },
     "custom/dns": {
         "format": "<b>{}</b>",
@@ -39,14 +41,17 @@
     "custom/vpn": {
         "format": "<b>{}</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh VPN",
-        "tooltip": false,
-        "interval": 5
+        "interval": 5,        
+        "return-type": "json"
+
     },
     "custom/tor": {
         "format": "<b>{}</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh TOR",
         "interval": 10,
-        "on-click": "bash ~/.config/waybar/scripts/custom/seftty/tor_toggle.sh"
+        "on-click": "bash ~/.config/waybar/scripts/custom/seftty/tor_toggle.sh",
+        "return-type": "json"
+
     }
 
 }

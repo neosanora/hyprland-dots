@@ -8,30 +8,35 @@ MODE_FILE="/tmp/system_mode"
 firewall_check() {
     # Cek nftables
     if command -v nft >/dev/null 2>&1 && nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
-        echo "🛡️"
+        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
+
         return
     fi
 
     # Cek firewalld
     if command -v firewall-cmd >/dev/null 2>&1 && firewall-cmd --state 2>/dev/null | grep -q "running"; then
-        echo "🛡️"
+        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
+
         return
     fi
 
     # Cek ufw
     if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null | grep -q "Status: active"; then
-        echo "🛡️"
+        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
+
         return
     fi
 
     # Cek iptables
     if command -v iptables >/dev/null 2>&1 && iptables -L 2>/dev/null | grep -q "Chain"; then
-        echo "🛡️"
+        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
+
         return
     fi
 
     # Kalau tidak ada yang aktif
-    echo "󪥳"
+    echo "{\"text\": \"󪥳\", \"tooltip\": \"FIREWALL tidak aktif\"}"
+
 }
 
 vpn_check() {
@@ -42,12 +47,14 @@ vpn_check() {
         # Cek IP publik
         VPN_IP=$(curl -s --max-time 2 https://ipinfo.io/org)
         if [[ "$VPN_IP" =~ "Proton" || "$VPN_IP" =~ "Mullvad" || "$VPN_IP" =~ "VPN" ]]; then
-            echo "🔒" # VPN aktif
+            echo "{\"text\": \"🔒\", \"tooltip\": \"VPN aktif\"}"
+
         else
-            echo "⚠️" # VPN interface ada tapi bukan dari VPN publik
+            echo "{\"text\": \"⚠️\", \"tooltip\": \"VPN interface ada tapi bukan dari VPN publik\"}"
         fi
     else
-        echo "󪤅" # VPN tidak aktif
+        echo "{\"text\": \"󪤅\", \"tooltip\": \"Tor mati /VPN tidak aktif\"}"
+
     fi
 }
 
@@ -74,15 +81,15 @@ tor_check() {
 
     # Kalau API balas "IsTor":true
     if echo "$result" | grep -q '"IsTor":true'; then
-        echo "󪤎"  # Tor aktif
-
+        echo "{\"text\": \"󪤎\", \"tooltip\": \"ON\"}"
     # Kalau curl gagal total (Tor service mati atau port salah)
     elif [ -z "$result" ]; then
-        echo "󪦇"  # Tor tidak bisa dihubungi
+        echo "{\"text\": \"󪦇\", \"tooltip\": \"Tor tidak bisa dihubungi\"}"
 
     # Kalau API nyala tapi bukan lewat Tor
     else
-        echo "󪦇"  # Tor mati / tidak digunakan
+        echo "{\"text\": \"󪦇\", \"tooltip\": \"Tor mati / tidak digunakan\"}"
+
     fi
 }
 
