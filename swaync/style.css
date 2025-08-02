@@ -1,37 +1,14 @@
-/* --- AirDrop iPhone Style for swaync (Clean Merge) --- */
+/* --- AirDrop iPhone Style for swaync (GTK Compatible, Smooth) --- */
 
-/* Animasi masuk kombinasi fade + bounce ala iOS */
-@keyframes airdrop-fade-bounce {
-    0% {
-        transform: translateY(-40px);
-        opacity: 0;
-    }
-    60% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    80% {
-        transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-/* Container utama notifikasi */
+/* Notifikasi utama */
 .notification-popup {
     border-radius: 20px;
     background-color: rgba(28, 28, 30, 0.72);
-    backdrop-filter: blur(30px);
     color: white;
-    padding: 14px 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 14px;
+    font-family: "SF Pro Display", "SF Pro Text", Roboto, sans-serif;
     font-size: 16px;
     font-weight: 500;
-    min-width: 380px;
-    max-width: 420px;
-    margin: auto;
-    animation: airdrop-fade-bounce 0.45s ease-out;
     box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
@@ -74,10 +51,9 @@
     background: transparent;
 }
 
-/* Setiap kartu notifikasi di Control Center */
+/* Kartu notifikasi di Control Center */
 .notifications .notification {
     background-color: rgba(28, 28, 30, 0.72);
-    backdrop-filter: blur(30px);
     border-radius: 16px;
     padding: 12px 16px;
     margin-bottom: 8px;
@@ -87,5 +63,50 @@
 
 /* Hover di Control Center */
 .notifications .notification:hover {
+    background-color: rgba(38, 38, 40, 0.75);
+}
+/* --- Control Center / Menu Panel --- */
+.control-center {
+    background-color: rgba(28, 28, 30, 0.80);
+    border-radius: 20px;
+    padding: 12px;
+    margin: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    color: white;
+}
+
+/* Title Bar di Menu */
+.control-center .title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 6px;
+}
+
+/* Tombol DND di Menu */
+.control-center .dnd {
+    font-size: 14px;
+    color: #d1d1d1;
+    margin-bottom: 10px;
+}
+
+/* List Notifikasi di Menu */
+.control-center .notifications {
+    background: transparent;
+}
+
+/* Kartu Notifikasi di Menu */
+.control-center .notifications .notification {
+    background-color: rgba(28, 28, 30, 0.72);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    color: white;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+/* Hover pada Kartu Notifikasi di Menu */
+.control-center .notifications .notification:hover {
     background-color: rgba(38, 38, 40, 0.75);
 }
