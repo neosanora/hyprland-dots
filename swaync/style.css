@@ -1,0 +1,50 @@
+@keyframes fadeInSlideDownBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px); /* mulai jauh di atas */
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(0); /* posisi normal */
+    }
+    80% {
+        transform: translateY(-8px); /* mantul sedikit ke atas */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.notification-window {
+    background-color: rgba(28, 28, 30, 0.88);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    min-width: 320px;
+    color: white;
+    animation: fadeInSlideDownBounce 0.45s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Isi notifikasi */
+.notification-popup .body {
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Animasi slide down */
+@keyframes slide-down {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
