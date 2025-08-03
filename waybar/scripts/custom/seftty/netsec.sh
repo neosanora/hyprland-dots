@@ -6,36 +6,33 @@
 MODE_FILE="/tmp/system_mode"
 
 firewall_check() {
-    # Cek nftables
-    if command -v nft >/dev/null 2>&1 && nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
-        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
+    ACTIVE_FILE="$HOME/.config/nftables/.active_filter"
 
-        return
+    # Pastikan nftables terpasang
+    if ! command -v nft >/dev/null 2>&1; then
+        echo '{"text": "❌", "tooltip": "nftables tidak terpasang"}'
+        exit 1
     fi
 
-    # Cek firewalld
-    if command -v firewall-cmd >/dev/null 2>&1 && firewall-cmd --state 2>/dev/null | grep -q "running"; then
-        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
-
-        return
+    # Cek service aktif atau tidak
+    if ! systemctl is-active --quiet nftables; then
+        echo '{"text": "❌", "tooltip": "Firewall mati"}'
+        exit 0
     fi
 
-    # Cek ufw
-    if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null | grep -q "Status: active"; then
-        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
-
-        return
+    # Service aktif → cek rules
+    if nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
+        # Ada table inet filter → hijau
+        if [[ -f "$ACTIVE_FILE" ]]; then
+            FILTER_NAME=$(cat "$ACTIVE_FILE")
+        else
+            FILTER_NAME="default"
+        fi
+        echo "{\"text\": \"🛡️[$FILTER_NAME]\", \"tooltip\": \"Firewall aktif - Filter: $FILTER_NAME\"}"
+    else
+        # Service aktif tapi rules kosong → kuning
+        echo '{"text": "⚠️", "tooltip": "Firewall aktif tapi rules kosong"}'
     fi
-
-    # Cek iptables
-    if command -v iptables >/dev/null 2>&1 && iptables -L 2>/dev/null | grep -q "Chain"; then
-        echo "{\"text\": \"🛡️\", \"tooltip\": \"FIREWALL aktif\"}"
-
-        return
-    fi
-
-    # Kalau tidak ada yang aktif
-    echo "{\"text\": \"󪥳\", \"tooltip\": \"FIREWALL tidak aktif\"}"
 
 }
 

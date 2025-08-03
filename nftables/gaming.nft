@@ -1,0 +1,20 @@
+table inet filter {
+    chain input {
+        type filter hook input priority 0;
+        policy drop;
+
+        iif "lo" accept;
+        ct state established,related accept;
+
+        # SSH
+        tcp dport ssh accept;
+
+        # Contoh game server (misal CS:GO / Source Engine)
+        tcp dport 27015 accept;
+        udp dport 27015 accept;
+
+        # Minecraft server (contoh)
+        tcp dport 25565 accept;
+        udp dport 25565 accept;
+    }
+}
