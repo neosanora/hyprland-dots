@@ -19,25 +19,20 @@ tor
 EOF
 }
 
-# Cek rules aktif
-if nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
-    pkexec nft flush ruleset
-    notify-send "Firewall" "❌ Firewall dimatikan" -i "$ICON_OFF" --expire-time=2000
-    rm -f "$ACTIVE_FILE"
-else
-    FILTER_NAME=$(choose_filter)
-    [[ -z "$FILTER_NAME" ]] && FILTER_NAME="default"
+FILTER_NAME=$(choose_filter)
+[[ -z "$FILTER_NAME" ]] && exit 0  # batal kalau tidak pilih
 
-    FILTER_FILE="$NFT_CONF_DIR/$FILTER_NAME.nft"
-    if [[ -f "$FILTER_FILE" ]]; then
-        pkexec nft -f "$FILTER_FILE"
-    else
-        pkexec nft -f "$DEFAULT_CONF"
-    fi
+FILTER_FILE="$NFT_CONF_DIR/$FILTER_NAME.nft"
+[[ ! -f "$FILTER_FILE" ]] && FILTER_FILE="$DEFAULT_CONF"
 
-    echo "$FILTER_NAME" > "$ACTIVE_FILE"
-    notify-send "Firewall" "✅ Firewall aktif - Filter: $FILTER_NAME" -i "$ICON_ON" --expire-time=2000
-fi
+# Ganti filter (flush ruleset dulu biar bersih)
+pkexec nft flush ruleset
+pkexec nft -f "$FILTER_FILE"
+
+# Simpan nama filter aktif
+echo "$FILTER_NAME" > "$ACTIVE_FILE"
+
+notify-send "Firewall" "✅ Firewall aktif - Filter: $FILTER_NAME" -i "$ICON_ON" --expire-time=2000
 
 # Paksa Waybar refresh
 pkill -RTMIN+8 waybar
