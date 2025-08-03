@@ -1,0 +1,20 @@
+table inet filter {
+    chain input {
+        type filter hook input priority 0;
+        policy drop;
+
+        iif "lo" accept;
+        ct state established,related accept;
+
+        # VPN interface
+        iifname "wg0" accept
+        iifname "tun0" accept
+
+        # SSH (opsional)
+        tcp dport ssh accept;
+
+        # ICMP / ping
+        ip protocol icmp accept;
+        ip6 nexthdr icmpv6 accept;
+    }
+}

@@ -14,17 +14,17 @@ default
 strict
 gaming
 web
+vpn
+tor
 EOF
 }
 
 # Cek rules aktif
 if nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
-    # Matikan firewall (flush rules)
     pkexec nft flush ruleset
     notify-send "Firewall" "❌ Firewall dimatikan" -i "$ICON_OFF" --expire-time=2000
     rm -f "$ACTIVE_FILE"
 else
-    # Pilih filter
     FILTER_NAME=$(choose_filter)
     [[ -z "$FILTER_NAME" ]] && FILTER_NAME="default"
 
@@ -38,3 +38,6 @@ else
     echo "$FILTER_NAME" > "$ACTIVE_FILE"
     notify-send "Firewall" "✅ Firewall aktif - Filter: $FILTER_NAME" -i "$ICON_ON" --expire-time=2000
 fi
+
+# Paksa Waybar refresh
+pkill -RTMIN+8 waybar

@@ -43,6 +43,7 @@
         "format": "<b>{}</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh VPN",
         "interval": 5,        
+        "on-click":"protonvpn-app",
         "return-type": "json"
 
     },

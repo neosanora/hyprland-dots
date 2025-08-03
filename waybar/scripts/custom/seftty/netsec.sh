@@ -11,7 +11,6 @@ escape_json() {
 }
 
 firewall_check() {
-    #!/usr/bin/env bash
     ACTIVE_FILE="$HOME/.config/nftables/.active_filter"
 
     if nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
@@ -19,11 +18,15 @@ firewall_check() {
         if [[ -f "$ACTIVE_FILE" ]]; then
             FILTER_NAME=$(tr -d '\n\r' < "$ACTIVE_FILE")
         fi
-        echo "{\"text\": \"🛡️[$(escape_json "$FILTER_NAME")]\", \"tooltip\": \"Firewall aktif - Filter: $(escape_json "$FILTER_NAME")\"}"
+        case "$FILTER_NAME" in
+            vpn) ICON="🛡️[vpn]" ;;
+            tor) ICON="🛡️[tor]" ;;
+            *) ICON="🛡️[$FILTER_NAME]" ;;
+        esac
+        echo "{\"text\": \"$(escape_json "$ICON")\", \"tooltip\": \"Firewall aktif - Filter: $(escape_json "$FILTER_NAME")\"}"
     else
         echo '{"text": "❌", "tooltip": "Firewall mati"}'
     fi
-
 
 }
 
