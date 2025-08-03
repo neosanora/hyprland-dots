@@ -1,104 +1,78 @@
 #!/usr/bin/env bash
 # Script status Firewall + VPN + DNS + Tor
-# Pastikan nftables & curl terinstall
-# Untuk sudo tanpa password: atur di sudoers
+# Aman JSON untuk Waybar
+# Tidak akan keluar kosong → selalu return JSON valid
 
 MODE_FILE="/tmp/system_mode"
 
+# Fungsi escape untuk tooltip supaya JSON aman
+escape_json() {
+    echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'
+}
+
 firewall_check() {
+    #!/usr/bin/env bash
     ACTIVE_FILE="$HOME/.config/nftables/.active_filter"
 
-    # Pastikan nftables terpasang
-    if ! command -v nft >/dev/null 2>&1; then
-        echo '{"text": "❌", "tooltip": "nftables tidak terpasang"}'
-        exit 1
-    fi
-
-    # Cek service aktif atau tidak
-    if ! systemctl is-active --quiet nftables; then
-        echo '{"text": "❌", "tooltip": "Firewall mati"}'
-        exit 0
-    fi
-
-    # Service aktif → cek rules
     if nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
-        # Ada table inet filter → hijau
+        FILTER_NAME="default"
         if [[ -f "$ACTIVE_FILE" ]]; then
-            FILTER_NAME=$(cat "$ACTIVE_FILE")
-        else
-            FILTER_NAME="default"
+            FILTER_NAME=$(tr -d '\n\r' < "$ACTIVE_FILE")
         fi
-        echo "{\"text\": \"🛡️[$FILTER_NAME]\", \"tooltip\": \"Firewall aktif - Filter: $FILTER_NAME\"}"
+        echo "{\"text\": \"🛡️[$(escape_json "$FILTER_NAME")]\", \"tooltip\": \"Firewall aktif - Filter: $(escape_json "$FILTER_NAME")\"}"
     else
-        # Service aktif tapi rules kosong → kuning
-        echo '{"text": "⚠️", "tooltip": "Firewall aktif tapi rules kosong"}'
+        echo '{"text": "❌", "tooltip": "Firewall mati"}'
     fi
+
 
 }
 
 vpn_check() {
-    # Cari interface VPN umum: WireGuard, OpenVPN, ProtonVPN
     VPN_IF=$(ip link | grep -E 'wg[0-9]|tun[0-9]|proton' | awk '{print $2}' | sed 's/://')
 
     if [[ -n "$VPN_IF" ]]; then
-        # Cek IP publik
         VPN_IP=$(curl -s --max-time 2 https://ipinfo.io/org)
         if [[ "$VPN_IP" =~ "Proton" || "$VPN_IP" =~ "Mullvad" || "$VPN_IP" =~ "VPN" ]]; then
-            echo "{\"text\": \"🔒\", \"tooltip\": \"VPN aktif\"}"
-
+            echo '{"text": "🔒", "tooltip": "VPN aktif"}'
         else
-            echo "{\"text\": \"⚠️\", \"tooltip\": \"VPN interface ada tapi bukan dari VPN publik\"}"
+            echo '{"text": "⚠️", "tooltip": "VPN interface ada tapi bukan dari VPN publik"}'
         fi
     else
-        echo "{\"text\": \"󪤅\", \"tooltip\": \"Tor mati /VPN tidak aktif\"}"
-
+        echo '{"text": "󪤅", "tooltip": "VPN tidak aktif"}'
     fi
 }
-
 
 dns_check() {
     DNS_SERVERS=$(grep -E '^nameserver' /etc/resolv.conf | awk '{print $2}' | paste -sd ', ')
     if [[ -n "$DNS_SERVERS" ]]; then
-        # Escape karakter khusus supaya JSON aman
-        TOOLTIP=$(echo "$DNS_SERVERS" | sed 's/"/\\"/g')
+        TOOLTIP=$(escape_json "$DNS_SERVERS")
         echo "{\"text\": \"🌐\", \"tooltip\": \"$TOOLTIP\"}"
     else
-        echo "{\"text\": \"󪤌\", \"tooltip\": \"Tidak ada DNS\"}"
+        echo '{"text": "󪤌", "tooltip": "Tidak ada DNS"}'
     fi
 }
 
-
-# Tor check
 tor_check() {
-    # Tes koneksi Tor lewat API JSON
-    local result
     result=$(curl --socks5-hostname 127.0.0.1:9050 \
                   --connect-timeout 2 --max-time 5 \
                   -s https://check.torproject.org/api/ip 2>/dev/null)
 
-    # Kalau API balas "IsTor":true
     if echo "$result" | grep -q '"IsTor":true'; then
-        echo "{\"text\": \"󪤎\", \"tooltip\": \"ON\"}"
-    # Kalau curl gagal total (Tor service mati atau port salah)
+        echo '{"text": "󪤎", "tooltip": "Tor aktif"}'
     elif [ -z "$result" ]; then
-        echo "{\"text\": \"󪦇\", \"tooltip\": \"Tor tidak bisa dihubungi\"}"
-
-    # Kalau API nyala tapi bukan lewat Tor
+        echo '{"text": "󪦇", "tooltip": "Tor tidak bisa dihubungi"}'
     else
-        echo "{\"text\": \"󪦇\", \"tooltip\": \"Tor mati / tidak digunakan\"}"
-
+        echo '{"text": "󪦇", "tooltip": "Tor mati / tidak digunakan"}'
     fi
 }
 
-
-# Mode check
 mode_check() {
     if [[ -f "$MODE_FILE" ]]; then
         MODE=$(cat "$MODE_FILE")
     else
         MODE="gaming"
     fi
-    [[ "$MODE" == "privacy" ]] && echo "󪥴" || echo "󪤳"
+    [[ "$MODE" == "privacy" ]] && echo '{"text": "󪥴", "tooltip": "Mode Privacy"}' || echo '{"text": "󪤳", "tooltip": "Mode Gaming"}'
 }
 
 # Argument handling
@@ -108,5 +82,5 @@ case "$1" in
     DNS) dns_check ;;
     TOR) tor_check ;;
     MODE) mode_check ;;
-    *) exit ;;
+    *) echo '{"text": "❓", "tooltip": "Argumen tidak valid"}' ;;
 esac

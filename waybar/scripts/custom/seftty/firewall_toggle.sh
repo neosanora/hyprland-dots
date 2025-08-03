@@ -17,11 +17,14 @@ web
 EOF
 }
 
-if systemctl is-active --quiet nftables; then
-    pkexec systemctl stop nftables
+# Cek rules aktif
+if nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
+    # Matikan firewall (flush rules)
+    pkexec nft flush ruleset
     notify-send "Firewall" "❌ Firewall dimatikan" -i "$ICON_OFF" --expire-time=2000
     rm -f "$ACTIVE_FILE"
 else
+    # Pilih filter
     FILTER_NAME=$(choose_filter)
     [[ -z "$FILTER_NAME" ]] && FILTER_NAME="default"
 
@@ -33,6 +36,5 @@ else
     fi
 
     echo "$FILTER_NAME" > "$ACTIVE_FILE"
-    pkexec systemctl start nftables
     notify-send "Firewall" "✅ Firewall aktif - Filter: $FILTER_NAME" -i "$ICON_ON" --expire-time=2000
 fi
