@@ -1,12 +1,75 @@
+# Firewall Tor Only Mode
+
+# ======================
+# Filter Rules
+# ======================
 table inet filter {
     chain input {
         type filter hook input priority 0;
         policy drop;
 
+        # Loopback
         iif "lo" accept;
+
+        # Established & Related
         ct state established,related accept;
 
-        # Port default Tor OR connection control
-        tcp dport { 9050, 9051 } accept;
+        # Tor SOCKS + Control Port
+        tcp dport { 9050, 9051, 9040 } accept;
+
+        # Tor DNS Port
+        udp dport 5353 accept;
+    }
+
+    chain output {
+        type filter hook output priority 0;
+        policy drop;
+
+        # Loopback
+        oif "lo" accept;
+
+        # Established & Related
+        ct state established,related accept;
+
+        # Izinkan proses milik user Tor
+        meta skuid tor accept;
+
+        # Tor SOCKS + Control Port
+        tcp dport { 9050, 9051, 9040 } accept;
+
+        # Tor DNS Port
+        udp dport 5353 accept;
+    }
+}
+
+# ======================
+# NAT Redirect Rules
+# ======================
+table ip nat {
+    chain output {
+        type nat hook output priority 0;
+
+        # Koneksi dari user Tor → jangan di-redirect
+        meta skuid tor return
+
+        # Localhost → jangan di-redirect
+        ip daddr 127.0.0.1 return
+
+        # Semua TCP dialihkan ke Tor TransPort (9040)
+        tcp dport != { 9050, 9051, 9040 } redirect to 9040
+    }
+}
+
+# ======================
+# IPv6 Block
+# ======================
+table ip6 filter {
+    chain input {
+        type filter hook input priority 0;
+        policy drop;
+    }
+    chain output {
+        type filter hook output priority 0;
+        policy drop;
     }
 }
