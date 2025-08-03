@@ -13,21 +13,41 @@ escape_json() {
 firewall_check() {
     ACTIVE_FILE="$HOME/.config/nftables/.active_filter"
 
-    if nft list ruleset 2>/dev/null | grep -q "table inet filter"; then
-        FILTER_NAME="default"
-        if [[ -f "$ACTIVE_FILE" ]]; then
-            FILTER_NAME=$(tr -d '\n\r' < "$ACTIVE_FILE")
-        fi
-        case "$FILTER_NAME" in
-            vpn) ICON="🛡️[vpn]" ;;
-            tor) ICON="🛡️[tor]" ;;
-            *) ICON="🛡️[$FILTER_NAME]" ;;
+    # Mapping filter ke icon
+    get_icon_for_filter() {
+        case "$1" in
+            default) echo "🟢" ;;  # default
+            strict)  echo "🔴" ;;  # strict mode
+            gaming)  echo "🎮" ;;  # gaming
+            web)     echo "🌐" ;;  # web mode
+            vpn)     echo "🛜" ;;  # vpn
+            tor)     echo "🧅" ;;  # tor
+            *)       echo "🛡️" ;;  # fallback
         esac
-        echo "{\"text\": \"$(escape_json "$ICON")\", \"tooltip\": \"Firewall aktif - Filter: $(escape_json "$FILTER_NAME")\"}"
-    else
-        echo '{"text": "❌", "tooltip": "Firewall mati"}'
-    fi
+    }
 
+    if [[ -f "$ACTIVE_FILE" ]]; then
+        # Firewall aktif berdasarkan file
+        FILTER_NAME=$(head -n 1 "$ACTIVE_FILE" | tr -d '\n\r')
+        [[ -z "$FILTER_NAME" ]] && FILTER_NAME="default"
+
+        ICON=$(get_icon_for_filter "$FILTER_NAME")
+        TOOLTIP="Firewall aktif - Filter: $FILTER_NAME"
+        echo "{\"text\": \"$ICON\", \"tooltip\": \"$(escape_json "$TOOLTIP")\"}"
+
+    elif nft list ruleset 2>/dev/null | grep -qE "table (inet|ip|ip6) .*filter"; then
+        # Firewall aktif tapi tidak ada file filter
+        FILTER_NAME="default"
+        ICON=$(get_icon_for_filter "$FILTER_NAME")
+        TOOLTIP="Firewall aktif - Filter: $FILTER_NAME"
+        echo "{\"text\": \"$ICON\", \"tooltip\": \"$(escape_json "$TOOLTIP")\"}"
+
+    else
+        # Firewall mati
+        ICON="❌"
+        TOOLTIP="⚠️ Firewall mati"
+        echo "{\"text\": \"$ICON\", \"tooltip\": \"$(escape_json "$TOOLTIP")\"}"
+    fi
 }
 
 vpn_check() {
