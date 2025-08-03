@@ -16,12 +16,12 @@ firewall_check() {
     # Mapping filter ke icon
     get_icon_for_filter() {
         case "$1" in
-            default) echo "🟢" ;;  # default
-            strict)  echo "🔴" ;;  # strict mode
-            gaming)  echo "🎮" ;;  # gaming
-            web)     echo "🌐" ;;  # web mode
-            vpn)     echo "🛜" ;;  # vpn
-            tor)     echo "🧅" ;;  # tor
+            default) echo "󰞉" ;;  # default
+            strict)  echo "󱛆" ;;  # strict mode
+            gaming)  echo "" ;;  # gaming
+            web)     echo "󰮡" ;;  # web mode
+            vpn)     echo "󱚿" ;;  # vpn
+            tor)     echo "󰯚" ;;  # tor
             *)       echo "🛡️" ;;  # fallback
         esac
     }
@@ -83,9 +83,9 @@ tor_check() {
     if echo "$result" | grep -q '"IsTor":true'; then
         echo '{"text": "󪤎", "tooltip": "Tor aktif"}'
     elif [ -z "$result" ]; then
-        echo '{"text": "󪦇", "tooltip": "Tor tidak bisa dihubungi"}'
+        echo '{"text": "󰋼", "tooltip": "Tor tidak bisa dihubungi"}'
     else
-        echo '{"text": "󪦇", "tooltip": "Tor mati / tidak digunakan"}'
+        echo '{"text": "", "tooltip": "Tor mati / tidak digunakan"}'
     fi
 }
 
