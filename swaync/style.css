@@ -1,62 +1,62 @@
-@define-color cc-bg rgba(22, 22, 29, 0.55);
-@define-color noti-border-color #dcd7ba;
-@define-color noti-bg rgba(17, 17, 27, 0.55);
-@define-color noti-bg-darker rgba(43, 43, 57, 0.55);
-@define-color noti-bg-hover rgba(27, 27, 43, 0.65);
-@define-color noti-bg-focus rgba(27, 27, 43, 0.65);
-@define-color noti-close-bg #dcd7ba;
-@define-color noti-close-bg-hover #dcd7ba;
-@define-color text-color #dcd7ba;
-@define-color text-color-disabled #828282;
-@define-color bg-selected #7e9cd8;
-@define-color border-green #76946a;
-@define-color red-base #c34043;
-@define-color red-hover #e46876;
-@define-color green-base #98bb6c;
-@define-color blue-base #7e9cd8;
+/*////////////////////////
+/// Warna dan Variabel ///
+////////////////////////*/
+@define-color cc-bg rgba(22, 22, 29, 0.50); /* Semi-transparan background utama */
+@define-color noti-border-color #dcd7ba; /* Warna border notifikasi */
+@define-color noti-bg rgba(17, 17, 27, 0.50); /* Latar belakang notifikasi */
+@define-color noti-bg-darker rgba(43, 43, 57, 0.50); /* Latar belakang elemen widget/notifikasi yang lebih gelap */
+@define-color noti-bg-hover rgba(27, 27, 43, 0.65); /* Warna saat hover */
+@define-color noti-bg-focus rgba(27, 27, 43, 0.65); /* Warna saat fokus */
+@define-color noti-close-bg #dcd7ba; /* Warna tombol close */
+@define-color noti-close-bg-hover #dcd7ba; /* Warna tombol close saat hover */
+@define-color text-color #dcd7ba; /* Warna teks utama */
+@define-color text-color-disabled #828282; /* Warna teks nonaktif */
+@define-color bg-selected #7e9cd8; /* Warna elemen terpilih */
+@define-color border-green #76946a; /* Warna border hijau */
+@define-color red-base #c34043; /* Warna dasar merah */
+@define-color red-hover #e46876; /* Warna merah saat hover */
+@define-color green-base #98bb6c; /* Warna hijau dasar */
+@define-color blue-base #7e9cd8; /* Warna biru dasar */
+
+/*/////////////////////////
+/// Reset Global Style  ///
+/////////////////////////*/
 
 * {
-  font-family: "JetBrainsMono NFM SemiBold", monospace;
-  border-radius: 0;
+  font-family: "JetBrainsMono NFM SemiBold", monospace; /* Font utama */
+  border-radius: 0; /* Default tanpa sudut bundar */
 }
 
-.control-center .notification-row:focus,
-.control-center .notification-row:hover {
-  opacity: 1;
-  background: @noti-bg-darker;
+/*//////////////////////////
+/// Control Center Block ///
+//////////////////////////*/
+.control-center {
+  background: @cc-bg;
+  background-image: url("file:///home/neo/.config/Gsetting/wallpapers/swaync.png"); /* Ganti USERNAME */
+  background-size: cover;
+  background-position: center;
+  border: 2px solid @border-green;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
 }
 
-.notification-row {
-  outline: none;
-  margin: 0;
-  padding: 0;
-}
-
+/*//////////////////////////
+/// Notifikasi Block     ///
+//////////////////////////*/
 .notification,
 .notification-content,
 .notification-action,
 .notification-default-action,
 .inline-reply-entry,
-.inline-reply-button,
-.widget-title,
-.widget-title>button,
-.widget-dnd,
-.widget-dnd>switch,
-.widget-dnd>switch slider,
-.widget-label>label,
-.widget-buttons-grid,
-.widget-buttons-grid>flowbox>flowboxchild>button,
-.widget-volume,
-.widget-backlight,
-.widget-mpris,
-.widget-mpris>box>button,
-.widget-mpris-player,
-.widget-mpris-album-art {
-  border-radius: 12px; /* sedikit bundar */
+.inline-reply-button {
+  border-radius: 12px;
 }
 
 .notification {
-  background: @cc-bg;
+  background: @noti-bg;
+  background-image: url("file:///home/neo/.config/Gsetting/wallpapers/swaync.png");
+  background-size: cover;
+  background-position: center;
   border: 2px solid @border-green;
   margin: 3px -2px 3px 0;
   backdrop-filter: blur(15px);
@@ -71,7 +71,7 @@
   margin-right: 5px;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  border-radius: 50%; /* tombol close bundar */
+  border-radius: 50%;
   border: none;
 }
 
@@ -121,38 +121,35 @@
   background: @noti-bg-hover;
 }
 
+.summary,
+.time,
+.body {
+  background: transparent;
+  text-shadow: none;
+}
+
 .summary {
   font-size: 16px;
   font-weight: 700;
-  background: transparent;
   color: @green-base;
-  text-shadow: none;
 }
 
 .time {
   font-size: 16px;
   font-weight: 700;
-  background: transparent;
   color: @text-color;
-  text-shadow: none;
   margin-right: 18px;
 }
 
 .body {
   font-size: 15px;
   font-weight: 400;
-  background: transparent;
   color: @text-color;
-  text-shadow: none;
 }
 
-.control-center {
-  background: @cc-bg;
-  border: 2px solid @border-green;
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-}
-
+/*/////////////////////////
+/// Widgets Title & DND ///
+/////////////////////////*/
 .widget-title {
   color: @blue-base;
   background: @noti-bg-darker;
@@ -194,6 +191,9 @@
   border: 1px solid @red-base;
 }
 
+/*//////////////////////////
+/// Widgets Tambahan     ///
+//////////////////////////*/
 .widget-label>label {
   font-size: 1rem;
   color: @text-color;
