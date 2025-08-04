@@ -75,19 +75,26 @@ dns_check() {
     fi
 }
 
+
+
 tor_check() {
+    ICON_ON="󪤎" # ikon tor aktif (pakai Nerd Font)
+    ICON_OFF="" # ikon tor mati
+    ICON_ERR="󰋼" # ikon error koneksi
+
     result=$(curl --socks5-hostname 127.0.0.1:9050 \
                   --connect-timeout 2 --max-time 5 \
                   -s https://check.torproject.org/api/ip 2>/dev/null)
 
     if echo "$result" | grep -q '"IsTor":true'; then
-        echo '{"text": "󪤎", "tooltip": "Tor aktif"}'
+        echo '{"text": "'$ICON_ON'", "tooltip": "Tor aktif"}'
     elif [ -z "$result" ]; then
-        echo '{"text": "󰋼", "tooltip": "Tor tidak bisa dihubungi"}'
+        echo '{"text": "'$ICON_ERR'", "tooltip": "Tor tidak bisa dihubungi"}'
     else
-        echo '{"text": "", "tooltip": "Tor mati / tidak digunakan"}'
+        echo '{"text": "'$ICON_OFF'", "tooltip": "Tor mati / tidak digunakan"}'
     fi
 }
+
 
 mode_check() {
     if [[ -f "$MODE_FILE" ]]; then
