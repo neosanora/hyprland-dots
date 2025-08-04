@@ -30,8 +30,10 @@
         "on-click": "shutdown now"
     },
     "custom/launcher": {
-        "format": "󪥴",
-        "on-click": "",
+        "format": "󪥴 {text}",
+        "exec": "bash ~/.config/waybar/scripts/custom/launcher.sh",
+        "on-click": "swaync-client -t",
+        "interval": 5,
         "tooltip": false
     }
 }
