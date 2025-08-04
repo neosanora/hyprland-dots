@@ -73,7 +73,7 @@
                 "󪤒"
             ]
         },
-        "on-click": "pavucontrol"
+        "on-click": "bash ~/.config/waybar/scripts/custom/audio-menu.sh"
     },
     "pulseaudio#text": {
         "tooltip": false,
