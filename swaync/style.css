@@ -1,112 +1,245 @@
-/* --- AirDrop iPhone Style for swaync (GTK Compatible, Smooth) --- */
+@define-color cc-bg #16161d;
+@define-color noti-border-color #dcd7ba;
+@define-color noti-bg #11111b;
+@define-color noti-bg-darker #2b2b39;
+@define-color noti-bg-hover #1b1b2b;
+@define-color noti-bg-focus #1b1b1b;
+@define-color noti-close-bg #dcd7ba;
+@define-color noti-close-bg-hover #dcd7ba;
+@define-color text-color #dcd7ba;
+@define-color text-color-disabled #828282;
+@define-color bg-selected #7e9cd8;
+@define-color border-green #76946a;
+@define-color red-base #c34043;
+@define-color red-hover #e46876;
+@define-color green-base #98bb6c;
+@define-color blue-base #7e9cd8;
 
-/* Notifikasi utama */
-.notification-popup {
-    border-radius: 20px;
-    background-color: rgba(28, 28, 30, 0.72);
-    color: white;
-    padding: 14px;
-    font-family: "SF Pro Display", "SF Pro Text", Roboto, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+* {
+  font-family: "JetBrainsMono NFM SemiBold", monospace;
+  border-radius: 0;
 }
 
-/* Judul notifikasi */
-.notification-popup .summary {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 6px;
+.control-center .notification-row:focus,
+.control-center .notification-row:hover {
+  opacity: 1;
+  background: @noti-bg-darker;
 }
 
-/* Isi notifikasi */
-.notification-popup .body {
-    font-size: 15px;
-    line-height: 1.4;
+.notification-row {
+  outline: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Icon di kiri notifikasi */
-.notification-popup image {
-    border-radius: 12px;
-    margin-right: 12px;
+.notification,
+.notification-content,
+.notification-action,
+.notification-default-action,
+.inline-reply-entry,
+.inline-reply-button,
+.widget-title,
+.widget-title>button,
+.widget-dnd,
+.widget-dnd>switch,
+.widget-dnd>switch slider,
+.widget-label>label,
+.widget-buttons-grid,
+.widget-buttons-grid>flowbox>flowboxchild>button,
+.widget-volume,
+.widget-backlight,
+.widget-mpris,
+.widget-mpris>box>button,
+.widget-mpris-player,
+.widget-mpris-album-art {
+  border-radius: 0;
 }
 
-/* --- Title bar di Control Center --- */
-.title {
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    padding: 8px 0;
+.notification {
+  background: @cc-bg;
+  border: 2px solid @border-green;
+  margin: 3px -2px 3px 0;
 }
 
-/* --- Do Not Disturb label --- */
-.dnd {
-    font-size: 14px;
-    color: #d1d1d1;
+.close-button {
+  background: @red-base;
+  color: @cc-bg;
+  text-shadow: none;
+  padding: 0;
+  margin-top: 5px;
+  margin-right: 5px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  border-radius: 0;
+  border: none;
 }
 
-/* --- Daftar notifikasi di Control Center --- */
-.notifications {
-    background: transparent;
+.notification:hover .close-button {
+  opacity: 1;
 }
 
-/* Kartu notifikasi di Control Center */
-.notifications .notification {
-    background-color: rgba(28, 28, 30, 0.72);
-    border-radius: 16px;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    color: white;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+.close-button:hover {
+  background: @red-hover;
+  box-shadow: none;
+  transition: all 0.15s ease-in-out;
 }
 
-/* Hover di Control Center */
-.notifications .notification:hover {
-    background-color: rgba(38, 38, 40, 0.75);
+.notification-action {
+  border: 2px solid @border-green;
+  border-top: none;
 }
-/* --- Control Center / Menu Panel --- */
+
+.notification-default-action:hover,
+.notification-action:hover {
+  color: @blue-base;
+  background: @cc-bg;
+}
+
+.inline-reply-entry {
+  background: @noti-bg-darker;
+  color: @text-color;
+  caret-color: @text-color;
+  border: 1px solid @noti-border-color;
+}
+
+.inline-reply-button {
+  margin-top: 4px;
+  margin-left: 4px;
+  background: @noti-bg;
+  border: 1px solid @noti-border-color;
+  color: @text-color;
+}
+
+.inline-reply-button:disabled {
+  background: transparent;
+  color: @text-color-disabled;
+  border: 1px solid transparent;
+}
+
+.inline-reply-button:hover {
+  background: @noti-bg-hover;
+}
+
+.summary {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @green-base;
+  text-shadow: none;
+}
+
+.time {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+  margin-right: 18px;
+}
+
+.body {
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+}
+
 .control-center {
-    background-color: rgba(28, 28, 30, 0.80);
-    border-radius: 20px;
-    padding: 12px;
-    margin: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    color: white;
+  background: @cc-bg;
+  border: 2px solid @border-green;
 }
 
-/* Title Bar di Menu */
-.control-center .title {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 6px;
+.widget-title {
+  color: @blue-base;
+  background: @noti-bg-darker;
+  padding: 5px 10px;
+  margin: 10px;
+  font-size: 1.5rem;
 }
 
-/* Tombol DND di Menu */
-.control-center .dnd {
-    font-size: 14px;
-    color: #d1d1d1;
-    margin-bottom: 10px;
+.widget-title>button {
+  font-size: 1rem;
+  color: @text-color;
+  background: @noti-bg;
+  box-shadow: none;
 }
 
-/* List Notifikasi di Menu */
-.control-center .notifications {
-    background: transparent;
+.widget-title>button:hover {
+  background: @red-base;
+  color: @cc-bg;
 }
 
-/* Kartu Notifikasi di Menu */
-.control-center .notifications .notification {
-    background-color: rgba(28, 28, 30, 0.72);
-    border-radius: 16px;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    color: white;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+.widget-dnd {
+  background: @noti-bg-darker;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  font-size: large;
+  color: @blue-base;
 }
 
-/* Hover pada Kartu Notifikasi di Menu */
-.control-center .notifications .notification:hover {
-    background-color: rgba(38, 38, 40, 0.75);
+.widget-dnd>switch {
+  background: @blue-base;
+  border-radius: 0;
+}
+
+.widget-dnd>switch:checked {
+  background: @red-base;
+  border: 1px solid @red-base;
+}
+
+.widget-label>label {
+  font-size: 1rem;
+  color: @text-color;
+  margin: 10px;
+}
+
+.widget-buttons-grid {
+  font-size: x-large;
+  padding: 5px;
+  margin: 10px;
+  background: @noti-bg-darker;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  margin: 3px;
+  background: @cc-bg;
+  color: @text-color;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: @blue-base;
+  color: @cc-bg;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:checked {
+  background: @green-base;
+  color: @cc-bg;
+}
+
+.widget-volume,
+.widget-backlight {
+  background: @noti-bg-darker;
+  padding: 5px;
+  margin: 5px 10px;
+  font-size: 2rem;
+  color: @blue-base;
+}
+
+.widget-mpris {
+  color: @text-color;
+  background: @noti-bg-darker;
+  padding: 5px 10px;
+  margin: 5px 10px 5px 10px;
+  box-shadow: none;
+}
+
+.widget-mpris>box>button,
+.widget-mpris-player,
+.widget-mpris-album-art {
+  border-radius: 0;
+  box-shadow: none;
+  padding: 5px 10px;
+  margin: 10px 0 0 0;
 }
