@@ -33,6 +33,3 @@ pkexec nft -f "$FILTER_FILE"
 echo "$FILTER_NAME" > "$ACTIVE_FILE"
 
 notify-send "Firewall" "✅ Firewall aktif - Filter: $FILTER_NAME" -i "$ICON_ON" --expire-time=2000
-
-# Paksa Waybar refresh
-pkill -RTMIN+8 waybar
