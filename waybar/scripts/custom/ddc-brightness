@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+STEP=5
+
+get_brightness() {
+    ddcutil getvcp 10 | grep -oP '\d+(?=%)' | head -n 1
+}
+
+set_brightness() {
+    local new=$1
+    if [ "$new" -lt 0 ]; then new=0; fi
+    if [ "$new" -gt 100 ]; then new=100; fi
+    ddcutil setvcp 10 "$new" &>/dev/null
+}
+
+case "$1" in
+    get)
+        get_brightness
+        ;;
+    up)
+        current=$(get_brightness)
+        set_brightness $((current + STEP))
+        ;;
+    down)
+        current=$(get_brightness)
+        set_brightness $((current - STEP))
+        ;;
+esac

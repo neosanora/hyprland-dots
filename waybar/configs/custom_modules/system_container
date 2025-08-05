@@ -35,7 +35,9 @@
         "orientation": "horizontal",
         "modules": [
             "backlight",
-            "backlight#text"
+            "backlight#text",
+            "custom/backlight",
+            "custom/backlight_text"
         ]
     },
 
@@ -136,4 +138,23 @@
         "exec": "",
         "tooltip": false
     }
+
+    // "custom/backlight": {
+    // "format": "{icon}",
+    // "tooltip": false,
+    // "format-icons": [
+    //     "󪤪","󪤪","󪤪","󪤪","󪤪","󪤪","󪤪","󪤪","󪤪"
+    // ],
+    // "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
+    // "on-scroll-up": "bash ~/.config/waybar/scripts/custom/ddc-brightness up",
+    // "on-scroll-down": "bash ~/.config/waybar/scripts/custom/ddc-brightness down",
+    // "interval": 5
+    // },
+    // "custom/backlight_text": {
+    //     "format": "<b>{}%</b>",
+    //     "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
+    //     "interval": 5,
+    //     "tooltip": false
+    // }
+
 }
