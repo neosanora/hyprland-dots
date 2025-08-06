@@ -1,6 +1,7 @@
 @import "../colors-waybar.css";
 
 #backlight,
+#custom-backlight,
 #pulseaudio,
 #custom-pacman-update {
   font-size: 13px;
@@ -10,6 +11,7 @@
 
 #battery.text,
 #backlight.text,
+#custom-backlight.text,
 #pulseaudio.text,
 #custom-pacman-update.text {
   font-size: 12px;
@@ -23,6 +25,8 @@ label#battery,
 label#battery.text,
 label#backlight,
 label#backlight.text,
+label#custom-backlight,
+label#custom-backlight.text,
 label#custom-pacman-update,
 label#custom-pacman-update.text,
 label#pulseaudio,
@@ -73,6 +77,18 @@ label#backlight {
 }
 
 label#backlight.text {
+  padding-left: 4px;
+  padding-right: 15px;
+  border-top-right-radius: 13px;
+  border-bottom-right-radius: 13px;
+}
+
+label#custom-backlight {
+  padding-left: 6px;
+  padding-right: 4px;
+}
+
+label#custom-backlight.text{
   padding-left: 4px;
   padding-right: 15px;
   border-top-right-radius: 13px;

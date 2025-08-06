@@ -12,6 +12,7 @@ box#system-container {
 }
 
 #backlight,
+#custom-backlight,
 #pulseaudio,
 #custom-pacman-update,
 #battery {
@@ -23,6 +24,7 @@ box#system-container {
 /*old-conf, needs change*/
 
 #backlight,
+#custom-backlight,
 #pulseaudio,
 #custom-pacman-update {
     font-size: 13px;
@@ -32,6 +34,7 @@ box#system-container {
 
 #battery.text,
 #backlight.text,
+#custom-backlight.text,
 #pulseaudio.text,
 #custom-pacman-update.text {
     font-size: 12px;
