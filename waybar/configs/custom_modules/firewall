@@ -19,10 +19,16 @@
   },
 
     "custom/mode": {
-        "format": "<b>{}</b>",
-        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh MODE",
+        "format": "{}",
+        "exec": "bash ~/.config/waybar/scripts/custom/runnings/running_apps.sh",
         "interval": 5,
-        "return-type": "json"
+        "tooltip": true,
+        "on-click": "bash ~/.config/waybar/scripts/custom/runnings/manage_apps.sh"
+
+        // "format": "<b>{}</b>",
+        // "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh MODE",
+        // "interval": 5,
+        // "return-type": "json"
 
     },
     "custom/firewall": {
