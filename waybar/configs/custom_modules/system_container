@@ -34,8 +34,10 @@
     "group/backlight-grp": {
         "orientation": "horizontal",
         "modules": [
+            /*
             "backlight",
             "backlight#text",
+            */
             "custom/backlight",
             "custom/backlight_text"
         ]
@@ -112,8 +114,7 @@
         "max-length": 25,
         "tooltip": false
     },
-
-    
+/*
     "backlight": {
         "device": "DP-1",
         "format": "{icon}",
@@ -138,18 +139,27 @@
         "exec": "",
         "tooltip": false
     },
-
+*/
     "custom/backlight": {
         "format": "{icon}",
         "tooltip": false,
         "format-icons": [
-            "󪤪","󪤪","󪤪","󪤪","󪤪","󪤪","󪤪","󪤪","󪤪"
+            "󪤪",
+            "󪤪",
+            "󪤪",
+            "󪤪",
+            "󪤪",
+            "󪤪",
+            "󪤪",
+            "󪤪",
+            "󪤪"
         ],
         "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
         "on-scroll-up": "bash ~/.config/waybar/scripts/custom/ddc-brightness up",
         "on-scroll-down": "bash ~/.config/waybar/scripts/custom/ddc-brightness down"
     },
     "custom/backlight#text": {
+        "device": "DP-1",
         "format": "<b>{}%</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
         "interval": 15,
