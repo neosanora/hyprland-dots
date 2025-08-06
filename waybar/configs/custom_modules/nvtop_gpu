@@ -1,6 +1,6 @@
 {
   "custom/gpu_usage": {
-    "interval": 5,
+    "interval": 1,
     "format": "󪥋 <b>{}</b>",
     "max-length": 10,
     "exec": "bash ~/.config/waybar/scripts/custom/gpu_usage.sh",
