@@ -147,7 +147,7 @@
         ],
         "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
         "on-scroll-up": "bash ~/.config/waybar/scripts/custom/ddc-brightness up",
-        "on-scroll-down": "bash ~/.config/waybar/scripts/custom/ddc-brightness down",
+        "on-scroll-down": "bash ~/.config/waybar/scripts/custom/ddc-brightness down"
     },
     "custom/backlight#text": {
         "format": "<b>{}%</b>",
