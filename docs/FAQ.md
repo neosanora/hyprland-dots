@@ -1,30 +1,21 @@
 # 📖 FAQ — `ddcutil` Setup & Penggunaan
 
-## ❓ Apa itu `ddcutil`?
-
-`ddcutil` adalah tool di Linux untuk mengontrol pengaturan monitor (seperti brightness, contrast, input source) menggunakan protokol **DDC/CI** melalui koneksi **I²C**.
+> **`ddcutil`** adalah tool Linux untuk mengontrol pengaturan monitor (brightness, contrast, input source) menggunakan protokol **DDC/CI** melalui koneksi **I²C**.
 
 ---
 
-## 🔹 Instalasi
+## 🛠️ Instalasi
 
-### **Arch Linux / Manjaro**
-
-```bash
-sudo pacman -S ddcutil
-```
-
-### **Debian / Ubuntu**
-
-```bash
-sudo apt install ddcutil
-```
+| OS / Distro         | Perintah Instalasi         |
+| ------------------- | -------------------------- |
+| **Arch / Manjaro**  | `sudo pacman -S ddcutil`   |
+| **Debian / Ubuntu** | `sudo apt install ddcutil` |
 
 ---
 
-## 🔹 Setup Awal
+## ⚙️ Setup Awal
 
-1. **Load modul kernel `i2c-dev`**
+### 1️⃣ Load modul kernel `i2c-dev`
 
 ```bash
 sudo modprobe i2c-dev
@@ -36,25 +27,29 @@ Agar otomatis aktif setiap boot:
 echo "i2c-dev" | sudo tee /etc/modules-load.d/i2c-dev.conf
 ```
 
-2. **Tambahkan user ke grup `i2c`**
+---
+
+### 2️⃣ Tambahkan user ke grup `i2c`
 
 ```bash
 sudo gpasswd -a $USER i2c
 ```
 
-Lalu logout → login ulang.
+Lalu **logout → login ulang** agar berlaku.
 
-3. **Aktifkan DDC/CI di monitor**
+---
 
-* Masuk ke **OSD menu** monitor (pakai tombol fisik monitor)
+### 3️⃣ Aktifkan DDC/CI di monitor
+
+* Buka menu OSD monitor (pakai tombol fisik monitor)
 * Cari opsi **DDC/CI**
 * Pastikan **Enabled**
 
 ---
 
-## 🔹 Verifikasi Monitor
+## 🔍 Verifikasi
 
-1. Deteksi monitor:
+### Cek monitor yang terdeteksi
 
 ```bash
 ddcutil detect
@@ -70,7 +65,7 @@ Display 1
    MCCS version: 2.1
 ```
 
-2. Cek brightness:
+### Cek brightness
 
 ```bash
 ddcutil getvcp 10
@@ -84,31 +79,20 @@ VCP code 0x10 (Brightness): current value = 40, max value = 100
 
 ---
 
-## 🔹 Mengubah Brightness
+## 💡 Mengubah Brightness
 
-* Set ke **nilai tertentu**:
-
-```bash
-ddcutil setvcp 10 70
-```
-
-* Naikkan 10 poin:
-
-```bash
-current=$(ddcutil getvcp 10 | awk -F'current value = ' '{print $2}' | awk '{print $1}' | tr -d ',')
-ddcutil setvcp 10 $((current + 10))
-```
-
-* Turunkan 10 poin:
-
-```bash
-current=$(ddcutil getvcp 10 | awk -F'current value = ' '{print $2}' | awk '{print $1}' | tr -d ',')
-ddcutil setvcp 10 $((current - 10))
-```
+| Perintah               | Fungsi                         |                                        |                   |                                                    |
+| ---------------------- | ------------------------------ | -------------------------------------- | ----------------- | -------------------------------------------------- |
+| `ddcutil setvcp 10 70` | Set brightness ke 70%          |                                        |                   |                                                    |
+| `ddcutil getvcp 10`    | Lihat brightness sekarang      |                                        |                   |                                                    |
+| Script **+10%**        | \`current=\$(ddcutil getvcp 10 | awk -F'current value = ' '{print \$2}' | awk '{print \$1}' | tr -d ','); ddcutil setvcp 10 \$((current + 10))\` |
+| Script **-10%**        | \`current=\$(ddcutil getvcp 10 | awk -F'current value = ' '{print \$2}' | awk '{print \$1}' | tr -d ','); ddcutil setvcp 10 \$((current - 10))\` |
 
 ---
 
-## 🔹 Integrasi dengan Waybar (Contoh)
+## 🎛️ Integrasi dengan Waybar
+
+**Config JSONC Waybar**
 
 ```jsonc
 "custom/backlight": {
@@ -120,40 +104,25 @@ ddcutil setvcp 10 $((current - 10))
 }
 ```
 
-Script `~/.config/waybar/scripts/custom/ddc-brightness` bisa dibuat untuk memanggil `ddcutil` sesuai kebutuhan (lihat contoh di repo).
+**Script `~/.config/waybar/scripts/custom/ddc-brightness`**
+
+> Contoh script bisa dilihat di bagian repo ini untuk kontrol brightness secara cepat dan menampilkan notifikasi.
 
 ---
 
-## ❗ Troubleshooting
+## 🚑 Troubleshooting
 
-* **Pesan error:**
-
-  ```
-  No /dev/i2c devices exist.
-  ddcutil requires module i2c-dev.
-  ```
-
-  → Load modul kernel `i2c-dev`:
-
-  ```bash
-  sudo modprobe i2c-dev
-  ```
-
-* **Tidak ada perubahan saat ubah brightness:**
-
-  * Pastikan **DDC/CI** aktif di monitor
-  * Gunakan kabel yang mendukung DDC/CI (HDMI/DP, bukan converter murah)
-  * Beberapa monitor hanya mendukung brightness lewat HDMI/DP, bukan USB-C
+| Masalah                                                       | Solusi                                                              |
+| ------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `No /dev/i2c devices exist. ddcutil requires module i2c-dev.` | Load modul: `sudo modprobe i2c-dev`                                 |
+| Nilai brightness tidak berubah                                | Pastikan DDC/CI aktif di monitor                                    |
+| Tidak bekerja di port tertentu                                | Coba ganti kabel (HDMI/DP), beberapa adapter tidak mendukung DDC/CI |
+| Delay saat scroll                                             | Gunakan sistem **cache** di script agar lebih responsif             |
 
 ---
 
 ## 📌 Catatan
 
-* `ddcutil` mungkin tidak bekerja di monitor yang terkoneksi lewat docking station murah atau adaptor tertentu.
-* Jangan spam perintah `ddcutil` terlalu cepat (kurang dari 0.1s) karena monitor bisa menolak perintah.
-* Untuk kontrol lebih halus dan responsif, gunakan **cache** di script lalu update monitor di background.
-
----
-
-Kalau kamu mau, aku bisa sekalian bikin **versi Markdown ini** jadi **lebih rapi dengan icon dan tabel** supaya cocok jadi dokumentasi GitHub modern.
-Kamu mau aku buatin juga?
+* `ddcutil` tidak selalu bekerja pada monitor via docking station atau adapter murah.
+* Gunakan interval pembacaan ≥ 0.1 detik untuk menghindari penolakan perintah oleh monitor.
+* Beberapa monitor menyimpan setting brightness terpisah untuk setiap input (HDMI 1, HDMI 2, DP).
