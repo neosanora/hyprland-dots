@@ -1,2 +1,2 @@
-brightness = 65
+brightness = 40
 script_state = 0
