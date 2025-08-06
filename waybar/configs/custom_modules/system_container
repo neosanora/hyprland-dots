@@ -148,12 +148,11 @@
         "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
         "on-scroll-up": "bash ~/.config/waybar/scripts/custom/ddc-brightness up",
         "on-scroll-down": "bash ~/.config/waybar/scripts/custom/ddc-brightness down",
-        "interval": 5
     },
     "custom/backlight#text": {
         "format": "<b>{}%</b>",
         "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
-        "interval": 5,
+        "interval": 15,
         "tooltip": false
     }
 
