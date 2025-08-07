@@ -1,5 +1,3 @@
-# Firewall Gaming Mode
-
 table inet filter {
     chain input {
         type filter hook input priority 0;
@@ -12,17 +10,17 @@ table inet filter {
         ct state established,related accept;
 
         # SSH (opsional)
-        tcp dport ssh accept;
+        tcp dport 22 accept;
 
-        # Steam / Source Engine (CS:GO, TF2, dst.)
-        tcp dport { 27015, 27036 } accept;
-        udp dport { 27000-27100 } accept;
+        # Steam / Source Engine (TF2, CS:GO, dst.)
+        tcp dport { 27014-27050, 27036, 27037 } accept;
+        udp dport { 27000-27100, 4380 } accept;
 
         # Minecraft
         tcp dport 25565 accept;
         udp dport 25565 accept;
 
-        # Voice chat (Discord / VoIP)
+        # Voice chat (Discord, VoIP)
         tcp dport { 80, 443 } accept;
         udp dport { 80, 443 } accept;
 
@@ -30,7 +28,7 @@ table inet filter {
         udp dport 53 accept;
         tcp dport 53 accept;
 
-        # Ping
+        # ICMP (ping)
         ip protocol icmp accept;
         ip6 nexthdr icmpv6 accept;
     }
@@ -46,17 +44,17 @@ table inet filter {
         ct state established,related accept;
 
         # SSH (opsional)
-        tcp dport ssh accept;
+        tcp dport 22 accept;
 
-        # Steam / Source Engine (CS:GO, TF2, dst.)
-        tcp dport { 27015, 27036 } accept;
-        udp dport { 27000-27100 } accept;
+        # Steam / Source Engine (TF2, CS:GO, dst.)
+        tcp dport { 27014-27050, 27036, 27037 } accept;
+        udp dport { 27000-27100, 4380 } accept;
 
         # Minecraft
         tcp dport 25565 accept;
         udp dport 25565 accept;
 
-        # Voice chat (Discord / VoIP)
+        # Voice chat (Discord, VoIP)
         tcp dport { 80, 443 } accept;
         udp dport { 80, 443 } accept;
 
@@ -64,7 +62,7 @@ table inet filter {
         udp dport 53 accept;
         tcp dport 53 accept;
 
-        # Ping
+        # ICMP (ping)
         ip protocol icmp accept;
         ip6 nexthdr icmpv6 accept;
     }
@@ -81,4 +79,3 @@ table ip6 filter {
         policy drop;
     }
 }
-

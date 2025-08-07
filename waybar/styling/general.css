@@ -1,25 +1,22 @@
 @import "colors-waybar.css";
 
-/* Perbaikan koma dan tambahan GPU */
-label#cpu,
+/* label#cpu,
 label#disk,
 label#temperature,
 label#memory,
-label#network,
 label#custom-gpu_usage {
-  background-color: @background;
-}
+  background-color: @primary-container;
+} */
 
 #memory,
 #cpu,
 #disk,
 #temperature,
-#network,
 #custom-gpu_usage,
 #mode,
 #idle_inhibitor {
   padding: 0 6px;
-  color: @on-background;
+  color:  @on-primary-container;
   font-size: 14px;
 }
 
@@ -27,6 +24,16 @@ label#custom-gpu_usage {
 #memory,
 #custom-gpu_usage {
   color: @primary;
+}
+
+label#network {
+  background-color: @background;
+}
+
+#network {
+  padding: 0 6px;
+  color: @on-background;
+  font-size: 14px;
 }
 
 #network.ethernet {

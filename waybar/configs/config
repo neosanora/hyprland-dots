@@ -5,8 +5,8 @@
     "~/.config/waybar/configs/custom_modules/privacy_container",
     "~/.config/waybar/configs/custom_modules/system_container",
     "~/.config/waybar/configs/custom_modules/app_title",
-    "~/.config/waybar/configs/custom_modules/nvtop_gpu",
-    "~/.config/waybar/configs/custom_modules/firewall"
+    "~/.config/waybar/configs/custom_modules/firewall",
+    "~/.config/waybar/configs/performance_container"
   ],
 
   "layer": "top",
@@ -30,11 +30,7 @@
   ],
   
   "modules-right": [
-    "cpu",
-    "custom/dot",
-    "custom/gpu_usage",
-    "custom/dot",
-    "memory",
+    "group/performance",
     "custom/dot",
     "network",
     "custom/left-arrw",
@@ -96,22 +92,6 @@
   "tray": {
     "icon-size": 28,
     "spacing": 8
-  },
-
-  "cpu": {
-    "interval": 1,
-    "format": "󪥋 <b>{usage}%</b>",
-    "max-length": 10,
-    "on-click": "alacritty -e btop",
-    "tooltip": false
-  },
-
-  "memory": {
-    "interval": 1,
-    "format": "󪤲 <b>{used:0.1f}G</b>",
-    "max-length": 10,
-    "on-click": "alacritty -e btop",
-    "tooltip": false
   },
 
   "network": {

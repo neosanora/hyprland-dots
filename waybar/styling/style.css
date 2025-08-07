@@ -10,8 +10,9 @@
 @import "custom/clock.css";
 @import "custom/privacycontainer.css";
 @import "custom/systemcontainer.css";
-/* @import "custom/nvtopgpu.css"; */
+
 @import "custom/sefttycontainer.css";
+@import "custom/performancecontainer.css";
 
 
 * {
