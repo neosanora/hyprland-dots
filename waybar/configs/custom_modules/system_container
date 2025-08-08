@@ -47,7 +47,9 @@
 
     "custom/pacman-update": {
         "format": "󪥔",
-        "tooltip": false
+        "tooltip": false,
+        "on-click":
+        "hyprctl dispatch exec \"[float;size 800 500;center] alacritty --class update-check -e bash ~/.config/waybar/scripts/custom/pacman-update.sh\""
     },
     
     "custom/pacman-update#text": {
