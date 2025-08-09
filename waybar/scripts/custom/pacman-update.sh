@@ -172,7 +172,90 @@ setup_exit_trap() {
 }
 
 ########################################
-# 8. FUNGSI UTAMA
+# 1. FUNGSI SETUP & UTILITY
+########################################
+setup_exit_trap() {
+  trap 'echo "❌ Script dihentikan."; exit 1' INT TERM
+}
+
+check_command() {
+  if ! command -v "$1" &>/dev/null; then
+    echo "❌ Perintah '$1' tidak ditemukan."
+    exit 1
+  fi
+}
+
+########################################
+# 2. FUNGSI MENU
+########################################
+main_menu_gum() {
+  gum choose --cursor.foreground 212 --limit 1 \
+    "Lihat daftar paket update" \
+    "Update semua paket" \
+    "Pilih paket untuk diupdate" \
+    "Lihat daftar paket terinstall" \
+    "Lihat paket terinstall berdasarkan ukuran" \
+    "Batal"
+}
+
+main_menu_fallback() {
+  echo "1) Lihat daftar paket update"
+  echo "2) Update semua paket"
+  echo "3) Pilih paket untuk diupdate"
+  echo "4) Lihat daftar paket terinstall"
+  echo "5) Lihat paket terinstall berdasarkan ukuran"
+  echo "6) Batal"
+  read -rp "Pilih opsi [1-6]: " CHOICE
+  echo "$CHOICE"
+}
+
+########################################
+# 3. FUNGSI AKSI MENU
+########################################
+lihat_daftar_update() {
+  if (( ${#PKG_LIST[@]} == 0 )); then
+    echo "✅ Tidak ada paket untuk diupdate."
+  else
+    echo "📦 Paket yang tersedia untuk update (${#PKG_LIST[@]}):"
+    {
+      echo -e "Paket\tVersi Baru\tKategori"
+      echo -e "------\t----------\t--------"
+      while IFS= read -r line; do
+        pkg=$(echo "$line" | awk '{print $1}')
+        ver=$(echo "$line" | awk '{print $2}')
+        catpkg=$(get_package_category "$pkg")
+        pkg_colored=$(color_for_category "$catpkg" "$pkg")
+        echo -e "$pkg_colored\t$ver\t$catpkg"
+      done <<< "$PACKAGES"
+    } | ansi_safe_table | (command -v gum &>/dev/null && gum pager || less -R)
+  fi
+}
+
+pilih_paket_update() {
+  if (( ${#PKG_LIST[@]} == 0 )); then
+    echo "❌ Tidak ada paket untuk diupdate."
+  else
+    if command -v gum &>/dev/null; then
+      mapfile -t SELECTED < <(printf '%s\n' "${PKG_LIST[@]}" \
+        | gum choose --no-limit --cursor.foreground 212 --height 10 \
+          --header "Pilih paket yang ingin diupdate (space untuk pilih)")
+    else
+      echo "Daftar paket:"
+      select pkg in "${PKG_LIST[@]}"; do
+        SELECTED=("$pkg")
+        break
+      done
+    fi
+    if (( ${#SELECTED[@]} > 0 )); then
+      update_selected_with_retry "${SELECTED[@]}"
+    else
+      echo "❌ Tidak ada paket dipilih."
+    fi
+  fi
+}
+
+########################################
+# 4. FUNGSI UTAMA
 ########################################
 main() {
   setup_exit_trap
@@ -186,73 +269,26 @@ main() {
   while true; do
     PACKAGES=$(checkupdates 2>/dev/null || true)
     PKG_LIST=()
-
     if [[ -n "$PACKAGES" ]]; then
       mapfile -t PKG_LIST < <(echo "$PACKAGES" | awk '{print $1}')
     fi
 
     echo
     if command -v gum &>/dev/null; then
-      CHOICE=$(gum choose --cursor.foreground 212 --limit 1 \
-        "Lihat daftar paket update" \
-        "Update semua paket" \
-        "Pilih paket untuk diupdate" \
-        "Lihat daftar paket terinstall" \
-        "Lihat paket terinstall berdasarkan ukuran" \
-        "Batal")
+      CHOICE=$(main_menu_gum)
     else
-      echo "1) Lihat daftar paket update"
-      echo "2) Update semua paket"
-      echo "3) Pilih paket untuk diupdate"
-      echo "4) Lihat daftar paket terinstall"
-      echo "5) Lihat paket terinstall berdasarkan ukuran"
-      echo "6) Batal"
-      read -rp "Pilih opsi [1-6]: " CHOICE
+      CHOICE=$(main_menu_fallback)
     fi
 
     case "$CHOICE" in
       "Lihat daftar paket update"|"1")
-        if (( ${#PKG_LIST[@]} == 0 )); then
-          echo "✅ Tidak ada paket untuk diupdate."
-        else
-          echo "📦 Paket yang tersedia untuk update (${#PKG_LIST[@]}):"
-          {
-            echo -e "Paket\tVersi Baru\tKategori"
-            echo -e "------\t----------\t--------"
-            while IFS= read -r line; do
-              pkg=$(echo "$line" | awk '{print $1}')
-              ver=$(echo "$line" | awk '{print $2}')
-              catpkg=$(get_package_category "$pkg")
-              pkg_colored=$(color_for_category "$catpkg" "$pkg")
-              echo -e "$pkg_colored\t$ver\t$catpkg"
-            done <<< "$PACKAGES"
-          } | ansi_safe_table | (command -v gum &>/dev/null && gum pager || less -R)
-        fi
+        lihat_daftar_update
         ;;
       "Update semua paket"|"2")
         update_all_with_retry
         ;;
       "Pilih paket untuk diupdate"|"3")
-        if (( ${#PKG_LIST[@]} == 0 )); then
-          echo "❌ Tidak ada paket untuk diupdate."
-        else
-          if command -v gum &>/dev/null; then
-            mapfile -t SELECTED < <(printf '%s\n' "${PKG_LIST[@]}" \
-              | gum choose --no-limit --cursor.foreground 212 --height 10 \
-                --header "Pilih paket yang ingin diupdate (space untuk pilih)")
-          else
-            echo "Daftar paket:"
-            select pkg in "${PKG_LIST[@]}"; do
-              SELECTED=("$pkg")
-              break
-            done
-          fi
-          if (( ${#SELECTED[@]} > 0 )); then
-            update_selected_with_retry "${SELECTED[@]}"
-          else
-            echo "❌ Tidak ada paket dipilih."
-          fi
-        fi
+        pilih_paket_update
         ;;
       "Lihat daftar paket terinstall"|"4")
         show_installed_packages
