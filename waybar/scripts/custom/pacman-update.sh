@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Warna ANSI
+########################################
+# 1. KONFIGURASI WARNA DAN IKON
+########################################
 YELLOW="\033[33m"
 RED="\033[31m"
 GREEN="\033[32m"
 RESET="\033[0m"
 
-# Ikon kategori
 ICON_SYSTEM="🖥"
 ICON_DRIVER="🎮"
 ICON_PACKAGE="📦"
 
+########################################
+# 2. FUNGSI ERROR DAN PENGECEKAN
+########################################
 error_exit() {
   echo "❌ $1" >&2
   exit 1
@@ -23,6 +27,9 @@ check_command() {
   fi
 }
 
+########################################
+# 3. FUNGSI KATEGORI DAN WARNA
+########################################
 get_package_category() {
   local pkg="$1"
   local pkg_lower="${pkg,,}"
@@ -55,8 +62,10 @@ color_for_category() {
   esac
 }
 
+########################################
+# 4. FUNGSI FORMAT TABEL (ANSI SAFE)
+########################################
 strip_ansi() {
-  # Hilangkan escape ANSI untuk perhitungan lebar teks
   sed 's/\x1B\[[0-9;]*[A-Za-z]//g'
 }
 
@@ -87,14 +96,17 @@ ansi_safe_table() {
   done
 }
 
+########################################
+# 5. FUNGSI UPDATE SISTEM
+########################################
 update_all_with_retry() {
   sudo -v
   echo "🔄 Mulai update semua paket..."
   until sudo pacman -Syu; do
-    echo "⚠️ Update gagal, cek koneksi. Ulang dalam 5 detik..."
+    echo "⚠️ Update gagal, ulang dalam 5 detik..."
     sleep 5
   done
-  echo "✅ Update semua paket selesai."
+  echo "✅ Update selesai."
 }
 
 update_selected_with_retry() {
@@ -102,41 +114,66 @@ update_selected_with_retry() {
   sudo -v
   echo "🔄 Mengupdate paket terpilih..."
   until sudo pacman -S --needed "${selected_pkgs[@]}"; do
-    echo "⚠️ Update paket gagal, cek koneksi. Ulang dalam 5 detik..."
+    echo "⚠️ Update gagal, ulang dalam 5 detik..."
     sleep 5
   done
   echo "✅ Update paket terpilih selesai."
 }
 
+########################################
+# 6. FUNGSI TAMPILAN DAFTAR PAKET
+########################################
 show_installed_packages() {
   echo "📋 Daftar paket terinstall:"
-  pacman -Q | column -t
+  {
+    echo -e "Paket\tVersi\tKategori"
+    echo -e "------\t-----\t--------"
+    pacman -Q | while read -r pkg ver; do
+      catpkg=$(get_package_category "$pkg")
+      pkg_colored=$(color_for_category "$catpkg" "$pkg")
+      echo -e "$pkg_colored\t$ver\t$catpkg"
+    done
+  } | ansi_safe_table | (command -v gum &>/dev/null && gum pager || less -R)
   echo
 }
 
 show_installed_by_size() {
-  echo "📏 Menghitung ukuran paket, tunggu sebentar..."
-  pacman -Qi | awk '
-    /^Name/ {name=$3}
-    /^Installed Size/ {
-      size=$4
-      unit=$5
-      if (unit=="MiB") {size_kb=size*1024}
-      else if (unit=="GiB") {size_kb=size*1024*1024}
-      else if (unit=="KiB") {size_kb=size}
-      else {size_kb=0}
-      print name "\t" size "\t" unit
-    }
-  ' | sort -k2 -nr | column -t
+  echo "📏 Daftar paket berdasarkan ukuran:"
+  {
+    echo -e "Paket\tUkuran\tKategori"
+    echo -e "------\t------\t--------"
+    pacman -Qi | awk '
+      /^Name/ {name=$3}
+      /^Installed Size/ {
+        size=$4
+        unit=$5
+        if (unit=="MiB") {size_kb=size*1024}
+        else if (unit=="GiB") {size_kb=size*1024*1024}
+        else if (unit=="KiB") {size_kb=size}
+        else {size_kb=0}
+        print name "\t" size " " unit
+      }
+    ' | sort -k2 -nr | while read -r pkg size unit; do
+      catpkg=$(get_package_category "$pkg")
+      pkg_colored=$(color_for_category "$catpkg" "$pkg")
+      echo -e "$pkg_colored\t$size\t$catpkg"
+    done
+  } | ansi_safe_table | (command -v gum &>/dev/null && gum pager || less -R)
   echo
 }
 
+########################################
+# 7. FUNGSI SETUP EXIT
+########################################
 setup_exit_trap() {
   if [ -t 1 ]; then
     trap 'read -r -p "Tekan ENTER untuk menutup..."' EXIT
   fi
 }
 
+########################################
+# 8. FUNGSI UTAMA
+########################################
 main() {
   setup_exit_trap
   check_command checkupdates
@@ -179,7 +216,6 @@ main() {
           echo "✅ Tidak ada paket untuk diupdate."
         else
           echo "📦 Paket yang tersedia untuk update (${#PKG_LIST[@]}):"
-          echo
           {
             echo -e "Paket\tVersi Baru\tKategori"
             echo -e "------\t----------\t--------"
