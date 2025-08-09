@@ -148,66 +148,57 @@ main() {
 
   while true; do
     PACKAGES=$(checkupdates 2>/dev/null || true)
-    if [[ -z "$PACKAGES" ]]; then
-      [[ $(command -v gum) ]] && gum confirm "✅ Sistem sudah up-to-date. Tutup?" && exit 0
-      echo "Tidak ada paket untuk diupdate."
-      PKG_LIST=()
-    else
+    PKG_LIST=()
+
+    if [[ -n "$PACKAGES" ]]; then
       mapfile -t PKG_LIST < <(echo "$PACKAGES" | awk '{print $1}')
-      echo "📦 Paket yang tersedia untuk update (${#PKG_LIST[@]}):"
-      echo
-
-      { 
-        echo -e "Paket\tVersi Baru\tKategori"
-        echo -e "------\t----------\t--------"
-        while IFS= read -r line; do
-          pkg=$(echo "$line" | awk '{print $1}')
-          ver=$(echo "$line" | awk '{print $2}')
-          catpkg=$(get_package_category "$pkg")
-          pkg_colored=$(color_for_category "$catpkg" "$pkg")
-          echo -e "$pkg_colored\t$ver\t$catpkg"
-        done <<< "$PACKAGES"
-      } | ansi_safe_table | (command -v gum &>/dev/null && gum pager || less -R)
-
-      # Hitung kategori
-      declare -A category_counts=( ["System"]=0 ["Driver"]=0 ["Package"]=0 )
-      for pkg in "${PKG_LIST[@]}"; do
-        catpkg=$(get_package_category "$pkg")
-        ((category_counts[$catpkg]++))
-      done
-      echo
-      echo "⚠️ Kategori paket yang akan diupdate:"
-      echo -e "  - ${YELLOW}${ICON_SYSTEM} System${RESET}  : ${category_counts[System]}"
-      echo -e "  - ${RED}${ICON_DRIVER} Driver${RESET}  : ${category_counts[Driver]}"
-      echo -e "  - ${GREEN}${ICON_PACKAGE} Package${RESET} : ${category_counts[Package]}"
-      echo
     fi
 
     echo
-
     if command -v gum &>/dev/null; then
       CHOICE=$(gum choose --cursor.foreground 212 --limit 1 \
+        "Lihat daftar paket update" \
         "Update semua paket" \
         "Pilih paket untuk diupdate" \
         "Lihat daftar paket terinstall" \
         "Lihat paket terinstall berdasarkan ukuran" \
         "Batal")
     else
-      echo "1) Update semua paket"
-      echo "2) Pilih paket untuk diupdate"
-      echo "3) Lihat daftar paket terinstall"
-      echo "4) Lihat paket terinstall berdasarkan ukuran"
-      echo "5) Batal"
-      read -rp "Pilih opsi [1-5]: " CHOICE
+      echo "1) Lihat daftar paket update"
+      echo "2) Update semua paket"
+      echo "3) Pilih paket untuk diupdate"
+      echo "4) Lihat daftar paket terinstall"
+      echo "5) Lihat paket terinstall berdasarkan ukuran"
+      echo "6) Batal"
+      read -rp "Pilih opsi [1-6]: " CHOICE
     fi
 
     case "$CHOICE" in
-      "Update semua paket"|"1")
+      "Lihat daftar paket update"|"1")
+        if (( ${#PKG_LIST[@]} == 0 )); then
+          echo "✅ Tidak ada paket untuk diupdate."
+        else
+          echo "📦 Paket yang tersedia untuk update (${#PKG_LIST[@]}):"
+          echo
+          {
+            echo -e "Paket\tVersi Baru\tKategori"
+            echo -e "------\t----------\t--------"
+            while IFS= read -r line; do
+              pkg=$(echo "$line" | awk '{print $1}')
+              ver=$(echo "$line" | awk '{print $2}')
+              catpkg=$(get_package_category "$pkg")
+              pkg_colored=$(color_for_category "$catpkg" "$pkg")
+              echo -e "$pkg_colored\t$ver\t$catpkg"
+            done <<< "$PACKAGES"
+          } | ansi_safe_table | (command -v gum &>/dev/null && gum pager || less -R)
+        fi
+        ;;
+      "Update semua paket"|"2")
         update_all_with_retry
         ;;
-      "Pilih paket untuk diupdate"|"2")
+      "Pilih paket untuk diupdate"|"3")
         if (( ${#PKG_LIST[@]} == 0 )); then
-          echo "Tidak ada paket untuk diupdate."
+          echo "❌ Tidak ada paket untuk diupdate."
         else
           if command -v gum &>/dev/null; then
             mapfile -t SELECTED < <(printf '%s\n' "${PKG_LIST[@]}" \
@@ -227,13 +218,13 @@ main() {
           fi
         fi
         ;;
-      "Lihat daftar paket terinstall"|"3")
+      "Lihat daftar paket terinstall"|"4")
         show_installed_packages
         ;;
-      "Lihat paket terinstall berdasarkan ukuran"|"4")
+      "Lihat paket terinstall berdasarkan ukuran"|"5")
         show_installed_by_size
         ;;
-      "Batal"|"5")
+      "Batal"|"6"|"Batal"|*)
         echo "❌ Dibatal."
         break
         ;;
