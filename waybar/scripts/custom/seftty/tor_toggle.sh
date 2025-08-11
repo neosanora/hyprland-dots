@@ -1,28 +1,38 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-ICON_ON="network-vpn"
-ICON_OFF="network-offline"
+ICON_ON="󪤎"  # ikon tor aktif (Nerd Font)
+ICON_OFF=""  # ikon tor mati
 
-# Fungsi set proxy (GNOME)
 set_proxy() {
-    gsettings set org.gnome.system.proxy mode 'manual'
-    gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
-    gsettings set org.gnome.system.proxy.socks port 9050
+    export ALL_PROXY="socks5h://127.0.0.1:9050"
+    export HTTP_PROXY="http://127.0.0.1:9050"
+    export HTTPS_PROXY="http://127.0.0.1:9050"
 }
 
-# Fungsi hapus proxy
 unset_proxy() {
-    gsettings set org.gnome.system.proxy mode 'none'
+    unset ALL_PROXY HTTP_PROXY HTTPS_PROXY
 }
 
-# Toggle Tor
 if systemctl is-active --quiet tor; then
-    pkexec systemctl stop tor
-    unset_proxy
-    notify-send "Tor" "❌ Tor dimatikan" -i "$ICON_OFF" --expire-time=2000
+    if pkexec systemctl stop tor; then
+        unset_proxy
+        notify-send "Tor" "❌ Tor dimatikan" -i "$ICON_OFF" --expire-time=2000
+    else
+        # Dibatalkan atau gagal
+        exit 1
+    fi
 else
-    pkexec systemctl start tor
-    sleep 3 # tunggu Tor siap
-    set_proxy
-    notify-send "Tor" "✅ Tor diaktifkan" -i "$ICON_ON" --expire-time=2000
+    if pkexec systemctl start tor; then
+        sleep 2
+        if systemctl is-active --quiet tor; then
+            set_proxy
+            notify-send "Tor" "✅ Tor diaktifkan" -i "$ICON_ON" --expire-time=2000
+        else
+            notify-send -u critical "Tor" "⚠️ Gagal mengaktifkan Tor" -i "$ICON_OFF"
+        fi
+    else
+        # Dibatalkan atau gagal
+        exit 1
+    fi
 fi

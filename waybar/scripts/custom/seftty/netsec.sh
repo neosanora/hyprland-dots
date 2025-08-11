@@ -78,22 +78,26 @@ dns_check() {
 
 
 tor_check() {
-    ICON_ON="󪤎" # ikon tor aktif (pakai Nerd Font)
-    ICON_OFF="" # ikon tor mati
-    ICON_ERR="󰋼" # ikon error koneksi
+    ICON_ON="󪤎"  # Tor aktif
+    ICON_OFF=""  # Tor mati
+    ICON_ERR="󰋼"  # Error koneksi
 
+    # Timeout singkat biar Waybar nggak nge-lag
     result=$(curl --socks5-hostname 127.0.0.1:9050 \
-                  --connect-timeout 2 --max-time 5 \
+                  --connect-timeout 1 --max-time 3 \
                   -s https://check.torproject.org/api/ip 2>/dev/null)
 
-    if echo "$result" | grep -q '"IsTor":true'; then
-        echo '{"text": "'$ICON_ON'", "tooltip": "Tor aktif"}'
-    elif [ -z "$result" ]; then
-        echo '{"text": "'$ICON_ERR'", "tooltip": "Tor tidak bisa dihubungi"}'
+    if [[ "$(systemctl is-active tor)" != "active" ]]; then
+        printf '{"text":"%s","tooltip":"Tor mati","class":"off"}\n' "$ICON_OFF"
+    elif echo "$result" | grep -q '"IsTor":true'; then
+        printf '{"text":"%s","tooltip":"Tor aktif","class":"on"}\n' "$ICON_ON"
+    elif [[ -z "$result" ]]; then
+        printf '{"text":"%s","tooltip":"Tor tidak bisa dihubungi","class":"error"}\n' "$ICON_ERR"
     else
-        echo '{"text": "'$ICON_OFF'", "tooltip": "Tor mati / tidak digunakan"}'
+        printf '{"text":"%s","tooltip":"Tor aktif tapi tidak digunakan","class":"warn"}\n' "$ICON_ERR"
     fi
 }
+
 
 
 mode_check() {
