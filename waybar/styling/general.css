@@ -21,7 +21,7 @@
 label#network {
   margin: 5px;
   padding: 0 6px;
-  background-color: @background;
+  background-color: alpha(@background, 0.75);
   border-radius: 10px;
 }
 

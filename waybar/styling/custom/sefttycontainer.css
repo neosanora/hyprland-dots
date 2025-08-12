@@ -11,6 +11,6 @@ box#seftty-container {
   margin: 5px;
   padding-left: 10px;
   padding-right: 5px;
-  background-color: @primary-container;
+  background-color: alpha(@primary-container, 0.75);
   border-radius: 10px;
 }
