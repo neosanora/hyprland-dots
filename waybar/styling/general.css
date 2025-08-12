@@ -1,13 +1,5 @@
 @import "colors-waybar.css";
 
-/* label#cpu,
-label#disk,
-label#temperature,
-label#memory,
-label#custom-gpu_usage {
-  background-color: @primary-container;
-} */
-
 #memory,
 #cpu,
 #disk,
@@ -27,11 +19,13 @@ label#custom-gpu_usage {
 }
 
 label#network {
+  margin: 5px;
+  padding: 0 6px;
   background-color: @background;
+  border-radius: 10px;
 }
 
 #network {
-  padding: 0 6px;
   color: @on-background;
   font-size: 14px;
 }
@@ -45,7 +39,7 @@ label#network {
 }
 
 #window {
-  margin: 0 0px;
+  margin: 0 6px;
   border-radius: 0px;
   background-color: @background;
 }
