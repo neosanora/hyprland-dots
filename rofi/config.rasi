@@ -34,7 +34,8 @@ configuration {
 @theme "~/.config/rofi/colors.rasi"
 
 /* ---- Load wallpaper ---- */
-@import "~/.cache/ml4w/hyprland-dotfiles/current_wallpaper.rasi"
+/*@import "~/.cache/ml4w/hyprland-dotfiles/current_wallpaper.rasi"*/
+@import "~/.config/Gsettings/wallpapers/swaync.png"
 
 /* ---- Load border width ---- */
 @import "~/.config/ml4w/settings/rofi-border.rasi"
