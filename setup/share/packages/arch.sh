@@ -12,6 +12,7 @@ packages=(
   "git"             # version control
   "jq"              # JSON processor
   "gum"             # command line UI toolkit
+  "inotify-tools"   # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
   "fastfetch"       # system information tool
 
   #/////////////////////#
