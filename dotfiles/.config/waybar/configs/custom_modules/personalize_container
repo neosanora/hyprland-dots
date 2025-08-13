@@ -1,0 +1,34 @@
+{
+    "include": [
+    "~/.config/waybar/configs/custom_modules/modules"
+  ],
+
+  "group/personalize": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "personalize",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/personalize",
+      "custom/cliphist",
+      "custom/dot"
+    ]
+  },
+
+  "custom/personalize": {
+    "format": "",
+    "on-click": "",
+    "tooltip": false
+  },
+
+    "custom/cliphist": {
+    "format": "",
+    "on-click": "sleep 0.1 && ~/.config/waybar/scripts/custom/cliphist.sh",
+    "on-click-right": "sleep 0.1 && ~/.config/waybar/scripts/custom/cliphist.sh d",
+    "on-click-middle": "sleep 0.1 && ~/.config/waybar/scripts/custom/cliphist.sh w",
+    "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list"
+  }
+
+}

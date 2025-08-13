@@ -1,0 +1,31 @@
+@import "../colors-waybar.css";
+
+#custom-personalize {
+  font-size: 13px;
+  margin: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+box#personalize {
+  margin: 5px;
+  border-radius: 8px;
+  background-color: alpha(@primary-container,0.65);
+}
+
+box#personalize .horizontal {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 8px;
+  background-color: alpha(@primary-container,0.98);
+}
+
+#cliphist {
+    margin-right: 16px;
+    font-size: 13px;
+    font-weight: bold;
+    color: @icon_color;
+}

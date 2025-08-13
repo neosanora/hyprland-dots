@@ -22,7 +22,7 @@
   },
 
   "custom/sistem": {
-    "format": "󪥴",
+    "format": "",
     "on-click": "alacritty -e btop",
     "tooltip": false
   },
