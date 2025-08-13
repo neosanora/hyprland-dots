@@ -16,7 +16,7 @@ if [ ! -f $HOME/.config/Gsetting/settings/dock-disabled ]; then
     else
         style="style-dark.css"
     fi
-    nwg-dock-hyprland -i 32 -w 5 -mb 10 -ml 10 -mr 10 -x -s $style -c  "rofi -show drun"
+    nwg-dock-hyprland -i 14 -w 4 -mb 4 -ml 4 -mr 4 -x -s $style -c  "rofi -show drun"
 else
     echo ":: Dock disabled"
 fi
