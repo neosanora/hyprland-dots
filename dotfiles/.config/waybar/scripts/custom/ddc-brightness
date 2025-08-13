@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+CACHE_FILE="/tmp/ddc-brightness"
+STEP=5
+
+# Baca langsung dari monitor
+read_hw_brightness() {
+    ddcutil getvcp 10 2>/dev/null \
+        | awk -F'current value = ' '{print $2}' \
+        | awk '{print $1}' \
+        | tr -d ','
+}
+
+# Simpan cache
+write_cache() {
+    echo "$1" > "$CACHE_FILE"
+}
+
+# Ambil cache atau baca hardware kalau belum ada
+read_cache() {
+    if [ -f "$CACHE_FILE" ]; then
+        cat "$CACHE_FILE"
+    else
+        val=$(read_hw_brightness)
+        write_cache "$val"
+        echo "$val"
+    fi
+}
+
+# Set brightness hardware (jalan di background)
+apply_hw_brightness() {
+    ddcutil setvcp 10 "$1" &>/dev/null &
+}
+
+# Kirim notifikasi swaync
+notify_brightness() {
+    notify-send -h int:value:"$1" \
+                -h string:x-canonical-private-synchronous:brightness \
+                -u low "󰃠 Brightness" "$1%"
+}
+
+case "$1" in
+    get)
+        val=$(read_hw_brightness)
+        write_cache "$val"
+        echo "$val"
+        ;;
+    up)
+        current=$(read_cache)
+        new=$((current + STEP))
+        [ "$new" -gt 100 ] && new=100
+        write_cache "$new"
+        notify_brightness "$new"
+        apply_hw_brightness "$new"
+        ;;
+    down)
+        current=$(read_cache)
+        new=$((current - STEP))
+        [ "$new" -lt 0 ] && new=0
+        write_cache "$new"
+        notify_brightness "$new"
+        apply_hw_brightness "$new"
+        ;;
+    set)
+        new="$2"
+        [ "$new" -lt 0 ] && new=0
+        [ "$new" -gt 100 ] && new=100
+        write_cache "$new"
+        notify_brightness "$new"
+        apply_hw_brightness "$new"
+        ;;
+esac

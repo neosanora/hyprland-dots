@@ -1,0 +1,45 @@
+# Firewall Strict Mode
+
+table inet filter {
+    chain input {
+        type filter hook input priority 0;
+        policy drop;
+
+        # Loopback (localhost)
+        iif "lo" accept;
+
+        # Koneksi yang sudah established
+        ct state established,related accept;
+
+        # ICMP / Ping (opsional)
+        ip protocol icmp accept;
+        ip6 nexthdr icmpv6 accept;
+    }
+
+    chain output {
+        type filter hook output priority 0;
+        policy drop;
+
+        # Loopback (localhost)
+        oif "lo" accept;
+
+        # Koneksi yang sudah established
+        ct state established,related accept;
+
+        # ICMP / Ping (opsional)
+        ip protocol icmp accept;
+        ip6 nexthdr icmpv6 accept;
+    }
+}
+
+# IPv6 Block
+table ip6 filter {
+    chain input {
+        type filter hook input priority 0;
+        policy drop;
+    }
+    chain output {
+        type filter hook output priority 0;
+        policy drop;
+    }
+}

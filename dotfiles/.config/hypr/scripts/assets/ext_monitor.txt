@@ -1,0 +1,2 @@
+brightness = 40
+script_state = 0

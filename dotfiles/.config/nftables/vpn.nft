@@ -1,0 +1,64 @@
+# Firewall VPN Only Mode
+
+# ======================
+# Filter Rules
+# ======================
+table inet filter {
+    chain input {
+        type filter hook input priority 0;
+        policy drop;
+
+        # Loopback
+        iif "lo" accept;
+
+        # Established connections
+        ct state established,related accept;
+
+        # Hanya terima koneksi dari interface VPN
+        iifname "wg0" accept;
+        iifname "tun0" accept;
+
+        # SSH (opsional)
+        tcp dport ssh accept;
+
+        # ICMP / ping
+        ip protocol icmp accept;
+        ip6 nexthdr icmpv6 accept;
+    }
+
+    chain output {
+        type filter hook output priority 0;
+        policy drop;
+
+        # Loopback
+        oif "lo" accept;
+
+        # Established connections
+        ct state established,related accept;
+
+        # Hanya kirim lewat interface VPN
+        oifname "wg0" accept;
+        oifname "tun0" accept;
+
+        # SSH (opsional)
+        tcp dport ssh accept;
+
+        # ICMP / ping
+        ip protocol icmp accept;
+        ip6 nexthdr icmpv6 accept;
+    }
+}
+
+# ======================
+# IPv6 Block
+# ======================
+table ip6 filter {
+    chain input {
+        type filter hook input priority 0;
+        policy drop;
+    }
+    chain output {
+        type filter hook output priority 0;
+        policy drop;
+    }
+}

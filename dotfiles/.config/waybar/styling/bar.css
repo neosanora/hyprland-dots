@@ -1,0 +1,35 @@
+@import "colors-waybar.css";
+
+window#waybar {
+  /* background-color: @background; */
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#waybar.horizontal {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* #waybar button,
+#waybar .module {
+  padding: 0 2px;
+  min-height: 20px;
+}
+
+#waybar img,
+#waybar .icon {
+  padding: 0;
+  margin: 0;
+  width: 16px;
+  height: 16px;
+} */
+
+
+
