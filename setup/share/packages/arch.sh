@@ -123,6 +123,10 @@ packages=(
   "btop"
   "nvtop"           # Monitor GPU usage (mirip htop)
 
+  #///////////////////////#
+  ### | POWER PROFILE | ###
+  #///////////////////////#
+ 	"power-profiles-daemon"     # Makes power profiles handling available over D-Bus
 
   #////////////////////////#
   ### | VPN | FIREWALL | ###

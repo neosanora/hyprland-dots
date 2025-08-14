@@ -32,6 +32,8 @@
   ],
   
   "modules-right": [
+    "power-profiles-daemon",
+    "custom/dot",
     "group/performance",
     "custom/dot",
     "group/personalize",
@@ -103,6 +105,19 @@
     "format-ethernet": "󪥈 <b>Ethernet</b>",
     "tooltip": true,
     "format-disconnected": "󪤓"
+  },
+
+  // Power Profiles Daemon
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
   }
   
 }

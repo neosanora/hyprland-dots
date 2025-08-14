@@ -1,24 +1,30 @@
 {
     "label" : "lock",
-    "action" : "hyprlock",
+    "action" : "~/.config/hypr/scripts/power.sh lock",
     "text" : "Lock",
     "keybind" : "l"
 }
 {
     "label" : "logout",
-    "action" : "killall -9 Hyprland",
-    "text" : "Exit",
+    "action" : "~/.config/hypr/scripts/power.sh exit",
+    "text" : "Log Out",
     "keybind" : "e"
 }
 {
-    "label" : "shutdown",
-    "action" : "poweroff",
-    "text" : "Shutdown",
-    "keybind" : "s"
+    "label" : "suspend",
+    "action" : "~/.config/hypr/scripts/power.sh suspend",
+    "text" : "Suspend",
+    "keybind" : "u"
 }
 {
     "label" : "reboot",
-    "action" : "reboot",
-    "text" : "Reboot",
+    "action" : "~/.config/hypr/scripts/power.sh reboot",
+    "text" : "Restart",
     "keybind" : "r"
+}
+{
+    "label" : "shutdown",
+    "action" : "~/.config/hypr/scripts/power.sh shutdown",
+    "text" : "Power Off",
+    "keybind" : "s"
 }
