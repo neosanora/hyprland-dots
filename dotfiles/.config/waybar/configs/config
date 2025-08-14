@@ -27,11 +27,13 @@
 
   "modules-center": [
     "custom/dot",
-    "group/seftty-container",
+    "tray",
     "custom/dot"
   ],
   
   "modules-right": [
+    "group/seftty-container",
+    "custom/dot",
     "power-profiles-daemon",
     "custom/dot",
     "group/performance",
