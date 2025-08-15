@@ -8,7 +8,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$SCRIPT_DIR/share/packages/arch.sh"
 
 # Source AUR package list
-AUR_PKG_FILE="$SCRIPT_DIR/share/packages/aur-package.sh"
+AUR_PKG_FILE="$SCRIPT_DIR/share/aur/aur-package.sh"
 if [[ -f "$AUR_PKG_FILE" ]]; then
     source "$AUR_PKG_FILE"
 else
@@ -201,6 +201,24 @@ curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin
 # --------------------------------------------------------------
 
 source $SCRIPT_DIR/_prebuilt.sh
+
+# --------------------------------------------------------------
+# Cursors
+# --------------------------------------------------------------
+
+source $SCRIPT_DIR/_cursors.sh
+
+# --------------------------------------------------------------
+# Fonts
+# --------------------------------------------------------------
+
+source $SCRIPT_DIR/_fonts.sh
+
+# --------------------------------------------------------------
+# Fonts
+# --------------------------------------------------------------
+
+source $SCRIPT_DIR/_fontsIcon.sh
 
 # ----------------------------------------------------------
 # Done
