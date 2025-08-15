@@ -8,28 +8,36 @@
         },
         "modules": [
             "custom/launcher",
-            "custom/power",
-            "custom/quit",
-            "custom/reboot"
+            "custom/exit"
+            // "custom/power",
+            // "custom/quit",
+            // "custom/reboot"
         ]
     },
     
-    "custom/quit": {
-        "format": "󪦐",
-        "tooltip": false,
-        "on-click": "hyprctl dispatch exit"
-    },
-    "custom/reboot": {
-        "format": "󪦕",
-        "tooltip": false,
-        "on-click": "reboot"
-    },
-    "custom/power": {
-        "format": "󪦓",
-        "tooltip": false,
-        "on-click": "shutdown now"
-    },
+    // "custom/quit": {
+    //     "format": "󪦐",
+    //     "tooltip": false,
+    //     "on-click": "hyprctl dispatch exit"
+    // },
+    // "custom/reboot": {
+    //     "format": "󪦕",
+    //     "tooltip": false,
+    //     "on-click": "reboot"
+    // },
+    // "custom/power": {
+    //     "format": "󪦓",
+    //     "tooltip": false,
+    //     "on-click": "shutdown now"
+    // },
 
+    // Power Menu
+    "custom/exit": {
+        "format": "󪦓",
+        "on-click": "~/.config/ml4w/scripts/wlogout.sh",
+        "on-click-right": "hyprlock",
+        "tooltip-format": "Left: Power menu\nRight: Lock screen"
+    },
     // "custom/launcher": {
     //     "format": "󪥴 {text}",
     //     "exec": "bash ~/.config/waybar/scripts/custom/launcher.sh",
