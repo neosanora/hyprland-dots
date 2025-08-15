@@ -1,42 +1,46 @@
 #!/usr/bin/env bash
 # --------------------------------------------------------------
-# Downloaded Cursors
+# Download and Install Bibata Cursors + Manual Cursors
 # --------------------------------------------------------------
 
+# Set variables
 download_folder="$HOME/Downloads/bibata-cursors"
-bibata_url="https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/"
+bibata_url="https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7"
+icons_dir="$HOME/.local/share/icons"
 
-if [ -d $download_folder ]; then
-    rm -rf $download_folder
-fi
-mkdir -p $download_folder
+# Create fresh download folder
+rm -rf "$download_folder"
+mkdir -p "$download_folder"
 
-wget -P $download_folder $bibata_url/Bibata-Modern-Amber.tar.xz
-wget -P $download_folder $bibata_url/Bibata-Modern-Classic.tar.xz
-wget -P $download_folder $bibata_url/Bibata-Modern-Ice.tar.xz
+# Download Bibata cursor themes
+for theme in Amber Classic Ice; do
+    wget -q --show-progress -P "$download_folder" "$bibata_url/Bibata-Modern-$theme.tar.xz"
+done
 
-if [ ! -d ~/.local/share/icons/ ]; then
-    mkdir -p ~/.local/share/icons/
-fi
+# Ensure icons directory exists
+mkdir -p "$icons_dir"
 
-if [ -d ~/.local/share/icons/Bibata-Modern-Amber ]; then
-    rm -rf ~/.local/share/icons/Bibata-Modern-Amber
-fi
-if [ -d ~/.local/share/icons/Bibata-Modern-Classic ]; then
-    rm -rf ~/.local/share/icons/Bibata-Modern-Classic
-fi
-if [ -d ~/.local/share/icons/Bibata-Modern-Amber ]; then
-    rm -rf ~/.local/share/icons/Bibata-Modern-Ice
-fi
+# Remove old Bibata installations
+for theme in Amber Classic Ice; do
+    rm -rf "$icons_dir/Bibata-Modern-$theme"
+done
 
-tar -xf $download_folder/Bibata-Modern-Amber.tar.xz -C ~/.local/share/icons/
-tar -xf $download_folder/Bibata-Modern-Classic.tar.xz -C ~/.local/share/icons/
-tar -xf $download_folder/Bibata-Modern-Ice.tar.xz -C ~/.local/share/icons/
+# Extract Bibata themes
+tar -xf "$download_folder/Bibata-Modern-Amber.tar.xz"   -C "$icons_dir"
+tar -xf "$download_folder/Bibata-Modern-Classic.tar.xz" -C "$icons_dir"
+tar -xf "$download_folder/Bibata-Modern-Ice.tar.xz"     -C "$icons_dir"
 
 # --------------------------------------------------------------
-# manual extrack Cursors
+# Manual extract custom cursors
 # --------------------------------------------------------------
 
-tar -xf $SCRIPT_DIR/cursors/ComixCursors-0.10.1.tar.bz2 -C ~/.local/share/icons/
-tar -xf $SCRIPT_DIR/cursors/oreo-spark-dark-cursors.tar.gz -C ~/.local/share/icons/
-tar -xf $SCRIPT_DIR/cursors/oreo-spark-purple-cursors.tar.gz -C ~/.local/share/icons/
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+for cursor_archive in \
+    "ComixCursors-0.10.1.tar.bz2" \
+    "oreo-spark-dark-cursors.tar.gz" \
+    "oreo-spark-purple-cursors.tar.gz"; do
+    tar -xf "$SCRIPT_DIR/cursors/$cursor_archive" -C "$icons_dir"
+done
+
+echo "✅ Cursor themes installed successfully."
