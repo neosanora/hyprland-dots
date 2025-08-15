@@ -34,8 +34,9 @@ tar -xf $download_folder/Bibata-Modern-Classic.tar.xz -C ~/.local/share/icons/
 tar -xf $download_folder/Bibata-Modern-Ice.tar.xz -C ~/.local/share/icons/
 
 # --------------------------------------------------------------
-# Copy Cursors
+# manual extrack Cursors
 # --------------------------------------------------------------
 
-# sudo cp -rf $SCRIPT_DIR/fonts/Niconne /usr/share/fonts
-# sudo cp -rf $SCRIPT_DIR/fonts/Satisfy /usr/share/fonts
+tar -xf $SCRIPT_DIR/cursors/ComixCursors-0.10.1.tar.bz2 -C ~/.local/share/icons/
+tar -xf $SCRIPT_DIR/cursors/oreo-spark-dark-cursors.tar.gz -C ~/.local/share/icons/
+tar -xf $SCRIPT_DIR/cursors/oreo-spark-purple-cursors.tar.gz -C ~/.local/share/icons/
