@@ -1,107 +1,84 @@
 {
-  "$schema": "/etc/xdg/swaync/configSchema.json",
-  "positionX": "right",
-  "positionY": "top",
-  "control-center-margin-top": 10,
-  "control-center-margin-bottom": 10,
-  "control-center-margin-right": 10,
-  "notification-body-image-height": 100,
-  "notification-body-image-width": 200,
-  "timeout": 10,
-  "timeout-low": 5,
-  "timeout-critical": 0,
-  "fit-to-screen": false,
-  "control-center-width": 500,
-  "control-center-height": 1033,
-  "notification-window-width": 500,
-  "keyboard-shortcuts": true,
-  "image-visibility": "when-available",
-  "transition-time": 200,
-  "hide-on-clear": false,
-  "hide-on-action": true,
-  "script-fail-notify": true,
-  "text-empty": "Nothing here",
-  "widgets": [
-    "buttons-grid",
-    "volume",
-    "backlight",
-    "mpris"
-  ],
-  "widget-config": {
-    "title": {
-      "text": "Notification Center",
-      "clear-all-button": true,
-      "button-text": "󰆴 Clear"
-    },
-    "dnd": {
-      "text": "Do Not Disturb"
-    },
-    "label": {
-      "max-lines": 1,
-      "text": "Notification Center"
-    },
-    "mpris": {
-      "image-size": 100,
-      "image-radius": 0,
-      "blacklist": [
-        "kew",
-        "firefox",
-        "spotify"
-      ]
-    },
-
-    "volume": {
-      "label": "󰕾"
-    },
-    "backlight": {
-      "label": "󰃟"
-    },
-
-    "buttons-grid": {
-      "actions": [
-        {
-          "label": "󰐥",
-          "command": "systemctl poweroff"
+    "$schema": "/etc/xdg/swaync/configSchema.json",
+    "positionX": "right",
+    "positionY": "top",
+    "layer": "overlay",
+    "control-center-layer": "top",
+    "layer-shell": true,
+    "cssPriority": "user",
+    "control-center-margin-top": 13,
+    "control-center-margin-bottom": 0,
+    "control-center-margin-right": 14,
+    "control-center-margin-left": 0,
+    "notification-2fa-action": true,
+    "notification-inline-replies": false,
+    "notification-icon-size": 24,
+    "notification-body-image-height": 100,
+    "notification-body-image-width": 100,
+    "notification-window-width": 300,
+    "timeout": 6,
+    "timeout-low": 3,
+    "timeout-critical": 0,
+    "fit-to-screen": false,
+    "control-center-width": 400,
+    "control-center-height": 720,
+    "keyboard-shortcuts": true,
+    "image-visibility": "when-available",
+    "transition-time": 200,
+    "hide-on-clear": false,
+    "hide-on-action": true,
+    "script-fail-notify": true,
+    "widgets": [
+        "dnd",
+        "buttons-grid",
+        "mpris",
+        "volume",
+        "backlight",
+        "title",
+        "notifications"
+    ],
+    "widget-config": {
+        "title": {
+            "text": "Notifications",
+            "clear-all-button": true,
+            "button-text": "Clear"
         },
-        {
-          "label": "󰜉",
-          "command": "systemctl reboot"
+        "dnd": {
+            "text": "Do Not Disturb"
         },
-        {
-          "label": "󰌾",
-          "command": "swaylock-corrupter"
+        "label": {
+            "max-lines": 1,
+            "text": "Notification"
         },
-        {
-          "label": "󰍃",
-          "command": "swaymsg exit"
+        "mpris": {
+            "image-size": 50,
+            "image-radius": 0
         },
-        {
-          "label": "󰆴",
-          "command": "swaync-client -C"
+        "volume": {
+            "label": "󰕾"
         },
-        {
-          "label": "󰕾",
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-          "type": "toggle"
+        "backlight": {
+            "label": "󰃟"
         },
-        {
-          "label": "󰍬",
-          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-          "type": "toggle"
-        },
-        {
-          "label": "󰖩",
-          "command": "iwgtk"
-        },
-        {
-          "label": "󰂯",
-          "command": "blueman-manager"
-        },
-        {
-          "label": "",
-          "command": "kooha"
+        "buttons-grid": {
+            "actions": [
+                {
+                    "label": "",
+                    "command": "hyprlock"
+                },
+                {
+                    "label": "󰝟",
+                    "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+                },
+                {
+                    "label": "󰂯",
+                    "command": "blueman-manager"
+                },
+                {
+                    "label": "",
+                    "command": "bash -c $HOME/.config/ml4w/scripts/wlogout.sh"
+                }
+            ]
         }
-      ]
     }
-  }
 }
