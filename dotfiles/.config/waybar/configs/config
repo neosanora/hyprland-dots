@@ -6,7 +6,7 @@
     "~/.config/waybar/configs/custom_modules/system_container",
     "~/.config/waybar/configs/custom_modules/app_title",
     "~/.config/waybar/configs/custom_modules/firewall",
-    "`/.config/waybar/configs/custom_modules/personalize_container",
+    "`/.config/waybar/configs/custom_modules/tools_container",
     "~/.config/waybar/configs/performance_container"
 
   ],
@@ -38,7 +38,7 @@
     "custom/dot",
     "group/performance",
     "custom/dot",
-    "group/personalize",
+    "group/tools",
     "custom/dot",
     "network",
     "custom/left-arrw",

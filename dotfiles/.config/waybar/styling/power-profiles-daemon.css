@@ -1,0 +1,11 @@
+label#power-profiles-daemon {
+  margin: 5px;
+  padding: 0 6px;
+  background-color: alpha(@background, 0.75);
+  border-radius: 10px;
+}
+
+#power-profiles-daemon {
+  color: @on-background;
+  font-size: 14px;
+}

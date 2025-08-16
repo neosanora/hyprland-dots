@@ -12,7 +12,9 @@
 @import "custom/systemcontainer.css";
 
 @import "custom/sefttycontainer.css";
+@import "custom/toolscontainer.css";
 @import "custom/performancecontainer.css";
+@import "power-profiles-daemon.css";
 
 
 * {

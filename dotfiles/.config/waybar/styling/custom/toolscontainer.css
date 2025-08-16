@@ -1,20 +1,34 @@
 @import "../colors-waybar.css";
 
-#custom-personalize {
+#custom-hyprshade,
+#custom-hypridle,
+#cliphist,
+#custom-tools {
   font-size: 13px;
   margin: 2px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
+#custom-tools {
+    margin-right:12px;
+}
 
-box#personalize {
+#custom-hypridle.active {
+    color: @icon_color;
+}
+
+#custom-hypridle.notactive {
+    color: @error;
+}
+
+box#tools {
   margin: 5px;
   border-radius: 8px;
   background-color: alpha(@primary-container,0.65);
 }
 
-box#personalize .horizontal {
+box#tools .horizontal {
   margin-top: 4px;
   margin-bottom: 4px;
   margin-left: 5px;
@@ -23,9 +37,9 @@ box#personalize .horizontal {
   background-color: alpha(@primary-container,0.98);
 }
 
-#cliphist {
+/* #cliphist {
     margin-right: 16px;
     font-size: 13px;
     font-weight: bold;
     color: @icon_color;
-}
+} */
