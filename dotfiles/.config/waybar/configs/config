@@ -1,14 +1,14 @@
 {
   "include": [
+    "~/.config/waybar/configs/custom_modules/app_title",
+    "~/.config/waybar/configs/custom_modules/firewall",
     "~/.config/waybar/configs/custom_modules/launcher",
     "~/.config/waybar/configs/custom_modules/modules",
     "~/.config/waybar/configs/custom_modules/privacy_container",
     "~/.config/waybar/configs/custom_modules/system_container",
-    "~/.config/waybar/configs/custom_modules/app_title",
-    "~/.config/waybar/configs/custom_modules/firewall",
-    "`/.config/waybar/configs/custom_modules/tools_container",
+    "~/.config/waybar/configs/custom_modules/tools_container",
+    
     "~/.config/waybar/configs/performance_container"
-
   ],
 
   "layer": "top",
