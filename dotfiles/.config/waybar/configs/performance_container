@@ -13,11 +13,8 @@
     "modules": [
       "custom/sistem",
       "cpu",
-      "custom/dot",
       "custom/gpu_usage",
-      "custom/dot",
-      "memory",
-      "custom/dot"
+      "memory"
     ]
   },
 

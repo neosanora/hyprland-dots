@@ -3,13 +3,16 @@
         "~/.config/waybar/configs/custom_modules/modules"
     ],
 
-  "group/seftty-container": {
+  "group/firewall": {
     "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "firewall",
+      "transition-left-to-right": false
+    },
     "modules": [
         "custom/firewall",
-        "custom/dot",
-        "custom/dns",
-        "custom/tor"
+        "custom/dns"
     ]
   },
 
