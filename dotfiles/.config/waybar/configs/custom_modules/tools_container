@@ -14,7 +14,9 @@
       "custom/tools",
       "custom/cliphist",
       "custom/dot",
-      "custom/hypridle"
+      "custom/hypridle",
+      "custom/dot",
+      "custom/ml4w-welcome"
     ]
   },
 
@@ -39,6 +41,12 @@
     "interval": 60,
     "exec": "~/.config/hypr/scripts/hypridle.sh status",
     "on-click": "~/.config/hypr/scripts/hypridle.sh toggle"
-  }
+  },
 
+  // ML4W Welcome App
+  "custom/ml4w-welcome": {
+    "on-click": "flatpak run com.ml4w.sidebar",
+    "format": " ",
+    "tooltip-format": "Open ML4W Sidebar App"
+  }
 }
