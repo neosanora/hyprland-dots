@@ -102,13 +102,6 @@
     "spacing": 8
   },
 
-  // "network": {
-  //   "format-wifi": "󪤀 <b>{essid}</b>",
-  //   "format-ethernet": "󪥈 <b>Ethernet</b>",
-  //   "tooltip": true,
-  //   "format-disconnected": "󪤓"
-  // },
-
   // Network
   "network": {
     "format": "{ifname}",

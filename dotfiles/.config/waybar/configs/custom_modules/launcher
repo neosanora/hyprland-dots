@@ -14,22 +14,23 @@
             // "custom/reboot"
         ]
     },
-    
-    // "custom/quit": {
-    //     "format": "󪦐",
-    //     "tooltip": false,
-    //     "on-click": "hyprctl dispatch exit"
-    // },
-    // "custom/reboot": {
-    //     "format": "󪦕",
-    //     "tooltip": false,
-    //     "on-click": "reboot"
-    // },
-    // "custom/power": {
-    //     "format": "󪦓",
-    //     "tooltip": false,
-    //     "on-click": "shutdown now"
-    // },
+   /* 
+    "custom/quit": {
+        "format": "󪦐",
+        "tooltip": false,
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/reboot": {
+        "format": "󪦕",
+        "tooltip": false,
+        "on-click": "reboot"
+    },
+    "custom/power": {
+        "format": "󪦓",
+        "tooltip": false,
+        "on-click": "shutdown now"
+    },
+    */
 
     // Power Menu
     "custom/exit": {
@@ -38,13 +39,6 @@
         "on-click-right": "hyprlock",
         "tooltip-format": "Left: Power menu\nRight: Lock screen"
     },
-    // "custom/launcher": {
-    //     "format": "󪥴 {text}",
-    //     "exec": "bash ~/.config/waybar/scripts/custom/launcher.sh",
-    //     "on-click": "swaync-client -t",
-    //     "interval": 5,
-    //     "tooltip": false
-    // },
 
     // SwayNC
     "custom/launcher": {
