@@ -6,14 +6,24 @@
 
 packages=(
   #////////////////////#
-  ### | Tools Umum | ###
+  ### |    Tools   | ###
   #////////////////////#
-  "firefox"         # Browser
+  "tumbler"         # Thumbnail service implementing the thumbnail management D-Bus specification
+  "cliphist"        # wayland clipboard manager
+  "gvfs"            # Virtual filesystem implementation for GIO
+  "xclip"           # Command line interface to the X11 clipboard
+  "figlet"          # A program for making large letters out of ordinary text
   "git"             # version control
   "jq"              # JSON processor
   "gum"             # command line UI toolkit
   "inotify-tools"   # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
   "fastfetch"       # system information tool
+
+  #//////////////#
+  ### | APPS | ###
+  #//////////////#
+  "firefox"         # Browser
+  "nautilus"        # Default file manager for GNOME
 
   #/////////////////////#
   ### | File Editor | ###
@@ -57,12 +67,18 @@ packages=(
   "font-manager"        #A simple font management application for GTK+ Desktop Environments
 
   #////////////////////////////////#
-  ### | Display | Manager | WM | ###
+  ### |         HYPRLAND       | ###
   #////////////////////////////////#
   "hyprland"                      # Wayland compositor
   "xdg-desktop-portal-hyprland"   # xdg portal untuk Hyprland
   "qt5-wayland"                   # Qt support for Wayland
   "qt6-wayland"                   # Qt support for Wayland
+
+  "nwg-dock-hyprland"         # GTK3-based dock for Hyprland Wayland compositor
+  "hyprpaper"                 # Wallpaper manager
+  "hyprlock"                  # Lock screen Hyprland
+  "hypridle"                  # hyprland’s idle daemon
+  "hyprpicker"                # A wlroots-compatible Wayland color picker that does not suck
 
   #///////////////////////////////////#
   ### | Terminal | Emulator | Shell ###
@@ -71,7 +87,7 @@ packages=(
   "alacritty"       # Terminal GPU-accelerated
 
   #////////////////////////////////#
-  ### | Aplikasi | GUI | System |###
+  ### |      GUI | System      | ###
   #////////////////////////////////#
   "libnotify"       # Library for sending desktop notifications
   "polkit-gnome"    # Legacy polkit authentication agent for GNOME
@@ -101,15 +117,10 @@ packages=(
 
   #///////////////////////////#
   ### | Bar | Menu | Lock | ###
-  #///////////////////////////#
-
-  "nwg-dock-hyprland"         # GTK3-based dock for Hyprland Wayland compositor
-  
+  #///////////////////////////#  
   "waybar"                    # Widget bar / status bar
   "rofi-wayland"              # Wayland app launcher
-  "hyprpaper"                 # Wallpaper manager
   "wlogout"                   # GUI logout menu
-  "hyprlock"                  # Lock screen Hyprland
 
   #////////////////////#
   ### | Screenshot | ###
