@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 #!/bin/bash
 #                    __
 #  _    _____ ___ __/ /  ___ _____
@@ -25,6 +23,52 @@ pkill waybar || true
 sleep 0.5
 
 # -----------------------------------------------------
+# Default theme: /THEMEFOLDER;/VARIATION
+# -----------------------------------------------------
+
+default_theme="/ml4w-modern;/ml4w-modern/default"
+
+# -----------------------------------------------------
+# Remove incompatible themes
+# -----------------------------------------------------
+
+if [ -f ~/.config/ml4w/settings/waybar-theme.sh ]; then
+    themestyle=$(cat ~/.config/ml4w/settings/waybar-theme.sh)
+    case "$themestyle" in
+    "/ml4w-modern;/ml4w-modern/light")
+        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        ;;
+    "/ml4w-modern;/ml4w-modern/dark")
+        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        ;;
+    "/ml4w;/ml4w/light")
+        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        ;;
+    "/ml4w;/ml4w/dark")
+        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        ;;
+    *)
+        echo
+        ;;
+    esac
+    if [ -d $HOME/.config/waybar/themes/ml4w-modern/light ]; then
+        rm -rf $HOME/.config/waybar/themes/ml4w-modern/light
+    fi
+    if [ -d $HOME/.config/waybar/themes/ml4w-modern/dark ]; then
+        rm -rf $HOME/.config/waybar/themes/ml4w-modern/dark
+    fi
+    if [ -d $HOME/.config/waybar/themes/ml4w-modern/colored ]; then
+        rm -rf $HOME/.config/waybar/themes/ml4w-modern/colored
+    fi
+    if [ -d $HOME/.config/waybar/themes/ml4w/light ]; then
+        rm -rf $HOME/.config/waybar/themes/ml4w/light
+    fi
+    if [ -d $HOME/.config/waybar/themes/ml4w/dark ]; then
+        rm -rf $HOME/.config/waybar/themes/ml4w/dark
+    fi
+fi
+
+# -----------------------------------------------------
 # Get current theme information from ~/.config/ml4w/settings/waybar-theme.sh
 # -----------------------------------------------------
 
@@ -47,11 +91,25 @@ fi
 # Loading the configuration
 # -----------------------------------------------------
 
-CONFIG="$HOME/.config/waybar/neobar/configs/config"
-STYLE="$HOME/.config/waybar/neobar/styling/style.css"
+config_file="config"
+style_file="style.css"
 
-if pgrep -x "waybar" > /dev/null; then
-    killall waybar
-else
-    waybar -c "$CONFIG" -s "$STYLE" > /dev/null 2>&1 &
+# Standard files can be overwritten with an existing config-custom or style-custom.css
+if [ -f ~/.config/waybar/themes${arrThemes[0]}/config-custom ]; then
+    config_file="config-custom"
 fi
+if [ -f ~/.config/waybar/themes${arrThemes[1]}/style-custom.css ]; then
+    style_file="style-custom.css"
+fi
+
+# Check if waybar-disabled file exists
+if [ ! -f $HOME/.config/ml4w/settings/waybar-disabled ]; then
+    HYPRLAND_SIGNATURE=$(hyprctl instances -j | jq -r '.[0].instance')
+    HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_SIGNATURE" waybar -c ~/.config/waybar/themes${arrThemes[0]}/$config_file -s ~/.config/waybar/themes${arrThemes[1]}/$style_file &
+else
+    echo ":: Waybar disabled"
+fi
+
+# Explicitly release the lock (optional) -> flock releases on exit
+flock -u 200
+exec 200>&-

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-CONFIG="$HOME/.config/waybar/configs/config"
-STYLE="$HOME/.config/waybar/styling/style.css"
+CONFIG="$HOME/.config/waybar/neobar/configs/config"
+STYLE="$HOME/.config/waybar/neobar/styling/style.css"
 
 if pgrep -x "waybar" > /dev/null; then
     killall waybar
