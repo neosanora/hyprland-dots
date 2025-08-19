@@ -1,55 +1,69 @@
 #!/bin/bash
-#                    __
-#  _    _____ ___ __/ /  ___ _____
-# | |/|/ / _ `/ // / _ \/ _ `/ __/
-# |__,__/\_,_/\_, /_.__/\_,_/_/
-#            /___/
+#
+# Waybar launcher (neobar version)
 #
 
-# -----------------------------------------------------
-# Prevent duplicate launches: only the first parallel
-# invocation proceeds; all others exit immediately.
-# -----------------------------------------------------
+LOCKFILE="/tmp/waybar-launch.lock"
+THEME_FILE="$HOME/.config/ml4w/settings/waybar-theme.sh"
+DEFAULT_THEME="Default;default"
+CONFIG_DIR="$HOME/.config/waybar/neobar/configs"
+STYLE_DIR="$HOME/.config/waybar/neobar/styling"
 
-exec 200>/tmp/waybar-launch.lock
+# -----------------------------------------------------
+# Prevent duplicate launches
+# -----------------------------------------------------
+exec 200>"$LOCKFILE"
 flock -n 200 || exit 0
 
 # -----------------------------------------------------
-# Quit all running waybar instances
+# Parse arguments
 # -----------------------------------------------------
-
-killall waybar || true
-pkill waybar || true
-sleep 0.5
-
-# -----------------------------------------------------
-# Get current theme information from ~/.config/ml4w/settings/waybar-theme.sh
-# -----------------------------------------------------
-
-if [ -f ~/.config/ml4w/settings/waybar-theme.sh ]; then
-    themestyle=$(cat ~/.config/ml4w/settings/waybar-theme.sh)
-else
-    touch ~/.config/ml4w/settings/waybar-theme.sh
-    echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
-    themestyle=$default_theme
-fi
-
-IFS=';' read -ra arrThemes <<<"$themestyle"
-echo ":: Theme: ${arrThemes[0]}"
-
-if [ ! -f ~/.config/waybar/themes${arrThemes[1]}/style.css ]; then
-    themestyle=$default_theme
-fi
+ACTION="start"
+for arg in "$@"; do
+    case $arg in
+        --reload) ACTION="reload" ;;
+        --stop)   ACTION="stop" ;;
+        --theme=*) 
+            echo "${arg#*=}" > "$THEME_FILE"
+            ;;
+    esac
+done
 
 # -----------------------------------------------------
-# Loading the configuration
+# Manage Waybar processes
 # -----------------------------------------------------
+stop_waybar() {
+    pkill waybar || true
+    sleep 0.5
+}
 
-CONFIG="$HOME/.config/waybar/neobar/configs/config"
-STYLE="$HOME/.config/waybar/neobar/styling/style.css"
+start_waybar() {
+    # load theme
+    if [[ -f "$THEME_FILE" ]]; then
+        themestyle=$(cat "$THEME_FILE")
+    else
+        themestyle="$DEFAULT_THEME"
+        echo "$themestyle" > "$THEME_FILE"
+    fi
 
-if pgrep -x "waybar" > /dev/null; then
-    killall waybar
-else
-    waybar -c "$CONFIG" -s "$STYLE" > /dev/null 2>&1 &
-fi
+    IFS=";" read -ra arrThemes <<<"$themestyle"
+    echo ":: Theme: ${arrThemes[0]}"
+
+    CONFIG="$CONFIG_DIR/config"
+    STYLE="$STYLE_DIR/style.css"
+
+    waybar -c "$CONFIG" -s "$STYLE" >/dev/null 2>&1 &
+    
+# Explicitly release the lock (optional) -> flock releases on exit
+flock -u 200
+exec 200>&-
+}
+
+# -----------------------------------------------------
+# Action handler
+# -----------------------------------------------------
+case $ACTION in
+    start)  stop_waybar; start_waybar ;;
+    reload) stop_waybar; start_waybar ;;
+    stop)   stop_waybar ;;
+esac
