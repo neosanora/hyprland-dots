@@ -12,4 +12,4 @@ if [ -f $HOME/.config/ml4w/settings/waybar-disabled ]; then
 else
     touch $HOME/.config/ml4w/settings/waybar-disabled
 fi
-$HOME/.config/waybar/neobar-launch.sh &
+$HOME/.config/waybar/launch.sh &
