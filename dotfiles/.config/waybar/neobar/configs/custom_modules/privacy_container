@@ -1,6 +1,6 @@
 {
   "include": [
-    "~/.config/waybar/configs/custom_modules/modules"
+    "~/.config/waybar/neobar/configs/custom_modules/modules"
   ],
   "group/privacy-container": {
     "orientation": "horizontal",
@@ -16,19 +16,19 @@
     "format": "<b>{}</b>",
     "tooltip": false,
     "interval": 1,
-    "exec": "~/.config/waybar/scripts/custom/privacy-test.sh S"
+    "exec": "~/.config/waybar/neobar/scripts/custom/privacy-test.sh S"
   },
   "custom/priv-mic": {
     "format": "<b>{}</b>",
     "tooltip": false,
     "interval": 1,
-    "exec": "~/.config/waybar/scripts/custom/privacy-test.sh M"
+    "exec": "~/.config/waybar/neobar/scripts/custom/privacy-test.sh M"
   },
   "custom/priv-cam": {
     "format": "<b>{}</b>",
     "tooltip": false,
     "interval": 1,
-    "exec": "~/.config/waybar/scripts/custom/privacy-test.sh C"
+    "exec": "~/.config/waybar/neobar/scripts/custom/privacy-test.sh C"
   },
   "clock": {
     "format": "󪥶 <b>{:%I:%M %p}</b>",

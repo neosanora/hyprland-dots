@@ -1,6 +1,6 @@
 {
     "include": [
-        "~/.config/waybar/configs/custom_modules/modules"
+        "~/.config/waybar/neobar/configs/custom_modules/modules"
     ],
 
   "group/firewall": {
@@ -18,15 +18,15 @@
 
     "custom/firewall": {
         "format": "<b>{}</b>",
-        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh FW",
+        "exec": "bash ~/.config/waybar/neobar/scripts/custom/seftty/netsec.sh FW",
         "interval": 60,
-        "on-click": "bash ~/.config/waybar/scripts/custom/seftty/firewall_toggle.sh",
+        "on-click": "bash ~/.config/waybar/neobar/scripts/custom/seftty/firewall_toggle.sh",
         "return-type": "json"
 
     },
     "custom/dns": {
         "format": "<b>{}</b>",
-        "exec": "bash ~/.config/waybar/scripts/custom/seftty/netsec.sh DNS",
+        "exec": "bash ~/.config/waybar/neobar/scripts/custom/seftty/netsec.sh DNS",
         "interval": 60,
         "return-type": "json"
     }

@@ -41,14 +41,20 @@ apply_theme() {
         $HOME/.local/bin/wallust run --palette dark16 $(cat ~/.cache/ml4w/hyprland-dotfiles/current_wallpaper)
 
         bash $HOME/.config/nwg-dock-hyprland/launch.sh &
-        bash $HOME/.config/waybar/launch.sh &
+
+        # bash $HOME/.config/waybar/launch.sh &
+        bash $HOME/.config/waybar/neobar-launch.sh $
+
     elif [ "$THEME_PREF" -eq 0 ]; then
         echo "Detected light theme preference (gtk-application-prefer-dark-theme=0). Applying light matugen theme..."
         $HOME/.local/bin/matugen image $(cat ~/.cache/ml4w/hyprland-dotfiles/current_wallpaper) -m "light"
         $HOME/.local/bin/wallust run --palette light16 $(cat ~/.cache/ml4w/hyprland-dotfiles/current_wallpaper)
 
         bash $HOME/.config/nwg-dock-hyprland/launch.sh &
-        bash $HOME/.config/waybar/launch.sh &
+        
+        # bash $HOME/.config/waybar/launch.sh &
+        bash $HOME/.config/waybar/neobar-launch.sh $
+
     else
         echo "Warning: Unexpected value for gtk-application-prefer-dark-theme: $THEME_PREF. Expected 0 or 1. Skipping theme application."
     fi

@@ -1,6 +1,6 @@
 {
     "include": [
-    "~/.config/waybar/configs/custom_modules/modules"
+    "~/.config/waybar/neobar/configs/custom_modules/modules"
   ],
 
   "group/tools": {
@@ -27,9 +27,9 @@
 
   "custom/cliphist": {
     "format": "",
-    "on-click": "sleep 0.1 && ~/.config/waybar/scripts/custom/cliphist.sh",
-    "on-click-right": "sleep 0.1 && ~/.config/waybar/scripts/custom/cliphist.sh d",
-    "on-click-middle": "sleep 0.1 && ~/.config/waybar/scripts/custom/cliphist.sh w",
+    "on-click": "sleep 0.1 && ~/.config/waybar/neobar/scripts/custom/cliphist.sh",
+    "on-click-right": "sleep 0.1 && ~/.config/waybar/neobar/scripts/custom/cliphist.sh d",
+    "on-click-middle": "sleep 0.1 && ~/.config/waybar/neobar/scripts/custom/cliphist.sh w",
     "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list"
   },
 

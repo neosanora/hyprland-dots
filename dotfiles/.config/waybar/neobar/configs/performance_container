@@ -1,6 +1,6 @@
 {
   "include": [
-    "~/.config/waybar/configs/custom_modules/modules"
+    "~/.config/waybar/neobar/configs/custom_modules/modules"
   ],
 
   "group/performance": {
@@ -35,7 +35,7 @@
     "interval": 1,
     "format": "󰍛 <b>{}</b>",
     "max-length": 10,
-    "exec": "bash ~/.config/waybar/scripts/custom/gpu_usage.sh",
+    "exec": "bash ~/.config/waybar/neobar/scripts/custom/gpu_usage.sh",
     "exec-if": "command -v nvidia-smi",
     "on-click": "alacritty -e nvtop",
     "tooltip": false

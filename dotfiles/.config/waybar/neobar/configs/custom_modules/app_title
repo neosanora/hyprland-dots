@@ -11,14 +11,14 @@
     "custom/app-title-icon": {
         "format": "{alt}",
         "interval": 1,
-        "exec": "~/.config/waybar/scripts/title/win_class_way.sh",
+        "exec": "~/.config/waybar/neobar/scripts/title/win_class_way.sh",
         "tooltip": false,
         "return-type": "json"
     },
     "custom/app-name": {
         "format": "<b>{}</b>",
         "interval": 1,
-        "exec": "~/.config/waybar/scripts/title/win_class_way.sh",
+        "exec": "~/.config/waybar/neobar/scripts/title/win_class_way.sh",
         "tooltip": false,
         "return-type": "json"
     }

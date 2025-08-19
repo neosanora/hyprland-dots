@@ -49,13 +49,13 @@
         "format": "󪥔",
         "tooltip": false,
         "on-click":
-        "hyprctl dispatch exec \"[float;size 800 500;center] alacritty --class update-check -e bash ~/.config/waybar/scripts/custom/pacman-update.sh\""
+        "hyprctl dispatch exec \"[float;size 800 500;center] alacritty --class update-check -e bash ~/.config/waybar/neobar/scripts/custom/pacman-update.sh\""
     },
     
     "custom/pacman-update#text": {
         "format": "<b>{}</b>",
         "interval": 60,
-        "exec": "~/.config/waybar/scripts/pacman-update-icon.sh",
+        "exec": "~/.config/waybar/neobar/scripts/pacman-update-icon.sh",
         "tooltip": false,
         "return-type": "json"
     },
@@ -79,7 +79,7 @@
                 "󪤒"
             ]
         },
-        "on-click": "bash ~/.config/waybar/scripts/custom/audio-menu.sh"
+        "on-click": "bash ~/.config/waybar/neobar/scripts/custom/audio-menu.sh"
     },
     "pulseaudio#text": {
         "tooltip": false,
@@ -156,14 +156,14 @@
             "󪤪",
             "󪤪"
         ],
-        "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
-        "on-scroll-up": "bash ~/.config/waybar/scripts/custom/ddc-brightness up",
-        "on-scroll-down": "bash ~/.config/waybar/scripts/custom/ddc-brightness down"
+        "exec": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness get",
+        "on-scroll-up": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness up",
+        "on-scroll-down": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness down"
     },
     "custom/backlight#text": {
         "device": "DP-1",
         "format": "<b>{}%</b>",
-        "exec": "bash ~/.config/waybar/scripts/custom/ddc-brightness get",
+        "exec": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness get",
         "interval": 15,
         "tooltip": false
     }
