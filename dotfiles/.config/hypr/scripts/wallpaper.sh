@@ -152,13 +152,13 @@ fi
 # -----------------------------------------------------
 
 sleep 1
-$HOME/.config/waybar/launch.sh
+bash $HOME/.config/waybar/launch.sh
 
 # -----------------------------------------------------
 # Reload nwg-dock-hyprland
 # -----------------------------------------------------
 
-$HOME/.config/nwg-dock-hyprland/launch.sh &
+bash $HOME/.config/nwg-dock-hyprland/launch.sh &
 
 # -----------------------------------------------------
 # Update Pywalfox
