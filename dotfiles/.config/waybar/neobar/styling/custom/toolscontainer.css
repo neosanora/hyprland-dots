@@ -21,7 +21,7 @@
 box#tools {
   margin: 5px;
   border-radius: 8px;
-  background-color: alpha(@primary-container, 0.65);
+  background-color: alpha(@primary_container, 0.65);
 }
 
 box#tools .horizontal {
@@ -30,7 +30,7 @@ box#tools .horizontal {
   margin-left: 5px;
   margin-right: 5px;
   border-radius: 8px;
-  background-color: alpha(@primary-container, 0.98);
+  background-color: alpha(@primary_container, 0.98);
 }
 
 #custom-ml4w-welcome {

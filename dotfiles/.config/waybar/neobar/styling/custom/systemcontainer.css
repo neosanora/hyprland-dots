@@ -6,7 +6,7 @@ box#system-container {
     margin-bottom: 5px;
     padding-left: 10px;
     padding-right: 5px;
-    background-color: alpha(@secondary-container, 0.75);
+    background-color: alpha(@secondary_container, 0.75);
     border-radius: 10px;
     /* border: 2px solid alpha(@secondary-container,0.95); */
 }
@@ -41,7 +41,7 @@ box#system-container {
     font-weight: 800;
     margin-left: 3px;
     margin-right: 3px;
-    color: @on-secondary-container;
+    color: @on_secondary_container;
 }
 
 #custom-pacman-update.uptodate.text {

@@ -8,7 +8,7 @@
 #battery.text {
   font-size: 12px;
   font-weight: 800;
-  color: @on-background;
+  color: @on_background;
 }
 
 #battery.charging,
@@ -21,7 +21,7 @@
 #battery.text.charging,
 #battery.text.full,
 #battery.text.plugged {
-  color: @on-background;
+  color: @on_background;
 }
 
 #battery.critical:not(.charging) {

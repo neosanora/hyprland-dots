@@ -6,6 +6,6 @@ label#power-profiles-daemon {
 }
 
 #power-profiles-daemon {
-  color: @on-background;
+  color: @on_background;
   font-size: 14px;
 }

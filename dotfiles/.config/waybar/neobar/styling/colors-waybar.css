@@ -1,7 +1,17 @@
-@import "themes/Madness.css";
+/* -----------------------------------------------------
+ * THEME
+ * ----------------------------------------------------- */
+
+/* @import "themes/Madness.css"; */
+@import '../../../../.config/waybar/colors.css';
+
 /**
 Change import to switch theme
 **/
+
+/* -----------------------------------------------------
+ * THEME PASTEL COLOR
+ * ----------------------------------------------------- */
 
 @define-color pastel-blue #add8e6;
 @define-color pastel-pink #ffb6c1;
@@ -13,6 +23,9 @@ Change import to switch theme
 @define-color pastel-mint #98ff98;
 @define-color pastel-peach #ffdab9;
 
+/* -----------------------------------------------------
+ * THEME PASTEL APP
+ * ----------------------------------------------------- */
 
 @define-color pastel-firefox-orange #ffa07a;
 @define-color pastel-jetbrains-blue #87ceeb;
@@ -20,3 +33,13 @@ Change import to switch theme
 @define-color pastel-telegram-blue #66a2ff;
 @define-color pastel-chrome-blue #a6c0fe;
 @define-color pastel-gitkraken-purple #A080E3;
+
+/* -----------------------------------------------------
+ * dark
+ * ----------------------------------------------------- */
+ 
+@define-color primary #000000;
+@define-color on_primary #FFFFFF;
+@define-color icon_color #000000;
+@define-color surface #000000;
+@define-color border_color #000000;

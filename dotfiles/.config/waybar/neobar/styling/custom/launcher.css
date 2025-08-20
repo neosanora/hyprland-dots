@@ -8,7 +8,7 @@
   margin: 5px;
   padding-left: 3px;
   padding-right: 3px;
-  color: @on-primary-container;
+  color: @on_primary_container;
 }
 
 #custom-launcher {
@@ -21,7 +21,7 @@
 box#launcher {
   margin: 5px;
   border-radius: 8px;
-  background-color: alpha(@primary-container,0.65);
+  background-color: alpha(@primary_container,0.65);
 }
 
 box#launcher .horizontal {
@@ -30,7 +30,7 @@ box#launcher .horizontal {
   margin-left: 5px;
   margin-right: 5px;
   border-radius: 8px;
-  background-color: alpha(@primary-container,0.98);
+  background-color: alpha(@primary_container,0.98);
 }
 
 

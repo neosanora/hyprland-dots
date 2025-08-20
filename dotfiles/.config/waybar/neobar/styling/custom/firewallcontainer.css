@@ -11,7 +11,7 @@
 box#firewall {
   margin: 5px;
   border-radius: 8px;
-  background-color: alpha(@tertiary-container, 0.65);
+  background-color: alpha(@tertiary_container, 0.65);
 }
 
 box#firewall .horizontal {
@@ -20,5 +20,5 @@ box#firewall .horizontal {
   margin-left: 5px;
   margin-right: 5px;
   border-radius: 8px;
-  background-color: alpha(@primary-container, 0.98);
+  background-color: alpha(@primary_container, 0.98);
 }

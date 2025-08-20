@@ -1,7 +1,7 @@
 @import "colors-waybar.css";
 
 window#waybar {
-  background-color: @background;
+  background-color: alpha(@background, 0.75);
   /* background-color: transparent; */
   padding: 0;
   margin: 0;

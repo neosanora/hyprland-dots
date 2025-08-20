@@ -8,7 +8,7 @@
 #mode,
 #idle_inhibitor {
   padding: 0 6px;
-  color:  @on-primary-container;
+  color:  @on_primary_container;
   font-size: 14px;
 }
 
@@ -26,12 +26,12 @@ label#network {
 }
 
 #network {
-  color: @on-background;
+  color: @on_background;
   font-size: 14px;
 }
 
 #network.ethernet {
-  color: @pastel-green;
+  color: @pastel_green;
 }
 
 #network.disconnected {
