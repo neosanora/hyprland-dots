@@ -19,7 +19,7 @@ mkdir -p "$BIN_DIR"
 # --------------------------------------------------------------
 PACKAGES=(
   "matugen|https://api.github.com/repos/InioX/matugen/releases|https://github.com/InioX/matugen/releases/download"
-  "wallust|https://codeberg.org/api/v1/repos/explosion-mental/wallust/releases|https://codeberg.org/explosion-mental/wallust/releases/download"
+
 )
 
 # --------------------------------------------------------------
