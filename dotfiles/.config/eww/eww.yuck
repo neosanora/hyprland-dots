@@ -806,7 +806,7 @@
     :stacking "bg"
     :geometry (geometry :anchor "top center"
                         :width "99.5%"
-                        :height "37px"
+                        :height "3.425%"
     )
     :exclusive true
     (bar)
