@@ -152,7 +152,8 @@ fi
 # -----------------------------------------------------
 
 sleep 1
-bash $HOME/.config/waybar/launch.sh
+# bash $HOME/.config/waybar/launch.sh
+bash $HOME/.config/hypr/scripts/toggle/change-waybar.sh
 
 # -----------------------------------------------------
 # Reload nwg-dock-hyprland
