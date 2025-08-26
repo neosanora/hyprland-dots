@@ -1,4 +1,4 @@
-<detail>
+<details>
 <summary> # 📖 FAQ — `ddcutil` Setup & Penggunaan </summary>
 
 > **`ddcutil`** adalah tool Linux untuk mengontrol pengaturan monitor (brightness, contrast, input source) menggunakan protokol **DDC/CI** melalui koneksi **I²C**.
@@ -127,4 +127,4 @@ VCP code 0x10 (Brightness): current value = 40, max value = 100
 * `ddcutil` tidak selalu bekerja pada monitor via docking station atau adapter murah.
 * Gunakan interval pembacaan ≥ 0.1 detik untuk menghindari penolakan perintah oleh monitor.
 * Beberapa monitor menyimpan setting brightness terpisah untuk setiap input (HDMI 1, HDMI 2, DP).
-</detail>
+</details>
