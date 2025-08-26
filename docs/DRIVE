@@ -1,7 +1,5 @@
-# LINUX
-I NEED TO KNOW
-
-# ❓ FAQ: Steam/Proton Tidak Bisa Jalan saat Game Disimpan di SSD NTFS (Arch Linux)
+<details>
+<summary>❓ FAQ: Steam/Proton Tidak Bisa Jalan saat Game Disimpan di SSD NTFS (Arch Linux)</summary>
 
 ## 💥 Masalah
 
@@ -93,3 +91,4 @@ PROTON_LOG=1 %command%
 ---
 
 Semoga membantu! Jangan lupa share jika berguna untuk user Arch lainnya :)
+</summary>
