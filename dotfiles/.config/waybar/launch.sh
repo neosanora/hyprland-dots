@@ -17,7 +17,6 @@ flock -n 200 || exit 0
 # -----------------------------------------------------
 # Kill existing waybar
 # -----------------------------------------------------
-killall waybar 2>/dev/null || true
 pkill waybar 2>/dev/null || true
 sleep 0.5
 
@@ -66,8 +65,11 @@ themeVariant="${arrThemes[1]}"
 
 echo ":: Current Theme: $themeFolder"
 
-if [ ! -f "$THEMES_DIR${themeVariant}/style.css" ]; then
+if [ ! -f "$THEMES_DIR/${themeVariant}/style.css" ]; then
     themestyle=$DEFAULT_THEME
+    IFS=';' read -ra arrThemes <<< "$themestyle"
+    themeFolder="${arrThemes[0]}"
+    themeVariant="${arrThemes[1]}"
 fi
 
 # -----------------------------------------------------
@@ -76,8 +78,8 @@ fi
 config_file="config"
 style_file="style.css"
 
-[ -f "$THEMES_DIR${themeFolder}/config-custom" ] && config_file="config-custom"
-[ -f "$THEMES_DIR${themeVariant}/style-custom.css" ] && style_file="style-custom.css"
+[ -f "$THEMES_DIR/${themeFolder}/config-custom" ] && config_file="config-custom"
+[ -f "$THEMES_DIR/${themeVariant}/style-custom.css" ] && style_file="style-custom.css"
 
 # -----------------------------------------------------
 # Launch Waybar (with Neobar switcher)
@@ -92,11 +94,21 @@ if [ ! -f "$SETTINGS_DIR/waybar-disabled" ]; then
 
         HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_SIGNATURE" waybar \
             -c "$CONFIG" -s "$STYLE" &
+    elif [ -f "$SETTINGS_DIR/waybar-use-cachybar" ]; then
+        echo ":: Using CachyOS Theme"
+        CONFIG="$HOME/.config/waybar/cachybar/config"
+        STYLE="$HOME/.config/waybar/cachybar/style.css"
+
+        HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_SIGNATURE" waybar \
+            -c "$CONFIG" -s "$STYLE" &
+    elif [ -f "$SETTINGS_DIR/waybar-use-eww" ]; then
+        echo ":: Using Eww"
+        bash "$HOME/.config/eww/launch.sh"
     else
         echo ":: Using Theme Config"
         HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_SIGNATURE" waybar \
-            -c "$THEMES_DIR${themeFolder}/$config_file" \
-            -s "$THEMES_DIR${themeVariant}/$style_file" &
+            -c "$THEMES_DIR/${themeFolder}/$config_file" \
+            -s "$THEMES_DIR/${themeVariant}/$style_file" &
     fi
 else
     echo ":: Waybar disabled"
