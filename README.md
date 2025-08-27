@@ -26,5 +26,5 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 <br/>
 
 ### Font Icons Preview
-<!-- ![Icons Preview](https://raw.githubusercontent.com/UnFunnyGuy/hyprland-dots/main/screenshots/icons.png) -->
+![Icons Preview](https://raw.githubusercontent.com/neosanora/hyprland-dots/main/screenshots/icons.png)
 
