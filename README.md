@@ -1,5 +1,3 @@
-# .config
-
 > [!IMPORTANT]
 > These dotfiles are currently being revised and updated. This can lead to side effects during the installation or update.
 
@@ -18,7 +16,7 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 ```
 
 
-### Screenshot 1
+### Screenshot
 
 <!-- ![First Preview](https://raw.githubusercontent.com/UnFunnyGuy/hyprland-dots/main/screenshots/current_bar.png) -->
 
