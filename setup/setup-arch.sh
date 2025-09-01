@@ -20,12 +20,11 @@ fi
 download_folder="$SCRIPT_DIR/tmp"
 mkdir -p "$download_folder"
 
-# ----------------------------------------------------------
-# Colors
-# ----------------------------------------------------------
+# --------------------------------------------------------------
+# Library
+# --------------------------------------------------------------
 
-GREEN='\033[0;32m'
-NONE='\033[0m'
+source $SCRIPT_DIR/_lib.sh
 
 # ----------------------------------------------------------
 # Utils
@@ -102,52 +101,23 @@ _installPackages() {
 #     yay --noconfirm -S "${toInstall[@]}"
 # }
 
-# ----------------------------------------------------------
-# Header
-# ----------------------------------------------------------
+# --------------------------------------------------------------
+# Install Gum
+# --------------------------------------------------------------
 
-clear
-echo -e "${GREEN}"
-cat <<"EOF"
-   ____    __          
-  / __/__ / /___ _____ 
- _\ \/ -_) __/ // / _ \
-/___/\__/\__/\_,_/ .__/
-                /_/    
-ML4W Hyprland Starter for Arch based distros
-EOF
-echo -e "${NONE}"
-
-# ----------------------------------------------------------
-# Prompt
-# ----------------------------------------------------------
-
-AUTO_YES=0
-if [[ "$1" == "--yes" ]]; then
-    AUTO_YES=1
-fi
-
-if [[ $AUTO_YES -eq 0 ]]; then
-    while true; do
-        read -rp "DO YOU WANT TO START THE PACKAGE INSTALLATION NOW? (Yy/Nn): " yn
-        case $yn in
-            [Yy]*)
-                echo ":: Installation started."
-                echo
-                break
-                ;;
-            [Nn]*)
-                echo ":: Installation canceled"
-                exit
-                ;;
-            *)
-                echo ":: Please answer yes or no."
-                ;;
-        esac
-    done
+if [[ $(_checkCommandExists "gum") == 0 ]]; then
+    echo ":: gum is already installed"
 else
-    echo ":: Auto mode enabled. Starting installation."
+    echo ":: The installer requires gum. gum will be installed now"
+    sudo pacman --noconfirm -S gum
 fi
+
+
+# --------------------------------------------------------------
+# Header
+# --------------------------------------------------------------
+
+_writeHeader "Arch"
 
 # ----------------------------------------------------------
 # Main
