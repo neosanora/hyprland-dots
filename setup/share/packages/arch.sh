@@ -10,6 +10,7 @@ packages=(
   #////////////////////#
   "tumbler"         # Thumbnail service implementing the thumbnail management D-Bus specification
   "cliphist"        # wayland clipboard manager
+  "unzip"           # For extracting and viewing files in .zip archives
   "gvfs"            # Virtual filesystem implementation for GIO
   "xclip"           # Command line interface to the X11 clipboard
   "figlet"          # A program for making large letters out of ordinary text
