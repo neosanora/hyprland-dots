@@ -8,6 +8,7 @@ packages=(
   #////////////////////#
   ### |    Tools   | ###
   #////////////////////#
+  "imagemagick"   # Software suite to create, edit, compose, or convert bitmap images
   "tumbler"         # Thumbnail service implementing the thumbnail management D-Bus specification
   "cliphist"        # wayland clipboard manager
   "gvfs"            # Virtual filesystem implementation for GIO
@@ -49,19 +50,23 @@ packages=(
   "nwg-look"        # GTK settings editor adapted to work on wlroots-based compositors
 
 # widget theme
-  "breeze-gtk"      # Breeze widget theme for GTK 2 and 3
+  "papirus-icon-theme"  # Papirus icon theme
+  "adapta-gtk-theme"    # Adapta is a material design-inspired
+  "breeze"      # Breeze widget theme for GTK 2 and 3
 
   
   #//////////////#
   ### | Font | ###
   #//////////////#
-  
-  "ttf-font-awesome"
+  "otf-font-awesome"
   "ttf-fira-sans"
   "ttf-fira-code"
   "ttf-firacode-nerd"
-
+  "ttf-dejavu"
+  "noto-fonts"
+  "noto-fonts-emoji"
   "noto-fonts-cjk"
+  "noto-fonts-extra"
   
 # FONT EDITOR/SETTINGS
   "font-manager"        #A simple font management application for GTK+ Desktop Environments
