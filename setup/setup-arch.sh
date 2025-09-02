@@ -30,15 +30,6 @@ source $SCRIPT_DIR/_lib.sh
 # Utils
 # ----------------------------------------------------------
 
-_checkCommandExists() {
-    cmd="$1"
-    if ! command -v "$cmd" >/dev/null; then
-        echo 1
-        return
-    fi
-    echo 0
-}
-
 _isInstalled() {
     package="$1"
     if pacman -Qq "${package}" &>/dev/null; then
