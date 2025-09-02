@@ -188,7 +188,7 @@ source $SCRIPT_DIR/_fonts.sh
 # Fonts
 # --------------------------------------------------------------
 
-source $SCRIPT_DIR/_fontsIcon.sh
+source $SCRIPT_DIR/_fontIcon.sh
 
 # --------------------------------------------------------------
 # ml4w apps
