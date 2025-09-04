@@ -3,7 +3,7 @@
 
 > [!NOTE]
 >This repository contains my personal dotfiles and system configuration for Arch Linux + Hyprland.  
->It was originally adapted from [username/dotfiles](https://github.com/mylinuxforwork/dotfiles), with modifications to fit my own workflow and preferences.
+>It was originally adapted from [mylinuxforwork/dotfiles](https://github.com/mylinuxforwork/dotfiles), with modifications to fit my own workflow and preferences.
 
 ## Installation
 
