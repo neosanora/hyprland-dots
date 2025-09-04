@@ -1,5 +1,9 @@
-> [!IMPORTANT]
+> [!CAUTION]
 > These dotfiles are currently being revised and updated. This can lead to side effects during the installation or update.
+
+> [!NOTE]
+>This repository contains my personal dotfiles and system configuration for Arch Linux + Hyprland.  
+>It was originally adapted from [username/dotfiles](https://github.com/mylinuxforwork/dotfiles), with modifications to fit my own workflow and preferences.
 
 ## Installation
 
@@ -16,7 +20,7 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 ```
 
 
-### Screenshot
+## Screenshot
 
 <!-- ![First Preview](https://raw.githubusercontent.com/UnFunnyGuy/hyprland-dots/main/screenshots/current_bar.png) -->
 
@@ -25,4 +29,3 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 
 ### Font Icons Preview
 ![Icons Preview](https://raw.githubusercontent.com/neosanora/hyprland-dots/main/screenshots/icons.png)
-
