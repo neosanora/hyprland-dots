@@ -18,15 +18,15 @@
 
     "custom/firewall": {
         "format": "<b>{}</b>",
-        "exec": "bash ~/.config/waybar/neobar/scripts/custom/seftty/netsec.sh FW",
+        "exec": "~/.config/waybar/neobar/scripts/custom/seftty/netsec.sh FW",
         "interval": 60,
-        "on-click": "bash ~/.config/waybar/neobar/scripts/custom/seftty/firewall_toggle.sh",
+        "on-click": "~/.config/waybar/neobar/scripts/custom/seftty/firewall_toggle.sh",
         "return-type": "json"
 
     },
     "custom/dns": {
         "format": "<b>{}</b>",
-        "exec": "bash ~/.config/waybar/neobar/scripts/custom/seftty/netsec.sh DNS",
+        "exec": "~/.config/waybar/neobar/scripts/custom/seftty/netsec.sh DNS",
         "interval": 60,
         "return-type": "json"
     }

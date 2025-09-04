@@ -79,7 +79,7 @@
                 "󪤒"
             ]
         },
-        "on-click": "bash ~/.config/waybar/neobar/scripts/custom/audio-menu.sh"
+        "on-click": "~/.config/waybar/neobar/scripts/custom/audio-menu.sh"
     },
     "pulseaudio#text": {
         "tooltip": false,
@@ -156,14 +156,14 @@
             "󪤪",
             "󪤪"
         ],
-        "exec": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness get",
-        "on-scroll-up": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness up",
-        "on-scroll-down": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness down"
+        "exec": "~/.config/waybar/neobar/scripts/custom/ddc-brightness get",
+        "on-scroll-up": "~/.config/waybar/neobar/scripts/custom/ddc-brightness up",
+        "on-scroll-down": "~/.config/waybar/neobar/scripts/custom/ddc-brightness down"
     },
     "custom/backlight#text": {
         "device": "DP-1",
         "format": "<b>{}%</b>",
-        "exec": "bash ~/.config/waybar/neobar/scripts/custom/ddc-brightness get",
+        "exec": "~/.config/waybar/neobar/scripts/custom/ddc-brightness get",
         "interval": 15,
         "tooltip": false
     }
