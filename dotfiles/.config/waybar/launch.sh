@@ -103,7 +103,7 @@ if [ ! -f "$SETTINGS_DIR/waybar-disabled" ]; then
             -c "$CONFIG" -s "$STYLE" &
     elif [ -f "$SETTINGS_DIR/waybar-use-eww" ]; then
         echo ":: Using Eww"
-        bash "$HOME/.config/eww/launch.sh"
+        $HOME/.config/eww/launch.sh
     else
         echo ":: Using Theme Config"
         HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_SIGNATURE" waybar \
