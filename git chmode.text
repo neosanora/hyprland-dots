@@ -1,0 +1,5 @@
+find dotfiles/.config/ -type f -name "*.sh" \
+  ! -path "dotfiles/.config/ml4w/settings/*" \
+  ! -path "dotfiles/.config/ml4w/version/*" \
+  ! -path "dotfiles/.config/waybar/themes/*" \
+  -exec git update-index --chmod=+x {} \;
