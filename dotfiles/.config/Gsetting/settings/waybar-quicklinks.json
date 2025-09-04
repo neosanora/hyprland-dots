@@ -6,12 +6,12 @@
     }, 
     "custom/quicklink2": {
         "format": " ",
-        "on-click": "bash ~/.config/ml4w/settings/browser.sh",
+        "on-click": "~/.config/ml4w/settings/browser.sh",
         "tooltip-format": "Open the browser"
     },
     "custom/quicklink3": {
         "format": " ",
-        "on-click": "bash ~/.config/ml4w/settings/filemanager.sh",
+        "on-click": "~/.config/ml4w/settings/filemanager.sh",
         "tooltip-format": "Open the filemanager"
     }, 
     "custom/quicklinkempty": {

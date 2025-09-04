@@ -49,7 +49,7 @@
         "format": "󪥔",
         "tooltip": false,
         "on-click":
-        "hyprctl dispatch exec \"[float;size 800 500;center] alacritty --class update-check -e bash ~/.config/waybar/neobar/scripts/custom/pacman-update.sh\""
+        "hyprctl dispatch exec \"[float;size 800 500;center] alacritty --class update-check -e ~/.config/waybar/neobar/scripts/custom/pacman-update.sh\""
     },
     
     "custom/pacman-update#text": {
