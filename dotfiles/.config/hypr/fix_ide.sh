@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function fix_jetbrains() {
 	if [ "$1" = 'Select Methods to Override/Implement' ]; then

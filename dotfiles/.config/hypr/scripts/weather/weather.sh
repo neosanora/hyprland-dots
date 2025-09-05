@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 weathertext="$HOME/.config/hypr/scripts/weather/weathertext"
 
