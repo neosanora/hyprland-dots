@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 class=$(playerctl metadata --player=spotify --format '{{lc(status)}}')
 
 if [[ $class == "playing" ]]; then
