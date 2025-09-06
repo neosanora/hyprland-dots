@@ -1,86 +1,53 @@
 #!/usr/bin/env bash
-# Minimal script: install NVIDIA driver + lib32 utils + headers + Mesa & Vulkan
-# - Regenerates initramfs
-# - Adds kernel parameter nvidia-drm.modeset=1 to GRUB (if GRUB is used)
-# Review before running. Run as root (sudo).
+# --------------------------------------------------------------
+# Arch Linux - NVIDIA Proprietary Driver Installer (Gaming Ready)
+# Mirip archinstall: auto setup driver, kernel modules, grub update
+# --------------------------------------------------------------
 
-set -euo pipefail
-IFS=$'
-	'
+set -e
 
-PACMAN_OPTS=(--noconfirm --needed)
-PKGS=(
-  nvidia
-  nvidia-utils
-  lib32-nvidia-utils
-  nvidia-settings
-  linux-headers
-  mesa
-  vulkan-icd-loader
-  lib32-vulkan-icd-loader
-  vulkan-tools
-)
+echo "[INFO] Updating system..."
+sudo pacman -Syu --noconfirm
 
-GRUB_FILE="/etc/default/grub"
-BACKUP_DIR="/root/arch-nvidia-backups-$(date +%s)"
+echo "[INFO] Installing NVIDIA proprietary drivers + dependencies..."
+sudo pacman -S --noconfirm --needed \
+    nvidia \
+    nvidia-utils \
+    nvidia-settings \
+    lib32-nvidia-utils \
+    vulkan-icd-loader \
+    lib32-vulkan-icd-loader \
+    opencl-nvidia \
+    lib32-opencl-nvidia \
+    mesa \
+    lib32-mesa \
+    vulkan-tools \
+    lib32-vulkan-driver \
+    egl-wayland
 
-if [[ $EUID -ne 0 ]]; then
-  echo "Error: please run this script as root (sudo)." >&2
-  exit 1
-fi
+echo "[INFO] Adding NVIDIA modules to initramfs..."
+sudo sed -i 's/^MODULES=(/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm /' /etc/mkinitcpio.conf
 
-echo "== Minimal NVIDIA + Mesa/Vulkan installer for Arch =="
+echo "[INFO] Rebuilding initramfs..."
+sudo mkinitcpio -P
 
-# Update system
-echo "-> Updating package database and system (pacman -Syu)"
-pacman -Syu "${PACMAN_OPTS[@]}"
+# --------------------------------------------------------------
+# GRUB CONFIG UPDATE (safe merge)
+# --------------------------------------------------------------
+echo "[INFO] Checking GRUB config for NVIDIA DRM modeset..."
 
-# Install packages
-echo "-> Installing packages: ${PKGS[*]}"
-pacman -S "${PACMAN_OPTS[@]}" "${PKGS[@]}"
+GRUB_CFG="/etc/default/grub"
 
-# Regenerate initramfs
-if command -v mkinitcpio >/dev/null 2>&1; then
-  echo "-> Regenerating initramfs (mkinitcpio -P)"
-  mkinitcpio -P
+# Tambah "nvidia-drm.modeset=1" ke GRUB_CMDLINE_LINUX_DEFAULT jika belum ada
+if ! grep -q "nvidia-drm.modeset=1" "$GRUB_CFG"; then
+    sudo sed -i 's/\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"/\1 nvidia-drm.modeset=1"/' "$GRUB_CFG"
+    echo "[OK] Added nvidia-drm.modeset=1 to GRUB."
 else
-  echo "-> mkinitcpio not found; skip initramfs regeneration." >&2
+    echo "[OK] nvidia-drm.modeset=1 already exists in GRUB."
 fi
 
-# Update GRUB kernel parameter if GRUB exists
-if [[ -f "$GRUB_FILE" ]]; then
-  echo "-> Backing up $GRUB_FILE to $BACKUP_DIR"
-  mkdir -p "$BACKUP_DIR"
-  cp "$GRUB_FILE" "$BACKUP_DIR/"
+echo "[INFO] Updating GRUB config..."
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-  if grep -q "nvidia-drm.modeset=1" "$GRUB_FILE"; then
-    echo "-> GRUB already contains nvidia-drm.modeset=1; skipping edit."
-  else
-    echo "-> Adding nvidia-drm.modeset=1 to GRUB_CMDLINE_LINUX_DEFAULT"
-    sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT=/ s/"$/ nvidia-drm.modeset=1"/' "$GRUB_FILE"
-    echo "-> Regenerating grub config (if grub-mkconfig is available)"
-    if command -v grub-mkconfig >/dev/null 2>&1; then
-      grub-mkconfig -o /boot/grub/grub.cfg
-    else
-      echo "-> grub-mkconfig not found; remember to update your bootloader config manually." >&2
-    fi
-  fi
-else
-  echo "-> GRUB not detected (/etc/default/grub missing). Please add 'nvidia-drm.modeset=1' to your bootloader kernel command line manually if needed." >&2
-fi
-
-cat <<EOF
-
-Done.
-- NVIDIA drivers + lib32 utils + linux-headers + Mesa & Vulkan installed.
-- initramfs regenerated (if mkinitcpio present).
-- If GRUB detected, kernel cmdline updated and grub.cfg regenerated (backup stored in $BACKUP_DIR).
-
-Notes:
-- 'mesa' provides OpenGL/EGL implementations used by many Linux apps. Even with NVIDIA driver, mesa is commonly needed for compatibility and fallbacks.
-- 'vulkan-icd-loader' + 'lib32-vulkan-icd-loader' enable Vulkan support for native and 32-bit games (Steam Proton).
-- If you use linux-lts or a custom kernel, replace linux-headers with the matching headers (e.g. linux-lts-headers).
-- Review the GRUB backup in $BACKUP_DIR before rebooting.
-EOF
-
-exit 0
+echo "[INFO] NVIDIA proprietary driver installation complete!"
+echo "[INFO] Please reboot to apply changes."
