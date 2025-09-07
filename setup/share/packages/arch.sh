@@ -125,7 +125,7 @@ packages=(
   ### | Bar | Menu | Lock | ###
   #///////////////////////////#  
   "waybar"                    # Widget bar / status bar
-  "rofi-wayland"              # Wayland app launcher
+  "rofi"                      # Wayland app launcher
   "wlogout"                   # GUI logout menu
 
   #////////////////////#
