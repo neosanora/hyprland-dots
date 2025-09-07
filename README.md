@@ -5,6 +5,8 @@
 >This repository contains my personal dotfiles and system configuration for Arch Linux + Hyprland.  
 >It was originally adapted from [mylinuxforwork/dotfiles](https://github.com/mylinuxforwork/dotfiles), with modifications to fit my own workflow and preferences.
 
+---
+
 ## Installation
 
 You can install the ML4W Hyprland Starter easily with the Dotfiles Installer from an existing Window Manager or Desktop Environment.
@@ -19,6 +21,7 @@ More information about the installation of the Dotfiles Installer here: https://
 https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.dotinst
 ```
 
+---
 
 ## Screenshot
 
