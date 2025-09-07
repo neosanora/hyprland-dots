@@ -80,6 +80,8 @@ packages=(
   "qt5-wayland"                   # Qt support for Wayland
   "qt6-wayland"                   # Qt support for Wayland
 
+  "uwsm"                          # A standalone Wayland session manager
+
   "nwg-dock-hyprland"         # GTK3-based dock for Hyprland Wayland compositor
   "hyprpaper"                 # Wallpaper manager
   "hyprlock"                  # Lock screen Hyprland
