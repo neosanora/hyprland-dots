@@ -110,6 +110,7 @@ packages=(
   #/////////////////#
   "nm-connection-editor"    # NetworkManager GUI connection editor and widgets
   "networkmanager"          # Manajemen jaringan (WiFi/Ethernet)
+  "network-manager-applet"  # Applet for managing network connections
   "curl"                    # command line tool and library for transferring data with URLs
   "wget"                    # Network utility to retrieve files from the web
 
