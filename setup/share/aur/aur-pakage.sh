@@ -3,5 +3,5 @@
 # ----------------------------------------------------------
 
 Packages=(
-  "waypaper"           # Dynamic wallpaper changer for Wayland
+  "waypaper-git"           # Dynamic wallpaper changer for Wayland
 )
