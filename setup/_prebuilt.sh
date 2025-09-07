@@ -1,89 +1,110 @@
 #!/usr/bin/env bash
 # --------------------------------------------------------------
-# Auto Download & Install Prebuilt Binaries (Customizable)
-# Supports multiple packages via single array definition
-# Default to latest version if no input provided
-# Skip installation if already exists
-# Skip download if URL is invalid or unreachable
+# Auto Download & Install Prebuilt Binaries (OS/Arch Aware)
+# Supports GitHub releases (multi-asset) + fixed URL
+# Extracts archives automatically (.tar.gz / .zip)
 # --------------------------------------------------------------
 
 set -e
 BIN_DIR="$HOME/.local/bin"
-mkdir -p "$BIN_DIR"
+TMP_DIR="/tmp/prebuilt-installer"
+mkdir -p "$BIN_DIR" "$TMP_DIR"
 
 # --------------------------------------------------------------
-# Package List (format: "name|repo_api|base_url")
+# Package List (format: "name|repo_api|fixed_url")
 # - name      : nama binary
-# - repo_api  : API URL untuk fetch release (kosongkan kalau versi fixed)
-# - base_url  : URL dasar untuk prebuilt binary
+# - repo_api  : GitHub API repo releases (kosongkan kalau fixed URL)
+# - fixed_url : URL langsung (opsional, kalau tidak pakai GitHub API)
 # --------------------------------------------------------------
 PACKAGES=(
-  "matugen|https://api.github.com/repos/InioX/matugen/releases|https://github.com/InioX/matugen/releases/download"
-
+  "matugen|https://api.github.com/repos/InioX/matugen/releases|"
 )
 
 # --------------------------------------------------------------
-# Function untuk fetch versi release terbaru
+# Function: fetch latest release asset from GitHub
 # --------------------------------------------------------------
-get_latest_release() {
-    local repo_url="$1"
-    curl -fsSL "$repo_url" | grep -oP 'tag_name":"\K[^" ]+' | head -n 1 || true
+get_latest_asset() {
+  local api_url="$1"
+  local name="$2"
+  local os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+  local arch="$(uname -m)"
+
+  # normalize arch
+  case "$arch" in
+    x86_64) arch="amd64|x86_64" ;;
+    aarch64) arch="arm64|aarch64" ;;
+  esac
+
+  curl -s "$api_url/latest" | jq -r \
+    ".assets[] | select(.name | test(\"$os.*($arch)\")) | .browser_download_url" | head -n 1
 }
 
 # --------------------------------------------------------------
-# Function untuk cek apakah URL valid
+# Function: check URL
 # --------------------------------------------------------------
 check_url() {
-    local url="$1"
-    if curl -fsI "$url" >/dev/null 2>&1; then
-        return 0
-    else
-        return 1
-    fi
+  local url="$1"
+  curl -fsIL "$url" >/dev/null 2>&1
 }
 
 # --------------------------------------------------------------
-# Main installer loop
+# Function: install binary
+# --------------------------------------------------------------
+install_binary() {
+  local name="$1"
+  local url="$2"
+
+  [[ -z "$url" ]] && echo "⚠️  No valid asset URL found for $name" && return
+
+  if [[ -f "$BIN_DIR/$name" ]]; then
+    echo "✅ $name already exists, skipping."
+    return
+  fi
+
+  echo "⬇️  Downloading $name from $url"
+  local tmpfile="$TMP_DIR/$(basename "$url")"
+  if ! curl -L --progress-bar -o "$tmpfile" "$url"; then
+    echo "⚠️  Failed to download $name"
+    return
+  fi
+
+  # extract if archive
+  if [[ "$tmpfile" =~ \.tar\.gz$ ]]; then
+    tar -xzf "$tmpfile" -C "$TMP_DIR"
+    local binpath
+    binpath=$(find "$TMP_DIR" -type f -name "$name" | head -n 1)
+    [[ -n "$binpath" ]] && mv "$binpath" "$BIN_DIR/$name"
+  elif [[ "$tmpfile" =~ \.zip$ ]]; then
+    unzip -qo "$tmpfile" -d "$TMP_DIR"
+    local binpath
+    binpath=$(find "$TMP_DIR" -type f -name "$name" | head -n 1)
+    [[ -n "$binpath" ]] && mv "$binpath" "$BIN_DIR/$name"
+  else
+    mv "$tmpfile" "$BIN_DIR/$name"
+  fi
+
+  chmod +x "$BIN_DIR/$name"
+  echo "✅ Installed $name at $BIN_DIR/$name"
+}
+
+# --------------------------------------------------------------
+# Main Loop
 # --------------------------------------------------------------
 for pkg in "${PACKAGES[@]}"; do
-    IFS="|" read -r NAME API_URL BASE_URL <<< "$pkg"
+  IFS="|" read -r NAME API_URL FIXED_URL <<< "$pkg"
 
-    # Prompt versi
-    read -rp "Enter ${NAME^} version (default: latest): " VER
-    VER=${VER:-latest}
-    if [[ "$VER" == "latest" ]]; then
-        if [[ -n "$API_URL" ]]; then
-            VER=$(get_latest_release "$API_URL")
-            [[ -z "$VER" ]] && echo "⚠️ Failed to fetch latest version for $NAME, skipping." && continue
-            echo "[DEBUG] Latest $NAME version resolved to: $VER"
-        else
-            echo "⚠️ No API defined for $NAME and version=latest, skipping."
-            continue
-        fi
-    fi
+  echo "-----------------------------"
+  echo "📦 Processing: $NAME"
+  echo "-----------------------------"
 
-    URL="$BASE_URL/${VER}/${NAME}"
-
-    # Cek URL valid
-    if ! check_url "$URL"; then
-        echo "⚠️ URL not valid or unreachable for $NAME: $URL"
-        continue
-    fi
-
-    # Install jika belum ada
-    if [[ -f "$BIN_DIR/$NAME" ]]; then
-        echo "$NAME already exists at $BIN_DIR/$NAME, skipping installation."
-    else
-        echo "Installing $NAME ${VER} into ${BIN_DIR}"
-        if wget -q --show-progress -O "$BIN_DIR/$NAME" "$URL"; then
-            chmod +x "$BIN_DIR/$NAME"
-            echo "[DEBUG] $NAME installed at: $BIN_DIR/$NAME"
-        else
-            echo "⚠️ Failed to download $NAME from $URL"
-            rm -f "$BIN_DIR/$NAME"
-        fi
-    fi
-
+  if [[ -n "$API_URL" ]]; then
+    ASSET_URL=$(get_latest_asset "$API_URL" "$NAME")
+    install_binary "$NAME" "$ASSET_URL"
+  elif [[ -n "$FIXED_URL" ]]; then
+    install_binary "$NAME" "$FIXED_URL"
+  else
+    echo "⚠️  No source defined for $NAME, skipping."
+  fi
 done
 
-echo "✅ Preebuilt Installation complete."
+echo "🎉 All installations complete."
