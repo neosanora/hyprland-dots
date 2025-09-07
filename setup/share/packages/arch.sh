@@ -22,6 +22,12 @@ packages=(
   "fastfetch"       # system information tool
 
   #//////////////#
+  # |  PYTHON  | #
+  #//////////////#
+  "python-pip"      # The PyPA recommended tool for installing Python packages
+  "python-gobject"  # Python bindings for GLib/GObject/GIO/GTK
+
+  #//////////////#
   ### | APPS | ###
   #//////////////#
   "firefox"         # Browser
