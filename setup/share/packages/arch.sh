@@ -106,9 +106,10 @@ packages=(
   #/////////////////#
   ### | Network | ###
   #/////////////////#
-  "networkmanager"  # Manajemen jaringan (WiFi/Ethernet)
-  "curl"            # command line tool and library for transferring data with URLs
-  "wget"            # Network utility to retrieve files from the web
+  "nm-connection-editor"    # NetworkManager GUI connection editor and widgets
+  "networkmanager"          # Manajemen jaringan (WiFi/Ethernet)
+  "curl"                    # command line tool and library for transferring data with URLs
+  "wget"                    # Network utility to retrieve files from the web
 
   #///////////////////////#
   ### | Audio | Media | ###
