@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # --------------------------------------------------------------
-# Arch Linux - NVIDIA Proprietary Driver Installer (Gaming Ready)
-# Mirip archinstall: auto setup driver, kernel modules, grub update
-# Skip paket yang gagal download (misal karena mirror error)
+# Arch Linux - NVIDIA Proprietary Driver Installer (Minimal & Safe)
 # --------------------------------------------------------------
 
 set -e
@@ -11,7 +9,7 @@ echo "[INFO] Updating system..."
 sudo pacman -Syu --noconfirm
 
 # --------------------------------------------------------------
-# Install paket dengan skip error
+# Install NVIDIA drivers + utils
 # --------------------------------------------------------------
 PACKAGES=(
     nvidia
@@ -25,43 +23,28 @@ PACKAGES=(
     mesa
     lib32-mesa
     vulkan-tools
-    lib32-vulkan-driver
     egl-wayland
 )
 
 echo "[INFO] Installing NVIDIA proprietary drivers + dependencies..."
-for pkg in "${PACKAGES[@]}"; do
-    echo "[INFO] Installing $pkg ..."
-    if ! sudo pacman -S --noconfirm --needed "$pkg"; then
-        echo "[WARN] Failed to install $pkg, skipping..."
-    fi
-done
+sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
 
 # --------------------------------------------------------------
-# NVIDIA modules ke initramfs
+# Rebuild initramfs
 # --------------------------------------------------------------
-echo "[INFO] Adding NVIDIA modules to initramfs..."
-sudo sed -i 's/^MODULES=(/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm /' /etc/mkinitcpio.conf
-
 echo "[INFO] Rebuilding initramfs..."
 sudo mkinitcpio -P
 
 # --------------------------------------------------------------
-# GRUB CONFIG UPDATE (safe merge)
+# Update GRUB (optional: add DRM modeset if not exists)
 # --------------------------------------------------------------
-echo "[INFO] Checking GRUB config for NVIDIA DRM modeset..."
-
 GRUB_CFG="/etc/default/grub"
-
 if ! grep -q "nvidia-drm.modeset=1" "$GRUB_CFG"; then
-    sudo sed -i 's/\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"/\1 nvidia-drm.modeset=1"/' "$GRUB_CFG"
-    echo "[OK] Added nvidia-drm.modeset=1 to GRUB."
-else
-    echo "[OK] nvidia-drm.modeset=1 already exists in GRUB."
+    echo "[INFO] Adding nvidia-drm.modeset=1 to GRUB config..."
+    sudo sed -i 's/\(GRUB_CMDLINE_LINUX_DEFAULT="[^"]*\)"/\1 nvidia-drm.modeset=1"/' "$GRUB_CFG"
 fi
 
-echo "[INFO] Updating GRUB config..."
+echo "[INFO] Regenerating GRUB config..."
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-echo "[INFO] NVIDIA proprietary driver installation complete!"
-echo "[INFO] Please reboot to apply changes."
+echo "[INFO] NVIDIA installation complete! Please reboot."
