@@ -33,6 +33,7 @@ source "$SCRIPT_DIR/_lib.sh"
 # ----------------------------------------------------------
 
 NOT_FOUND_PKGS=()
+FAILED_AUR_PKGS=()
 
 # ----------------------------------------------------------
 # Helpers
@@ -118,12 +119,18 @@ _installAURPackages() {
     echo "🔧 Menginstall package (AUR/yay):"
     printf "%s\n" "${toInstall[@]}"
 
-    if [[ $(_checkCommandExists "yay") -eq 0 ]]; then
-        yay --noconfirm -S --needed "${toInstall[@]}"
-    else
+    if [[ $(_checkCommandExists "yay") -ne 0 ]]; then
         _installYay
-        yay --noconfirm -S --needed "${toInstall[@]}"
     fi
+
+    for pkg in "${toInstall[@]}"; do
+        if yay --noconfirm -S --needed "$pkg"; then
+            echo ":: Successfully installed AUR package: $pkg"
+        else
+            echo "⚠️  Gagal install AUR package: $pkg"
+            FAILED_AUR_PKGS+=("$pkg")
+        fi
+    done
 }
 
 # --------------------------------------------------------------
@@ -184,4 +191,10 @@ if [[ ${#NOT_FOUND_PKGS[@]} -gt 0 ]]; then
     echo
     echo "⚠️  Summary: Paket berikut tidak ditemukan di repository pacman:"
     printf "%s\n" "${NOT_FOUND_PKGS[@]}"
+fi
+
+if [[ ${#FAILED_AUR_PKGS[@]} -gt 0 ]]; then
+    echo
+    echo "⚠️  Summary: Beberapa paket AUR gagal diinstall:"
+    printf "%s\n" "${FAILED_AUR_PKGS[@]}"
 fi
