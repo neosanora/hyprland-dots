@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# ------------------------------------------------------------
-# Script Install / Update Matugen (Versi terbaru otomatis)
-# ------------------------------------------------------------
 set -euo pipefail
 
 REPO="InioX/matugen"
@@ -11,58 +8,23 @@ BINARY_NAME="matugen"
 
 mkdir -p "$INSTALL_DIR"
 
-# -----------------------------
-# Fungsi bantu
-# -----------------------------
-function command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+# Ambil release terbaru dari daftar release
+echo "[INFO] Mengambil daftar release Matugen..."
+RELEASE_JSON=$(curl -s "https://api.github.com/repos/$REPO/releases")
 
-function get_latest_release() {
-    curl -s "https://api.github.com/repos/$REPO/releases/latest" \
-        | grep '"tag_name":' \
-        | sed -E 's/.*"([^"]+)".*/\1/'
-}
-
-function get_asset_url() {
-    curl -s "https://api.github.com/repos/$REPO/releases/latest" \
-        | grep browser_download_url \
-        | grep linux \
-        | cut -d '"' -f 4
-}
-
-function get_local_version() {
-    if [[ -x "$INSTALL_DIR/$BINARY_NAME" ]]; then
-        "$INSTALL_DIR/$BINARY_NAME" --version 2>/dev/null || echo "0.0.0"
-    else
-        echo "0.0.0"
-    fi
-}
-
-# -----------------------------
-# Ambil versi terbaru & local
-# -----------------------------
-LATEST_RELEASE=$(get_latest_release)
-LOCAL_VERSION=$(get_local_version)
-
+# Ambil release pertama (paling baru)
+LATEST_RELEASE=$(echo "$RELEASE_JSON" | grep -m1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 echo "[INFO] Versi terbaru: $LATEST_RELEASE"
-echo "[INFO] Versi terinstall: $LOCAL_VERSION"
 
-# -----------------------------
-# Cek apakah perlu update
-# -----------------------------
-if [[ "$LOCAL_VERSION" == "$LATEST_RELEASE" ]]; then
-    echo "[INFO] Matugen sudah versi terbaru. Tidak perlu update."
-    exit 0
-fi
-
-# -----------------------------
-# Download release terbaru
-# -----------------------------
-ASSET_URL=$(get_asset_url)
+# Ambil URL asset Linux (.tar.gz)
+ASSET_URL=$(echo "$RELEASE_JSON" \
+    | grep -A 5 "$LATEST_RELEASE" \
+    | grep '"browser_download_url":' \
+    | grep 'x86_64.tar.gz' \
+    | cut -d '"' -f 4)
 
 if [[ -z "$ASSET_URL" ]]; then
-    echo "[ERROR] Gagal menemukan asset untuk Linux!"
+    echo "[ERROR] Gagal menemukan asset Linux untuk release $LATEST_RELEASE!"
     exit 1
 fi
 
@@ -72,25 +34,11 @@ curl -LO "$ASSET_URL"
 
 FILENAME=$(basename "$ASSET_URL")
 
-# -----------------------------
-# Extract / Install
-# -----------------------------
-if [[ "$FILENAME" == *.tar.gz ]]; then
-    tar -xzf "$FILENAME" -C "$INSTALL_DIR"
-elif [[ "$FILENAME" == *.zip ]]; then
-    unzip -o "$FILENAME" -d "$INSTALL_DIR"
-else
-    chmod +x "$FILENAME"
-    mv -f "$FILENAME" "$INSTALL_DIR/$BINARY_NAME"
-fi
+# Extract dan install
+tar -xzf "$FILENAME" -C "$INSTALL_DIR"
 
-# -----------------------------
 # Bersihkan tmp
-# -----------------------------
 rm -rf "$TMP_DIR"
 
-# -----------------------------
-# DONE
-# -----------------------------
-
-echo "[SUCCESS] Matugen $LATEST_RELEASE berhasil diinstal/diupdate di $INSTALL_DIR"
+echo "[SUCCESS] Matugen $LATEST_RELEASE berhasil diinstal di $INSTALL_DIR"
+echo "Pastikan $INSTALL_DIR ada di PATH Anda."
