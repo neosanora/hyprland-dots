@@ -29,6 +29,12 @@ mkdir -p "$download_folder"
 source "$SCRIPT_DIR/_lib.sh"
 
 # ----------------------------------------------------------
+# Globals for tracking failures
+# ----------------------------------------------------------
+
+NOT_FOUND_PKGS=()
+
+# ----------------------------------------------------------
 # Helpers
 # ----------------------------------------------------------
 
@@ -41,18 +47,28 @@ _isInstalled() {
     fi
 }
 
+_inPacmanRepo() {
+    local package="$1"
+    if pacman -Si "$package" &>/dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # ----------------------------------------------------------
 # Installers
 # ----------------------------------------------------------
 
 _installPacmanPackages() {
-    # Usage: _installPacmanPackages pkg1 pkg2 ...
     local toInstall=()
     for pkg in "$@"; do
         if _isInstalled "${pkg}"; then
             echo ":: ${pkg} is already installed."
-        else
+        elif _inPacmanRepo "${pkg}"; then
             toInstall+=("${pkg}")
+        else
+            NOT_FOUND_PKGS+=("${pkg}")
         fi
     done
 
@@ -61,16 +77,13 @@ _installPacmanPackages() {
     fi
 
     echo "🔧 Menginstall package (pacman):"
-    printf "%s
-" "${toInstall[@]}"
+    printf "%s\n" "${toInstall[@]}"
 
     sudo pacman -S --needed --noconfirm "${toInstall[@]}"
 }
 
 _installYay() {
-    # install base dependencies and build yay if not present
     echo ":: Installing yay (build from AUR)..."
-    # ensure base-devel + git present
     _installPacmanPackages base-devel git
 
     local script_path
@@ -89,10 +102,8 @@ _installYay() {
 }
 
 _installAURPackages() {
-    # Usage: _installAURPackages pkg1 pkg2 ...
     local toInstall=()
     for pkg in "$@"; do
-        # If already installed by pacman or yay, skip
         if _isInstalled "${pkg}"; then
             echo ":: ${pkg} is already installed."
             continue
@@ -105,13 +116,11 @@ _installAURPackages() {
     fi
 
     echo "🔧 Menginstall package (AUR/yay):"
-    printf "%s
-" "${toInstall[@]}"
+    printf "%s\n" "${toInstall[@]}"
 
     if [[ $(_checkCommandExists "yay") -eq 0 ]]; then
         yay --noconfirm -S --needed "${toInstall[@]}"
     else
-        # if yay tidak tersedia, build lalu gunakan
         _installYay
         yay --noconfirm -S --needed "${toInstall[@]}"
     fi
@@ -138,74 +147,41 @@ _writeHeader "Arch"
 # Main flow
 # ----------------------------------------------------------
 
-# Ensure yay is present before attempting AUR jobs later
 if [[ $(_checkCommandExists "yay") -ne 0 ]]; then
     echo ":: yay not found. Will install yay when needed."
 fi
 
-# Install packages from arch.sh (pacman packages)
 if [[ ${#packages[@]} -gt 0 ]]; then
     _installPacmanPackages "${packages[@]}"
 else
     echo ":: WARNING: Tidak ada isi array 'packages' dari arch.sh"
 fi
 
-# Install additional AUR packages
 if [[ ${#aur_packages[@]} -gt 0 ]]; then
     _installAURPackages "${aur_packages[@]}"
 else
     echo ":: No additional AUR packages to install."
 fi
 
-# --------------------------------------------------------------
-# Create .local/bin folder
-# --------------------------------------------------------------
-
 if [ ! -d "$HOME/.local/bin" ]; then
     mkdir -p "$HOME/.local/bin"
 fi
 
-# --------------------------------------------------------------
-# Oh My Posh
-# --------------------------------------------------------------
-
 curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin
 
-# --------------------------------------------------------------
-# Prebuilt Packages
-# --------------------------------------------------------------
-
 source "$SCRIPT_DIR/_prebuilt.sh" || true
-
-# --------------------------------------------------------------
-# Cursors
-# --------------------------------------------------------------
-
 source "$SCRIPT_DIR/_cursors.sh" || true
-
-# --------------------------------------------------------------
-# Fonts
-# --------------------------------------------------------------
-
 source "$SCRIPT_DIR/_fonts.sh" || true
-
-# --------------------------------------------------------------
-# Font Icons
-# --------------------------------------------------------------
-
 source "$SCRIPT_DIR/_fontIcon.sh" || true
-
-# --------------------------------------------------------------
-# ml4w apps
-# --------------------------------------------------------------
-
 source "$SCRIPT_DIR/_ml4w-apps.sh" || true
-
-# ----------------------------------------------------------
-# Done
-# ----------------------------------------------------------
 
 echo
 echo ":: Installation complete."
 echo ":: Ready to install the dotfiles with the Dotfiles Installer."
 echo ":: IF NOT, INSTALL GIT FIRST AND THEN RUN THE SCRIPT AGAIN."
+
+if [[ ${#NOT_FOUND_PKGS[@]} -gt 0 ]]; then
+    echo
+    echo "⚠️  Summary: Paket berikut tidak ditemukan di repository pacman:"
+    printf "%s\n" "${NOT_FOUND_PKGS[@]}"
+fi
