@@ -8,7 +8,8 @@ packages=(
   #////////////////////#
   ### |    Tools   | ###
   #////////////////////#
-  "imagemagick"   # Software suite to create, edit, compose, or convert bitmap images
+  "imagemagick"     # Software suite to create, edit, compose, or convert bitmap images
+  "loupe"           # A simple image viewer for GNOME
   "tumbler"         # Thumbnail service implementing the thumbnail management D-Bus specification
   "cliphist"        # wayland clipboard manager
   "unzip"           # For extracting and viewing files in .zip archives
