@@ -28,7 +28,6 @@ box#system-container {
 #pulseaudio,
 #custom-pacman-update {
     font-size: 13px;
-    color: @primary;
 }
 
 

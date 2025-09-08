@@ -27,7 +27,7 @@
 
   "modules-center": [
     "custom/dot",
-    "tray",
+    "group/privacy-container",
     "custom/dot"
   ],
   
@@ -44,7 +44,7 @@
     "custom/left-arrw",
     "group/system-container",
     "custom/dot-alt",
-    "group/privacy-container",
+    "tray",
     "custom/left-arrw",
     "group/launcher"
   ],

@@ -1,5 +1,9 @@
 @import "colors-waybar.css";
 
+/* -----------------------------------------------------
+* ANOTHER
+* ----------------------------------------------------- */
+
 #memory,
 #cpu,
 #disk,
@@ -18,6 +22,21 @@
   color: @primary;
 }
 
+/* -----------------------------------------------------
+* Tray
+* ----------------------------------------------------- */
+#tray {
+    padding: 0px 15px 0px 0px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
 label#network {
   margin: 5px;
   padding: 0 6px;
@@ -25,6 +44,9 @@ label#network {
   border-radius: 10px;
 }
 
+/* -----------------------------------------------------
+* Network
+* ----------------------------------------------------- */
 #network {
   color: @on_background;
   font-size: 14px;
@@ -38,7 +60,9 @@ label#network {
   color: @secondary;
 }
 
-/* Workspaces positioning fix */
+/* ------------------------------------------------------
+ * Workspaces positioning fix 
+ * ---------------------------------------------------- */
 .modules-left > widget:first-child > #workspaces {
   margin-left: 0;
 }
