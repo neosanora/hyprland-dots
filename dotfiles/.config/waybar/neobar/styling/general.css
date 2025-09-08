@@ -38,12 +38,6 @@ label#network {
   color: @secondary;
 }
 
-#window {
-  margin: 0 6px;
-  border-radius: 0px;
-  background-color: @background;
-}
-
 /* Workspaces positioning fix */
 .modules-left > widget:first-child > #workspaces {
   margin-left: 0;
