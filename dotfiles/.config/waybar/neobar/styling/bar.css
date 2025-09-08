@@ -1,9 +1,25 @@
 @import "colors-waybar.css";
 
+/* -----------------------------------------------------
+ * Window
+ * ----------------------------------------------------- */
+
+#window {
+    margin: 3px 15px 3px 0px;
+    padding: 2px 10px 0px 10px;
+    border-radius: 5px 5px 5px 5px;
+    color: @icon_color;
+    font-size:16px;
+    font-weight:normal;
+}
+
+window#waybar.empty #window {
+    background-color:transparent;
+}
 
 
 window#waybar {
-  background-color: rgba(0,0,0,0.1);
+  background-color: transparent;
   transition-property: background-color;
   transition-duration: .5s;
   padding: 0;
@@ -19,20 +35,3 @@ window#waybar.hidden {
   padding-left: 5px;
   padding-right: 5px;
 }
-
-/* #waybar button,
-#waybar .module {
-  padding: 0 2px;
-  min-height: 20px;
-}
-
-#waybar img,
-#waybar .icon {
-  padding: 0;
-  margin: 0;
-  width: 16px;
-  height: 16px;
-} */
-
-
-

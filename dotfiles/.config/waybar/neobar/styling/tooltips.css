@@ -1,0 +1,14 @@
+/* -----------------------------------------------------
+ * Tooltips
+ * ----------------------------------------------------- */
+
+tooltip {
+    border-radius: 10px;
+    background-color: @surface;
+    padding: 5px;
+    margin: 0px;
+}
+
+tooltip label {
+    color: @on_surface;
+}

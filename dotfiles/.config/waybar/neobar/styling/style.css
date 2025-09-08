@@ -15,10 +15,12 @@
 @import "custom/toolscontainer.css";
 @import "custom/performancecontainer.css";
 @import "power-profiles-daemon.css";
+@import "tooltips.css";
 
 
 * {
   border: none;
   font-family: JetBrainsMono Nerd Font;
   font-size: 12px;
+  border-radius: 0px;
 }
