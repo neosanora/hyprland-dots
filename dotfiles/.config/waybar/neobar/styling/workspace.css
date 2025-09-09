@@ -31,9 +31,10 @@ box#workspaces {
 }
 
 #workspaces button.active {
-  color: @primary;
+  color: @on_secondary_fixed;
 }
 
 #workspaces button.urgent {
-  background-color: @red;
+  background-color: @error;
+  color: @on_error;
 }
