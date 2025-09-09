@@ -1,49 +1,91 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Root folders
-ROOTS=("dotfiles" "setup")
+# Root folders yang akan discan
+ROOTS=(
+       "dotfiles"
+       "setup"
+      )
 
-# Exclude map
+# Exclude map (per-root)
 declare -A EXCLUDES
-EXCLUDES["dotfiles"]=".config/ml4w/settings .config/ml4w/version .config/waybar/themes"
-EXCLUDES["setup"]="scripts/old install/backup"
+EXCLUDES["dotfiles"]="
+                      .config/ml4w/settings
+                      .config/ml4w/version
+                      .config/waybar/themes
+                     "
 
-# File/folder manual
+EXCLUDES["setup"]="
+                  scripts/old
+                  install/backup
+                  "
+
+# Pola file/folder (generik)
+PATTERNS=(
+          "*.sh"
+         )
+
+# Target spesifik (manual, bisa file/folder)
 EXTRA_TARGETS=(
   "dotfiles/.config/sidepad"
 )
 
-# Pola file yang mau dicari
-PATTERNS=("*.sh")
-
 FILES_TO_UPDATE=()
 
+# Build exclude args per-root
+function build_excludes() {
+  local root="$1"
+  local args=()
+  for dir in ${EXCLUDES[$root]:-}; do
+    args+=( ! -path "$root/$dir" ! -path "$root/$dir/*" )
+  done
+  echo "${args[@]}"
+}
+
+# Cari berdasarkan patterns
 for ROOT in "${ROOTS[@]}"; do
   echo ":: Scanning $ROOT"
 
-  EXCLUDE_ARGS=()
-  for dir in ${EXCLUDES[$ROOT]}; do
-    EXCLUDE_ARGS+=( ! -path "$ROOT/$dir/*" )
-  done
+  EXCLUDE_ARGS=($(build_excludes "$ROOT"))
 
-  # Cari sesuai pola
   for pat in "${PATTERNS[@]}"; do
-    if [[ -d "$ROOT/.config" ]]; then
+    if [[ "$pat" == */* ]]; then
+      # Kalau pattern mengarah ke folder (contoh: bin/*)
+      if [[ -d "$ROOT/$pat" ]]; then
+        while IFS= read -r f; do
+          FILES_TO_UPDATE+=("$f")
+        done < <(find "$ROOT/$pat" -type f "${EXCLUDE_ARGS[@]}")
+      fi
+    else
+      # Kalau pattern file biasa (*.sh, *.py)
+      if [[ -d "$ROOT/.config" ]]; then
+        while IFS= read -r f; do
+          FILES_TO_UPDATE+=("$f")
+        done < <(find "$ROOT/.config" -type f -name "$pat" "${EXCLUDE_ARGS[@]}")
+      fi
       while IFS= read -r f; do
         FILES_TO_UPDATE+=("$f")
-      done < <(find "$ROOT/.config" -type f -name "$pat" "${EXCLUDE_ARGS[@]}")
+      done < <(find "$ROOT" -maxdepth 1 -type f -name "$pat" "${EXCLUDE_ARGS[@]}")
     fi
-
-    while IFS= read -r f; do
-      FILES_TO_UPDATE+=("$f")
-    done < <(find "$ROOT" -maxdepth 1 -type f -name "$pat")
   done
 done
 
-# Tambahkan manual
-FILES_TO_UPDATE+=("${EXTRA_TARGETS[@]}")
+# Tambahkan EXTRA_TARGETS (dengan exclude check juga)
+for f in "${EXTRA_TARGETS[@]}"; do
+  if [[ -d "$f" ]]; then
+    while IFS= read -r x; do
+      FILES_TO_UPDATE+=("$x")
+    done < <(find "$f" -type f $(build_excludes "$(dirname "$f")"))
+  elif [[ -f "$f" ]]; then
+    skip=0
+    for ex in ${EXCLUDES["$(dirname "$f")"]:-}; do
+      [[ "$f" == *"$ex" ]] && skip=1
+    done
+    [[ $skip -eq 0 ]] && FILES_TO_UPDATE+=("$f")
+  fi
+done
 
-# Hapus duplikat (jaga2 kalau overlap pattern)
+# Hapus duplikat
 FILES_TO_UPDATE=($(printf "%s\n" "${FILES_TO_UPDATE[@]}" | sort -u))
 
 echo
@@ -57,13 +99,8 @@ echo
 read -p "Lanjutkan chmod +x & update-index untuk semua di atas? (y/n): " CONFIRM
 if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
   for f in "${FILES_TO_UPDATE[@]}"; do
-    if [[ -d "$f" ]]; then
-      chmod -R +x "$f"
-      git add "$f"
-    else
-      chmod +x "$f"
-      git update-index --chmod=+x "$f"
-    fi
+    chmod +x "$f"
+    git update-index --chmod=+x "$f" || true
   done
   echo ":: Done."
 else
