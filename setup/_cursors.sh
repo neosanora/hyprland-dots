@@ -10,7 +10,7 @@ IFS=$'\n\t'
 # --- Config ---
 DOWNLOAD_FOLDER="${DOWNLOAD_FOLDER:-$HOME/Downloads/bibata-cursors}"
 BIBATA_BASE_URL="https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7"
-ICONS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/icons"
+ICONS_DIR="${$HOME/.local/share}/icons"
 THEMES=("Amber" "Classic" "Ice")
 CUSTOM_ARCHIVES=(
   "ComixCursors-0.10.1.tar.bz2"
@@ -89,10 +89,6 @@ for archive in "${CUSTOM_ARCHIVES[@]}"; do
 done
 
 # --- Final touches ---
-# Ensure reasonable permissions
-info "Setting permissions on $ICONS_DIR"
-find "$ICONS_DIR" -type d -exec chmod 755 {} + 2>/dev/null || true
-
 info "✅ Cursor themes installed into: $ICONS_DIR"
 
 cat <<'EOF'
