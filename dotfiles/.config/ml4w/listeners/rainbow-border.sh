@@ -1,21 +1,27 @@
 #!/usr/bin/env bash
 # 🌈 Rainbow Border toggle berdasarkan file gamemode-enabled (dibalik logika)
 
-set -euo pipefail
-IFS=$'\n\t'
 
 WATCH_DIR="$HOME/.config/ml4w/settings"
 TRIGGER_FILE="gamemode-enabled"
 INTERVAL=0.2
-RAINBOW_PID=""
+PIDFILE="/tmp/rainbow-border.pid"
 
 # --- Helpers ---
 random_hex() {
-    printf "0xff%06x" $((RANDOM * RANDOM % 16777216))
+    printf "0xff%06x" "$((RANDOM % 16777216))"
+}
+
+set_default_border() {
+    hyprctl keyword general:col.active_border \
+        "0xffffffff" "0xffffffff" "0xffffffff" "0xffffffff" >/dev/null 2>&1
 }
 
 start_rainbow() {
-    [[ -n "${RAINBOW_PID:-}" ]] && kill -0 "$RAINBOW_PID" 2>/dev/null && return
+    # Cek kalau sudah ada PID lama
+    if [[ -f "$PIDFILE" ]] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        return
+    fi
     (
         while true; do
             hyprctl keyword general:col.active_border \
@@ -23,17 +29,18 @@ start_rainbow() {
             sleep "$INTERVAL"
         done
     ) &
-    RAINBOW_PID=$!
-    echo "🌈 Rainbow border started"
+    echo $! > "$PIDFILE"
+    echo "🌈 Rainbow border started (PID=$(cat "$PIDFILE"))"
 }
 
 stop_rainbow() {
-    if [[ -n "${RAINBOW_PID:-}" ]]; then
-        kill "$RAINBOW_PID" 2>/dev/null || true
-        wait "$RAINBOW_PID" 2>/dev/null || true
-        RAINBOW_PID=""
+    if [[ -f "$PIDFILE" ]]; then
+        kill "$(cat "$PIDFILE")" 2>/dev/null || true
+        wait "$(cat "$PIDFILE")" 2>/dev/null || true
+        rm -f "$PIDFILE"
         echo "🌈 Rainbow border stopped"
     fi
+    set_default_border
 }
 
 apply_state() {
@@ -60,13 +67,10 @@ for cmd in inotifywait hyprctl; do
     }
 done
 
-# Pastikan folder ada
-mkdir -p "$WATCH_DIR"
-
-# Terapkan state awal
+# --- Terapkan state awal ---
 apply_state
 
-# Monitor folder
+# --- Monitor folder ---
 inotifywait -m -q -e create,delete "$WATCH_DIR" | while read -r dir events filename; do
     if [[ "$filename" == "$TRIGGER_FILE" ]]; then
         apply_state
