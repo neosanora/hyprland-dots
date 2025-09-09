@@ -8,9 +8,17 @@ label#custom-dot {
   color: @surface_variant;
 }
 
+label#custom-right-arrw,
 label#custom-left-arrw {
   color: @primary;
   margin-left: 4px;
   margin-right: 4px;
   font-size: 15px;
+}
+
+
+#custom-arrow-dec {
+  margin-left: 2px;
+  font-size: 15px;
+  color: @primary;
 }

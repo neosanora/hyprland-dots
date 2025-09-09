@@ -1,12 +1,6 @@
 @import "../colors-waybar.css";
 
 
-#custom-arrow-dec {
-  margin-left: 2px;
-  font-size: 15px;
-  color: @primary;
-}
-
 #custom-app-title-icon {
   font-size: 13px;
   color: alpha(@on_secondary_container,0.75);

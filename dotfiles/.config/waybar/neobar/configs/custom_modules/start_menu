@@ -1,0 +1,14 @@
+{
+        "group/start-menu": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/start-menu"
+        ]
+    },
+
+    "custom/start-menu": {
+        "format": "󪥴",
+        "tooltip-format": "START MENU",
+        "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace"
+    }
+}

@@ -1,14 +1,14 @@
 {
   "include": [
+    "~/.config/waybar/neobar/configs/custom_modules/start_menu",
     "~/.config/waybar/neobar/configs/custom_modules/app_title",
     "~/.config/waybar/neobar/configs/custom_modules/firewall",
     "~/.config/waybar/neobar/configs/custom_modules/launcher",
     "~/.config/waybar/neobar/configs/custom_modules/modules",
     "~/.config/waybar/neobar/configs/custom_modules/privacy_container",
     "~/.config/waybar/neobar/configs/custom_modules/system_container",
-    "~/.config/waybar/neobar/configs/custom_modules/tools_container",
-    
-    "~/.config/waybar/neobar/configs/performance_container"
+    "~/.config/waybar/neobar/configs/custom_modules/tools_container",    
+    "~/.config/waybar/neobar/configs/custom_modules/performance_container"
   ],
 
   "layer": "top",
@@ -19,7 +19,7 @@
   "margin-right": 0,
   "spacing": 0,
   "modules-left": [
-    "custom/dot-alt",
+    "group/start-menu",
     "hyprland/workspaces",
     "custom/arrow-dec",
     "group/app-title-container"
@@ -33,15 +33,15 @@
   
   "modules-right": [
     "power-profiles-daemon",
-    "custom/dot",
+    "custom/left-arrw",
     "group/performance",
-    "custom/dot",
+    "custom/left-arrw",
     "group/tools",
-    "custom/dot",
+    "custom/left-arrw",
     "group/firewall",
     "custom/dot",
     "network",
-    "custom/left-arrw",
+    "custom/dot",
     "group/system-container",
     "custom/dot-alt",
     "tray",

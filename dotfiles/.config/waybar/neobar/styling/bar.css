@@ -18,7 +18,7 @@ window#waybar *{
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: alpha(@background, 0.1);
   transition-property: background-color;
   transition-duration: .5s;
   padding: 0;
@@ -31,9 +31,9 @@ window#waybar.empty #window {
 }
 
 
-/* window#waybar.hidden {
+window#waybar.hidden {
   opacity: 0.2;
-} */
+}
 
 /* #waybar.horizontal {
   padding-left: 5px;

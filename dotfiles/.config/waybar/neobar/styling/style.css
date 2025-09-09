@@ -4,6 +4,7 @@
 @import "bar.css";
 @import "general.css";
 @import "stock.css";
+@import "custom/startmenu.css";
 @import "custom/launcher.css";
 @import "custom/battery.css";
 @import "custom/apptitle.css";
