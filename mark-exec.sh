@@ -3,49 +3,69 @@
 # Root folders
 ROOTS=("dotfiles" "setup")
 
-# Exclude map (folder yang mau di-skip per root)
+# Exclude map
 declare -A EXCLUDES
 EXCLUDES["dotfiles"]=".config/ml4w/settings .config/ml4w/version .config/waybar/themes"
 EXCLUDES["setup"]="scripts/old install/backup"
 
-# List semua file target
+# File/folder manual
+EXTRA_TARGETS=(
+  "dotfiles/.config/sidepad"
+)
+
+# Pola file yang mau dicari
+PATTERNS=("*.sh")
+
 FILES_TO_UPDATE=()
 
 for ROOT in "${ROOTS[@]}"; do
   echo ":: Scanning $ROOT"
 
-  # Bangun argumen exclude sesuai root
   EXCLUDE_ARGS=()
   for dir in ${EXCLUDES[$ROOT]}; do
     EXCLUDE_ARGS+=( ! -path "$ROOT/$dir/*" )
   done
 
-  # 1. .sh di dalam .config
-  if [[ -d "$ROOT/.config" ]]; then
-    FILES=$(find "$ROOT/.config" -type f -name "*.sh" "${EXCLUDE_ARGS[@]}")
-    FILES_TO_UPDATE+=($FILES)
-  fi
+  # Cari sesuai pola
+  for pat in "${PATTERNS[@]}"; do
+    if [[ -d "$ROOT/.config" ]]; then
+      while IFS= read -r f; do
+        FILES_TO_UPDATE+=("$f")
+      done < <(find "$ROOT/.config" -type f -name "$pat" "${EXCLUDE_ARGS[@]}")
+    fi
 
-  # 2. .sh di root level
-  FILES=$(find "$ROOT" -maxdepth 1 -type f -name "*.sh")
-  FILES_TO_UPDATE+=($FILES)
+    while IFS= read -r f; do
+      FILES_TO_UPDATE+=("$f")
+    done < <(find "$ROOT" -maxdepth 1 -type f -name "$pat")
+  done
 done
 
-# Tampilkan daftar file
+# Tambahkan manual
+FILES_TO_UPDATE+=("${EXTRA_TARGETS[@]}")
+
+# Hapus duplikat (jaga2 kalau overlap pattern)
+FILES_TO_UPDATE=($(printf "%s\n" "${FILES_TO_UPDATE[@]}" | sort -u))
+
 echo
-echo ":: File yang akan di-mark executable:"
+echo ":: File/folder yang akan di-mark executable:"
 for f in "${FILES_TO_UPDATE[@]}"; do
   echo "   $f"
 done
+echo ":: Total: ${#FILES_TO_UPDATE[@]}"
 
-# Tanya user
 echo
-read -p "Lanjutkan update-index untuk semua file di atas? (y/n): " CONFIRM
+read -p "Lanjutkan chmod +x & update-index untuk semua di atas? (y/n): " CONFIRM
 if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
   for f in "${FILES_TO_UPDATE[@]}"; do
-    git update-index --chmod=+x "$f"
+    if [[ -d "$f" ]]; then
+      chmod -R +x "$f"
+      git add "$f"
+    else
+      chmod +x "$f"
+      git update-index --chmod=+x "$f"
+    fi
   done
-  echo ":: Done. Semua file sudah di-mark executable."
+  echo ":: Done."
 else
-  echo ":: Dibatalkan. Tidak ada perubahan."
+  echo ":: Dibatalkan."
 fi
