@@ -9,18 +9,20 @@ packages=(
   ### |    Tools   | ###
   #////////////////////#
   "imagemagick"     # Software suite to create, edit, compose, or convert bitmap images
-  "loupe"           # A simple image viewer for GNOME
   "tumbler"         # Thumbnail service implementing the thumbnail management D-Bus specification
+  "gvfs"            # Virtual filesystem implementation for GIO
+  "inotify-tools"   # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
+  ###  can be execute ###
   "cliphist"        # wayland clipboard manager
   "unzip"           # For extracting and viewing files in .zip archives
-  "gvfs"            # Virtual filesystem implementation for GIO
   "xclip"           # Command line interface to the X11 clipboard
   "figlet"          # A program for making large letters out of ordinary text
   "git"             # version control
   "jq"              # JSON processor
   "gum"             # command line UI toolkit
-  "inotify-tools"   # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
   "fastfetch"       # system information tool
+  ### have GUI ###
+  "loupe"           # A simple image viewer for GNOME
 
   #//////////////#
   # |  PYTHON  | #
@@ -56,14 +58,12 @@ packages=(
   #///////////////#
   "qt6ct"               # Qt 6 Configuration Utility
   "nwg-look"             # GTK settings editor adapted to work on wlroots-based compositors
-
-# widget theme
+  ### widget theme ###
   "adwaita-icon-theme"  # GNOME standard icons
   "adw-gtk-theme"       # Unofficial GTK 3 port of the libadwaita theme
   "adapta-gtk-theme"    # Adapta is a material design-inspired
   "breeze"              # Breeze widget theme for GTK 2 and 3
-
-# Icon Theme
+  ### Icon Theme ###
   "papirus-icon-theme"  # Papirus icon theme
   
   #//////////////#
@@ -78,8 +78,7 @@ packages=(
   "noto-fonts-emoji"
   "noto-fonts-cjk"
   "noto-fonts-extra"
-  
-# FONT EDITOR/SETTINGS
+  ### FONT EDITOR/SETTINGS ###
   "font-manager"        #A simple font management application for GTK+ Desktop Environments
 
   #////////////////////////////////#
@@ -110,9 +109,8 @@ packages=(
   "libnotify"       # Library for sending desktop notifications
   "polkit-gnome"    # Legacy polkit authentication agent for GNOME
   "swaync"          # A simple GTK based notification daemon for Sway
-  
+  ### monitor ###
   "ddcutil"         # Query and change Linux monitor settings using DDC/CI and USB.
-  
   # "brightnessctl"   # Lightweight brightness control tool ---(laptop)---
 
   #/////////////////#
@@ -134,6 +132,9 @@ packages=(
   "pamixer"         # CLI audio mixer
   "pavucontrol"     # PulseAudio Volume Control
   "qjackctl"        # A Qt front-end for the JACK low-latency audio server
+  ###      ADDITIONAL      ###
+  "mpv"
+  "mpv-mpris"
 
   #///////////////////////////#
   ### | Bar | Menu | Lock | ###
@@ -170,8 +171,7 @@ packages=(
   ###   | DRIVER |  ###
   #///////////////////#
   "ntfs-3g"         #NTFS filesystem driver and utilities
-
-# Bluetooth
+  ### Bluetooth ###
   "bluez"
   "bluez-utils"
   "blueman"
