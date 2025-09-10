@@ -27,6 +27,8 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 
 <!-- ![First Preview](https://raw.githubusercontent.com/UnFunnyGuy/hyprland-dots/main/screenshots/current_bar.png) -->
 
+![First Preview](https://raw.githubusercontent.com/neosanora/hyprland-dots/main/screenshots/HOME.png)
+
 <br/>
 <br/>
 
