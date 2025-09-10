@@ -32,7 +32,7 @@ configuration {
 @import "~/.config/ml4w/settings/rofi-font.rasi"
 
 /* ---- Load colors ---- */
-@theme "~/.config/rofi/colors.rasi"
+@theme "~/.config/rofi/matugen/colors.rasi"
 
 /* ---- Load wallpaper ---- */
 @import "~/.cache/ml4w/hyprland-dotfiles/current_wallpaper.rasi"
