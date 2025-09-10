@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+
+#================================================================#
+# CHANGE 
+#================================================================#
+
 # Root folders yang akan discan
 ROOTS=(
        "dotfiles"
@@ -28,8 +33,14 @@ PATTERNS=(
 # Target spesifik (manual, bisa file/folder)
 EXTRA_TARGETS=(
   "dotfiles/.config/sidepad"
+  "dotfiles/.config/waybar/neobar/scripts/custom/ddc-brightness"
 )
 
+#================================================================#
+# MAIN PARTS (Don't change this)
+#================================================================#
+
+# Don't change this
 FILES_TO_UPDATE=()
 
 # Build exclude args per-root
