@@ -56,8 +56,9 @@ packages=(
   #///////////////#
   ### | THEME | ###
   #///////////////#
+  "kvantum"             # SVG-based theme engine for Qt6 (including config tool and extra themes)
   "qt6ct"               # Qt 6 Configuration Utility
-  "nwg-look"             # GTK settings editor adapted to work on wlroots-based compositors
+  "nwg-look"            # GTK settings editor adapted to work on wlroots-based compositors
   ### widget theme ###
   "adwaita-icon-theme"  # GNOME standard icons
   "adw-gtk-theme"       # Unofficial GTK 3 port of the libadwaita theme
