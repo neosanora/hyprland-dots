@@ -63,12 +63,12 @@
       "buttons-grid": {
           "actions": [
               {
-                  "label": "󰐥",
-                  "command": "bash -c $HOME/.config/ml4w/scripts/wlogout.sh"
+                    "label": "",
+                    "command": "hyprlock"
               },
               {
-                  "label": "󰌾",
-                  "command": "bash -c $HOME/.config/hypr/scripts/LockScreen.sh"
+                  "label": "󰐥",
+                  "command": "bash -c $HOME/.config/ml4w/scripts/wlogout.sh"
               },
               {
                   "label": "󰍃",
