@@ -1,5 +1,3 @@
-/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
-/* KooL Hyprland Rofi Style 14 */
 
 /* original design from: https://github.com/adi1090x/rofi */
 
@@ -12,14 +10,29 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+/* @theme "~/.config/rofi/wallust/colors-rofi.rasi" */
+
+/* ---- Load font ---- */
+/* @import "~/.config/ml4w/settings/rofi-font.rasi" */
+
+/* ---- Load colors ---- */
+@theme "~/.config/rofi/matugen/colors.rasi"
+
+/* ---- Load wallpaper ---- */
+@import "~/.cache/ml4w/hyprland-dotfiles/current_wallpaper.rasi"
+
+/* ---- Load border width ---- */
+@import "~/.config/ml4w/settings/rofi-border.rasi"
+
+/* ---- Load border radius ---- */
+@import "~/.config/ml4w/settings/rofi-border-radius.rasi"
 
 /*****----- Global Properties -----*****/
 * {
-    background-alt:              @color0;
-    selected:                    @color13;
-    active:                      @color12;
-    urgent:                      #8E3596;
+    background-alt:              @background;
+    selected:                    @on-primary-fixed;
+    active:                      @on-surface;
+    urgent:                      @error-container;
 }
 
 /*****----- Main Window -----*****/
@@ -53,6 +66,15 @@ mainbox {
     border-color:                @selected;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
+
+    background-image:            @current-image;
+}
+
+imagebox {
+    padding:                     20px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
 
 /*****----- Inputbar -----*****/
