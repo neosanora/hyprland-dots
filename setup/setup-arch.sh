@@ -1,114 +1,201 @@
+You said:
 #!/usr/bin/env bash
-# --------------------------------------------------------------
-# Install Bibata cursor themes + extract manual cursor archives
-# - safer, idempotent, wget/curl fallback, basic error handling
-# - expects optional custom archives in ./cursors relative to script
-# - auto cleanup downloads unless --keep-downloads given
-# --------------------------------------------------------------
+
+# ----------------------------------------------------------
+# Packages installer (split pacman vs AUR/yay functions)
+# ----------------------------------------------------------
+
 set -euo pipefail
-IFS=$'\n\t'
 
-# --- Config ---
-DOWNLOAD_FOLDER="${DOWNLOAD_FOLDER:-$HOME/Downloads/bibata-cursors}"
-BIBATA_BASE_URL="https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7"
-ICONS_DIR="$HOME/.local/share/icons"
-THEMES=("Amber" "Classic" "Ice")
-CUSTOM_ARCHIVES=(
-  "ComixCursors-0.10.1.tar.bz2"
-  "oreo-spark-dark-cursors.tar.gz"
-  "oreo-spark-purple-cursors.tar.gz"
-)
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source "$SCRIPT_DIR/share/packages/arch.sh"
 
-KEEP_DOWNLOADS=false
-[[ "${1:-}" == "--keep-downloads" ]] && KEEP_DOWNLOADS=true
+# Source AUR package list
+AUR_PKG_FILE="$SCRIPT_DIR/share/aur/aur-package.sh"
+if [[ -f "$AUR_PKG_FILE" ]]; then
+    source "$AUR_PKG_FILE"
+else
+    echo ":: WARNING: File aur-package.sh tidak ditemukan. Lewati AUR tambahan."
+    aur_packages=()
+fi
 
-# --- Helpers ---
-err() { echo "[ERROR] $*" >&2; }
-info() { echo "[INFO] $*"; }
-check_cmd() { command -v "$1" >/dev/null 2>&1 || return 1; }
+# Download folder untuk yay
+download_folder="$SCRIPT_DIR/tmp"
+mkdir -p "$download_folder"
 
-download() {
-  local url="$1" out="$2"
-  if check_cmd wget; then
-    wget -q --show-progress -O "$out" "$url"
-  elif check_cmd curl; then
-    curl -L --fail -# -o "$out" "$url"
-  else
-    return 2
-  fi
+# --------------------------------------------------------------
+# Library
+# --------------------------------------------------------------
+
+source "$SCRIPT_DIR/_lib.sh"
+
+# ----------------------------------------------------------
+# Globals for tracking failures
+# ----------------------------------------------------------
+
+NOT_FOUND_PKGS=()
+FAILED_AUR_PKGS=()
+
+# ----------------------------------------------------------
+# Helpers
+# ----------------------------------------------------------
+
+_isInstalled() {
+    local package="$1"
+    if pacman -Qq "${package}" &>/dev/null; then
+        return 0
+    else
+        return 1
+    fi
 }
 
-# --- Preconditions ---
-if ! check_cmd tar; then
-  err "'tar' is required. Install it and run again."
-  exit 1
-fi
-if ! check_cmd wget && ! check_cmd curl; then
-  err "Either 'wget' or 'curl' is required. Install one and run again."
-  exit 1
-fi
-
-# --- Prepare directories ---
-info "Creating folders: $DOWNLOAD_FOLDER and $ICONS_DIR"
-mkdir -p "$DOWNLOAD_FOLDER" "$ICONS_DIR"
-
-# --- Remove old Bibata installations (safe) ---
-for theme in "${THEMES[@]}"; do
-  old_dir="$ICONS_DIR/Bibata-Modern-$theme"
-  if [ -d "$old_dir" ]; then
-    info "Removing old theme: $old_dir"
-    rm -rf -- "$old_dir"
-  fi
-done
-
-# --- Download & extract official Bibata themes ---
-for theme in "${THEMES[@]}"; do
-  filename="Bibata-Modern-$theme.tar.xz"
-  url="$BIBATA_BASE_URL/$filename"
-  out="$DOWNLOAD_FOLDER/$filename"
-
-  if [ ! -f "$out" ]; then
-    info "Downloading $filename"
-    if ! download "$url" "$out"; then
-      err "Failed to download $url (skipping)."
-      continue
+_inPacmanRepo() {
+    local package="$1"
+    if pacman -Si "$package" &>/dev/null; then
+        return 0
+    else
+        return 1
     fi
-  else
-    info "Using cached $out"
-  fi
+}
 
-  info "Extracting $filename -> $ICONS_DIR"
-  if ! tar -xf "$out" -C "$ICONS_DIR"; then
-    err "Failed to extract $out"
-  fi
-done
+# ----------------------------------------------------------
+# Installers
+# ----------------------------------------------------------
 
-# --- Extract custom cursor archives (if present) ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-for archive in "${CUSTOM_ARCHIVES[@]}"; do
-  src="$SCRIPT_DIR/cursors/$archive"
-  if [ -f "$src" ]; then
-    info "Extracting custom archive: $archive"
-    if ! tar -xf "$src" -C "$ICONS_DIR"; then
-      err "Failed to extract $src"
+_installPacmanPackages() {
+    local toInstall=()
+    for pkg in "$@"; do
+        if _isInstalled "${pkg}"; then
+            echo ":: ${pkg} is already installed."
+        elif _inPacmanRepo "${pkg}"; then
+            toInstall+=("${pkg}")
+        else
+            NOT_FOUND_PKGS+=("${pkg}")
+        fi
+    done
+
+    if [[ ${#toInstall[@]} -eq 0 ]]; then
+        return 0
     fi
-  else
-    info "Custom archive not found, skipping: $archive"
-  fi
-done
 
-# --- Cleanup ---
-if ! $KEEP_DOWNLOADS; then
-  info "Cleaning up downloads in $DOWNLOAD_FOLDER"
-  rm -rf "$DOWNLOAD_FOLDER"
+    echo "🔧 Menginstall package (pacman):"
+    printf "%s\n" "${toInstall[@]}"
+
+    sudo pacman -S --needed --noconfirm "${toInstall[@]}"
+}
+
+_installYay() {
+    echo ":: Installing yay (build from AUR)..."
+    _installPacmanPackages base-devel git
+
+    local script_path
+    script_path=$(realpath "$0")
+    local temp_path
+    temp_path=$(dirname "$script_path")
+
+    local yay_dir="$download_folder/yay"
+    rm -rf "$yay_dir"
+    git clone https://aur.archlinux.org/yay.git "$yay_dir"
+    pushd "$yay_dir" >/dev/null || exit 1
+    makepkg --noconfirm -si
+    popd >/dev/null || true
+
+    echo ":: yay has been installed successfully."
+}
+
+_installAURPackages() {
+    local toInstall=()
+    for pkg in "$@"; do
+        if _isInstalled "${pkg}"; then
+            echo ":: ${pkg} is already installed."
+            continue
+        fi
+        toInstall+=("${pkg}")
+    done
+
+    if [[ ${#toInstall[@]} -eq 0 ]]; then
+        return 0
+    fi
+
+    echo "🔧 Menginstall package (AUR/yay):"
+    printf "%s\n" "${toInstall[@]}"
+
+    if [[ $(_checkCommandExists "yay") -ne 0 ]]; then
+        _installYay
+    fi
+
+    for pkg in "${toInstall[@]}"; do
+        if yay --noconfirm -S --needed "$pkg"; then
+            echo ":: Successfully installed AUR package: $pkg"
+        else
+            echo "⚠️  Gagal install AUR package: $pkg"
+            FAILED_AUR_PKGS+=("$pkg")
+        fi
+    done
+}
+
+# --------------------------------------------------------------
+# Install Gum (utility used by installer)
+# --------------------------------------------------------------
+
+if [[ $(_checkCommandExists "gum") -eq 0 ]]; then
+    echo ":: gum is already installed"
+else
+    echo ":: The installer requires gum. gum will be installed now"
+    sudo pacman --noconfirm -S gum
 fi
 
-# --- Final touches ---
-info "✅ Cursor themes installed into: $ICONS_DIR"
+# --------------------------------------------------------------
+# Header
+# --------------------------------------------------------------
 
-cat <<'EOF'
-Next steps (pick one depending on your desktop environment):
-- GNOME: gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic'
-- KDE / other: set theme in System Settings or log out / log in to reload cursor cache
-- General: if a session doesn't pick it up immediately, log out/in or reboot.
-EOF
+_writeHeader "Arch"
+
+# ----------------------------------------------------------
+# Main flow
+# ----------------------------------------------------------
+
+if [[ $(_checkCommandExists "yay") -ne 0 ]]; then
+    echo ":: yay not found. Will install yay when needed."
+fi
+
+if [[ ${#packages[@]} -gt 0 ]]; then
+    _installPacmanPackages "${packages[@]}"
+else
+    echo ":: WARNING: Tidak ada isi array 'packages' dari arch.sh"
+fi
+
+if [[ ${#aur_packages[@]} -gt 0 ]]; then
+    _installAURPackages "${aur_packages[@]}"
+else
+    echo ":: No additional AUR packages to install."
+fi
+
+if [ ! -d "$HOME/.local/bin" ]; then
+    mkdir -p "$HOME/.local/bin"
+fi
+
+curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin
+
+source "$SCRIPT_DIR/_prebuilt.sh" || true
+source "$SCRIPT_DIR/_cursors.sh" || true
+source "$SCRIPT_DIR/_fonts.sh" || true
+source "$SCRIPT_DIR/_fontIcon.sh" || true
+source "$SCRIPT_DIR/_ml4w-apps.sh" || true
+
+echo
+echo ":: Installation complete."
+echo ":: Ready to install the dotfiles with the Dotfiles Installer."
+echo ":: IF NOT, INSTALL GIT FIRST AND THEN RUN THE SCRIPT AGAIN."
+
+if [[ ${#NOT_FOUND_PKGS[@]} -gt 0 ]]; then
+    echo
+    echo "⚠️  Summary: Paket berikut tidak ditemukan di repository pacman:"
+    printf "%s\n" "${NOT_FOUND_PKGS[@]}"
+fi
+
+if [[ ${#FAILED_AUR_PKGS[@]} -gt 0 ]]; then
+    echo
+    echo "⚠️  Summary: Beberapa paket AUR gagal diinstall:"
+    printf "%s\n" "${FAILED_AUR_PKGS[@]}"
+fi

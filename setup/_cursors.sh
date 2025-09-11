@@ -3,6 +3,7 @@
 # Install Bibata cursor themes + extract manual cursor archives
 # - safer, idempotent, wget/curl fallback, basic error handling
 # - expects optional custom archives in ./cursors relative to script
+# - auto cleanup downloads unless --keep-downloads given
 # --------------------------------------------------------------
 set -euo pipefail
 IFS=$'\n\t'
@@ -10,13 +11,16 @@ IFS=$'\n\t'
 # --- Config ---
 DOWNLOAD_FOLDER="${DOWNLOAD_FOLDER:-$HOME/Downloads/bibata-cursors}"
 BIBATA_BASE_URL="https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7"
-ICONS_DIR="${$HOME/.local/share}/icons"
+ICONS_DIR="$HOME/.local/share/icons"
 THEMES=("Amber" "Classic" "Ice")
 CUSTOM_ARCHIVES=(
   "ComixCursors-0.10.1.tar.bz2"
   "oreo-spark-dark-cursors.tar.gz"
   "oreo-spark-purple-cursors.tar.gz"
 )
+
+KEEP_DOWNLOADS=false
+[[ "${1:-}" == "--keep-downloads" ]] && KEEP_DOWNLOADS=true
 
 # --- Helpers ---
 err() { echo "[ERROR] $*" >&2; }
@@ -63,14 +67,19 @@ for theme in "${THEMES[@]}"; do
   url="$BIBATA_BASE_URL/$filename"
   out="$DOWNLOAD_FOLDER/$filename"
 
-  info "Downloading $filename"
-  if download "$url" "$out"; then
-    info "Extracting $filename -> $ICONS_DIR"
-    if ! tar -xf "$out" -C "$ICONS_DIR"; then
-      err "Failed to extract $out"
+  if [ ! -f "$out" ]; then
+    info "Downloading $filename"
+    if ! download "$url" "$out"; then
+      err "Failed to download $url (skipping)."
+      continue
     fi
   else
-    err "Failed to download $url (skipping)."
+    info "Using cached $out"
+  fi
+
+  info "Extracting $filename -> $ICONS_DIR"
+  if ! tar -xf "$out" -C "$ICONS_DIR"; then
+    err "Failed to extract $out"
   fi
 done
 
@@ -88,6 +97,12 @@ for archive in "${CUSTOM_ARCHIVES[@]}"; do
   fi
 done
 
+# --- Cleanup ---
+if ! $KEEP_DOWNLOADS; then
+  info "Cleaning up downloads in $DOWNLOAD_FOLDER"
+  rm -rf "$DOWNLOAD_FOLDER"
+fi
+
 # --- Final touches ---
 info "✅ Cursor themes installed into: $ICONS_DIR"
 
@@ -96,6 +111,4 @@ Next steps (pick one depending on your desktop environment):
 - GNOME: gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic'
 - KDE / other: set theme in System Settings or log out / log in to reload cursor cache
 - General: if a session doesn't pick it up immediately, log out/in or reboot.
-
-If you want the script to remove the temporary downloads folder after successful run, set DOWNLOAD_FOLDER to a temp path or manually delete it.
 EOF
