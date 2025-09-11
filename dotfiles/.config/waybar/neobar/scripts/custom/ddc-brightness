@@ -1,72 +1,72 @@
 #!/usr/bin/env bash
 
-CACHE_FILE="/tmp/ddc-brightness"
-STEP=5
+ICON="$HOME/.config/hypr/scripts/assets/brightness.svg"
 
-# Baca langsung dari monitor
-read_hw_brightness() {
-    ddcutil getvcp 10 2>/dev/null \
-        | awk -F'current value = ' '{print $2}' \
-        | awk '{print $1}' \
-        | tr -d ','
-}
+# Ambil brightness dari monitor (0–100)
+get_hw_brightness_percent() {
+    local out cur max
+    out=$(ddcutil getvcp 10 2>/dev/null) || return 1
+    cur=$(printf '%s' "$out" | sed -n 's/.*[Cc]urrent value *= *\([0-9][0-9]*\).*/\1/p' | head -n1)
+    max=$(printf '%s' "$out" | sed -n 's/.*max value *= *\([0-9][0-9]*\).*/\1/p' | head -n1)
 
-# Simpan cache
-write_cache() {
-    echo "$1" > "$CACHE_FILE"
-}
-
-# Ambil cache atau baca hardware kalau belum ada
-read_cache() {
-    if [ -f "$CACHE_FILE" ]; then
-        cat "$CACHE_FILE"
-    else
-        val=$(read_hw_brightness)
-        write_cache "$val"
-        echo "$val"
+    if [ -z "$cur" ] || [ -z "$max" ] || [ "$max" -le 0 ]; then
+        return 1
     fi
+
+    # Pembulatan sederhana
+    printf '%d\n' $(( (cur * 100 + max/2) / max ))
 }
 
-# Set brightness hardware (jalan di background)
-apply_hw_brightness() {
-    ddcutil setvcp 10 "$1" &>/dev/null &
+
+# Hitung step berdasarkan persentase (default 5%)
+get_step() {
+    local val=$1
+    step=$((val / 20))   # 5% dari nilai sekarang
+    [ "$step" -lt 1 ] && step=1
+    echo "$step"
 }
 
-# Kirim notifikasi swaync
+# Set brightness di monitor
+apply_brightness() {
+    local val=$1
+    [ "$val" -lt 0 ] && val=0
+    [ "$val" -gt 100 ] && val=100
+    ddcutil setvcp 10 "$val" &>/dev/null &
+}
+
+# Notifikasi slider
 notify_brightness() {
-    notify-send -h int:value:"$1" \
+    local val=$1
+    notify-send -h int:value:"$val" \
                 -h string:x-canonical-private-synchronous:brightness \
-                -u low "󰃠 Brightness" "$1%"
+                -u low "󰃠 Brightness" "$val%" \
+                --icon="$ICON"
 }
 
 case "$1" in
     get)
-        val=$(read_hw_brightness)
-        write_cache "$val"
-        echo "$val"
+        get_hw_brightness_percent
         ;;
     up)
-        current=$(read_cache)
-        new=$((current + STEP))
-        [ "$new" -gt 100 ] && new=100
-        write_cache "$new"
+        current=$(get_hw_brightness)
+        step=$(get_step "$current")
+        new=$((current + step))
+        apply_brightness "$new"
         notify_brightness "$new"
-        apply_hw_brightness "$new"
         ;;
     down)
-        current=$(read_cache)
-        new=$((current - STEP))
-        [ "$new" -lt 0 ] && new=0
-        write_cache "$new"
+        current=$(get_hw_brightness)
+        step=$(get_step "$current")
+        new=$((current - step))
+        apply_brightness "$new"
         notify_brightness "$new"
-        apply_hw_brightness "$new"
         ;;
     set)
-        new="$2"
-        [ "$new" -lt 0 ] && new=0
-        [ "$new" -gt 100 ] && new=100
-        write_cache "$new"
-        notify_brightness "$new"
-        apply_hw_brightness "$new"
+        val="$2"
+        apply_brightness "$val"
+        notify_brightness "$val"
+        ;;
+    *)
+        echo "Usage: $0 {get|up|down|set N}"
         ;;
 esac
