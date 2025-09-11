@@ -2,6 +2,25 @@
 set -euo pipefail
 
 ########################################
+# 0. KONFIRMASI AWAL (dari script pertama)
+########################################
+clear
+if command -v figlet &>/dev/null; then
+  figlet -f smslant "Updates"
+  echo
+fi
+
+if command -v gum &>/dev/null; then
+  if ! gum confirm "DO YOU WANT TO START THE UPDATE NOW?"; then
+    echo ":: Update canceled."
+    exit 0
+  fi
+else
+  read -rp "Mulai update sekarang? (y/N): " ans
+  [[ "$ans" =~ ^[Yy]$ ]] || { echo ":: Update canceled."; exit 0; }
+fi
+
+########################################
 # 1. KONFIGURASI WARNA DAN IKON
 ########################################
 YELLOW="\033[33m"
@@ -107,6 +126,14 @@ update_all_with_retry() {
     sleep 5
   done
   echo "✅ Update selesai."
+
+  # tambahan dari script pertama -> flatpak
+  echo ":: Searching for Flatpak updates..."
+  flatpak update -y || true
+  echo ":: Flatpak update selesai."
+
+  # reload waybar
+  pkill -RTMIN+1 waybar || true
 }
 
 update_selected_with_retry() {
@@ -118,6 +145,9 @@ update_selected_with_retry() {
     sleep 5
   done
   echo "✅ Update paket terpilih selesai."
+
+  # reload waybar
+  pkill -RTMIN+1 waybar || true
 }
 
 ########################################
@@ -166,27 +196,11 @@ show_installed_by_size() {
 # 7. FUNGSI SETUP EXIT
 ########################################
 setup_exit_trap() {
-  if [ -t 1 ]; then
-    trap 'read -r -p "Tekan ENTER untuk menutup..."' EXIT
-  fi
-}
-
-########################################
-# 1. FUNGSI SETUP & UTILITY
-########################################
-setup_exit_trap() {
   trap 'echo "❌ Script dihentikan."; exit 1' INT TERM
 }
 
-check_command() {
-  if ! command -v "$1" &>/dev/null; then
-    echo "❌ Perintah '$1' tidak ditemukan."
-    exit 1
-  fi
-}
-
 ########################################
-# 2. FUNGSI MENU
+# 8. FUNGSI MENU
 ########################################
 main_menu_gum() {
   gum choose --cursor.foreground 212 --limit 1 \
@@ -210,7 +224,7 @@ main_menu_fallback() {
 }
 
 ########################################
-# 3. FUNGSI AKSI MENU
+# 9. FUNGSI AKSI MENU
 ########################################
 lihat_daftar_update() {
   if (( ${#PKG_LIST[@]} == 0 )); then
@@ -255,7 +269,7 @@ pilih_paket_update() {
 }
 
 ########################################
-# 4. FUNGSI UTAMA
+# 10. FUNGSI UTAMA
 ########################################
 main() {
   setup_exit_trap

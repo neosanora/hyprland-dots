@@ -36,7 +36,7 @@
         "modules": [
             /*
             "backlight",
-            "backlight#text",
+            "backlight#text"
             */
             "custom/backlight",
             "custom/backlight#text"
@@ -53,11 +53,14 @@
     },
     
     "custom/pacman-update#text": {
-        "format": "<b>{}</b>",
-        "interval": 60,
-        "exec": "~/.config/waybar/neobar/scripts/pacman-update-icon.sh",
-        "tooltip": false,
-        "return-type": "json"
+        "format": "{}",
+        "escape": true,
+        "return-type": "json",
+        "exec": "~/.config/ml4w/scripts/updates.sh",
+        "interval": 1800,
+        "signal": 1,
+        "hide-empty-text": true,
+        // "return-type": "json"
     },
 
     "pulseaudio": {
