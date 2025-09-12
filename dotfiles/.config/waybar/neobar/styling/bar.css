@@ -10,7 +10,7 @@ window#waybar {
   font-size: 16px;
   background-color: alpha(@background, 0.4);
   transition: background-color .5s; /* lebih ringkas */
-  border-radius: 14px;
+  border-radius: 15px;
 }
 
 window#waybar.empty {

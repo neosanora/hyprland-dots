@@ -12,5 +12,5 @@ box#privacy-container {
   padding-left: 10px;
   padding-right: 5px;
   background-color: alpha(@primary_container, 0.75);
-  border-radius: 10px;
+  border-radius: 15px;
 }

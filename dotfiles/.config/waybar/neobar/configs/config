@@ -20,6 +20,7 @@
   "spacing": 0,
   "modules-left": [
     "group/start-menu",
+    "custom/dot-alt",
     "hyprland/workspaces",
     "custom/arrow-dec",
     "group/app-title-container"
@@ -43,7 +44,7 @@
     "network",
     "custom/dot",
     "group/system-container",
-    "custom/dot-alt",
+    "custom/dot",
     "tray",
     "custom/left-arrw",
     "group/launcher"
