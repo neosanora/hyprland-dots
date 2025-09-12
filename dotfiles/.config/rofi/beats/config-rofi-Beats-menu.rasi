@@ -1,8 +1,7 @@
 /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
 /* Main config Rofi Beats Config menu */
 
-/* @import "~/.config/rofi/config.rasi" */
-@import "~/.config/rofi/configneo.rasi"
+@import "~/.config/rofi/config.rasi"
 
 /* ---- Mainbox ---- */
 mainbox {
@@ -33,9 +32,9 @@ listview {
 
 /* ---- Element ---- */
 element-icon {
-  	size: 0%;
+	size: 0%;
 }
 element-text {
-    horizontal-align: 0.5;
+  horizontal-align: 0.5;
     
 }

@@ -30,7 +30,7 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
     background-alt:              @background;
-    selected:                    @on-primary-fixed;
+    selected:                    @surface;
     active:                      @on-surface;
     urgent:                      @error-container;
 }
