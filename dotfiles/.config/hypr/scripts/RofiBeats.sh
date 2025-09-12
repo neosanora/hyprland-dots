@@ -12,7 +12,6 @@ rofi_theme_1="$HOME/.config/rofi/beats/config-rofi-Beats-menu.rasi"
 # Online Stations. Edit as required
 declare -A online_music=(
   ["YT - NCS 🎧🎹🎶"]="https://music.youtube.com/playlist?list=PLQzXNtRqbRmGoSSLg0N6pLYYvyl8AV3Re"
-  ["Radio - Metal Music 🎧🎶"]="https://tunein.com/radio/mETaLmuSicRaDio-s119867/"
   ["YT - Youtube Top 100 Songs Global 📹🎶"]="https://youtube.com/playlist?list=PL4fGSI1pDJn6puJdseH2Rt9sMvt9E2M4i&si=5jsyfqcoUXBCSLeu"
   ["YT - Wish 107.5 YT Pinoy HipHop 📻🎶"]="https://youtube.com/playlist?list=PLkrzfEDjeYJnmgMYwCKid4XIFqUKBVWEs&si=vahW_noh4UDJ5d37"
   ["YT - Wish 107.5 YT Wishclusives 📹🎶"]="https://youtube.com/playlist?list=PLkrzfEDjeYJn5B22H9HOWP3Kxxs-DkPSM&si=d_Ld2OKhGvpH48WO"

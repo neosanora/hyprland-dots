@@ -7,4 +7,6 @@ aur_packages=(
   "waypaper-git"           # Dynamic wallpaper changer for Wayland
   "grimblast-git"          # A helper for screenshots within Hyprland.
   "hyprshade"              # Hyprland shade configuration tool
+  #  icons #
+  # "ttf-material-icons-git"     # Material Design icons by Google - classic fonts
 )
