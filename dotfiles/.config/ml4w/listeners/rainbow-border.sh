@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# 🌈 Rainbow Border toggle berdasarkan file gamemode-enabled (dibalik logika)
-
+# 🌈 Rainbow Border toggle dengan awareness gamemode + window.conf (low CPU + safe)
 
 WATCH_DIR="$HOME/.config/ml4w/settings"
 TRIGGER_FILE="gamemode-enabled"
 INTERVAL=0.2
 PIDFILE="/tmp/rainbow-border.pid"
+
+WINDOW_CONF="$HOME/.config/hypr/conf/window.conf"
 
 # --- Helpers ---
 random_hex() {
@@ -18,7 +19,6 @@ set_default_border() {
 }
 
 start_rainbow() {
-    # Cek kalau sudah ada PID lama
     if [[ -f "$PIDFILE" ]] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
         return
     fi
@@ -43,14 +43,29 @@ stop_rainbow() {
     set_default_border
 }
 
-apply_state() {
-    if [[ -f "$WATCH_DIR/$TRIGGER_FILE" ]]; then
-        # Kalau file ada → stop rainbow
+# --- State Manager ---
+update_state() {
+    if [[ ! -s "$WINDOW_CONF" ]]; then
+        # File tidak ada / kosong
+        echo "🚫 window.conf kosong atau hilang → rainbow border dimatikan."
         stop_rainbow
-    else
-        # Kalau file tidak ada → start rainbow
-        start_rainbow
+        return
     fi
+
+    if grep -q "no-border" "$WINDOW_CONF"; then
+        echo "🚫 window.conf mengandung 'no-border' → rainbow border dimatikan."
+        stop_rainbow
+        return
+    fi
+
+    if [[ -f "$WATCH_DIR/$TRIGGER_FILE" ]]; then
+        echo "🎮 gamemode aktif → rainbow border dimatikan."
+        stop_rainbow
+        return
+    fi
+
+    echo "✅ Kondisi normal → rainbow border aktif."
+    start_rainbow
 }
 
 cleanup() {
@@ -67,12 +82,15 @@ for cmd in inotifywait hyprctl; do
     }
 done
 
-# --- Terapkan state awal ---
-apply_state
+# --- Apply initial state ---
+update_state
 
-# --- Monitor folder ---
-inotifywait -m -q -e create,delete "$WATCH_DIR" | while read -r dir events filename; do
-    if [[ "$filename" == "$TRIGGER_FILE" ]]; then
-        apply_state
+# --- Monitor window.conf + gamemode-enabled ---
+inotifywait -m -q \
+    -e create,delete "$WATCH_DIR" \
+    -e close_write "$WINDOW_CONF" |
+while read -r path events filename; do
+    if [[ "$path$filename" == "$WINDOW_CONF" ]] || [[ "$filename" == "$TRIGGER_FILE" ]]; then
+        update_state
     fi
 done
