@@ -9,7 +9,7 @@
 
 box#privacy-container {
   margin: 5px;
-  padding-left: 10px;
+  padding-left: 5px;
   padding-right: 5px;
   background-color: alpha(@primary_container, 0.75);
   border-radius: 15px;
