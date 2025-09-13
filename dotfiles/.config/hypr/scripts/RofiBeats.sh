@@ -12,14 +12,18 @@ rofi_theme_1="$HOME/.config/rofi/beats/config-rofi-Beats-menu.rasi"
 # Online Stations. Edit as required
 declare -A online_music=(
   ["YT - NCS 🎧🎹🎶"]="https://music.youtube.com/playlist?list=PLQzXNtRqbRmGoSSLg0N6pLYYvyl8AV3Re"
-  ["YT - Youtube Top 100 Songs Global 📹🎶"]="https://youtube.com/playlist?list=PL4fGSI1pDJn6puJdseH2Rt9sMvt9E2M4i&si=5jsyfqcoUXBCSLeu"
+  ["YT - Playlist1"]="https://music.youtube.com/playlist?list=PLQzXNtRqbRmG-X_xG-GYD0hDDT968dNe_&si=8SksMUzt9AFmwBX4"
+  ["YT - Playlist2"]="https://music.youtube.com/playlist?list=PLj5Rup2fwwz_L8nVl2-fFhA1qXEflBQLx&si=3vG72HsFmDSNThw6"
+  ["YT - Youtube Top 100 Songs Global 📹🎶"]="https://music.youtube.com/playlist?list=PL4fGSI1pDJn5kI81J1fYWK5eZRl1zJ5kM&si=BDDdjh-ySxUgPtCj"
+  ["YT - Youtube Daily Top Music Videos - Global 📹🎶"]="https://music.youtube.com/playlist?list=PL4fGSI1pDJn6t3TXLGiiJdD-sZbrG3tG0&si=b99hMjIA2or0-9VM"
   ["YT - Wish 107.5 YT Pinoy HipHop 📻🎶"]="https://youtube.com/playlist?list=PLkrzfEDjeYJnmgMYwCKid4XIFqUKBVWEs&si=vahW_noh4UDJ5d37"
   ["YT - Wish 107.5 YT Wishclusives 📹🎶"]="https://youtube.com/playlist?list=PLkrzfEDjeYJn5B22H9HOWP3Kxxs-DkPSM&si=d_Ld2OKhGvpH48WO"
   ["YT - Relaxing Piano Music 🎹🎶"]="https://youtu.be/6H7hXzjFoVU?si=nZTPREC9lnK1JJUG"
   ["YT - Youtube Remix 📹🎶"]="https://youtube.com/playlist?list=PLeqTkIUlrZXlSNn3tcXAa-zbo95j0iN-0"
   ["YT - Korean Drama OST 📹🎶"]="https://youtube.com/playlist?list=PLUge_o9AIFp4HuA-A3e3ZqENh63LuRRlQ"
-  ["YT - lofi hip hop radio beats 📹🎶"]="https://www.youtube.com/live/jfKfPfyJRdk?si=PnJIA9ErQIAw6-qd"
   ["YT - Relaxing Piano Jazz Music 🎹🎶"]="https://youtu.be/85UEqRat6E4?si=jXQL1Yp2VP_G6NSn"
+  # LIVE #
+  ["YT - lofi hip hop radio beats 📹🎶"]="https://www.youtube.com/live/jfKfPfyJRdk?si=PnJIA9ErQIAw6-qd"
 )
 
 # Populate local_music array with files from music directory and subdirectories
