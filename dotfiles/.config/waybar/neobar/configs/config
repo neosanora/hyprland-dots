@@ -27,9 +27,11 @@
   ],
 
   "modules-center": [
-    "custom/dot",
+    "group/launcher",
+    "custom/right-arrw",
     "group/privacy-container",
-    "custom/dot"
+    "custom/left-arrw",
+    "group/firewall"
   ],
   
   "modules-right": [
@@ -38,16 +40,12 @@
     "group/performance",
     "custom/left-arrw",
     "group/tools",
-    "custom/left-arrw",
-    "group/firewall",
     "custom/dot",
     "network",
     "custom/dot",
     "group/system-container",
     "custom/dot",
-    "tray",
-    "custom/left-arrw",
-    "group/launcher"
+    "tray"
   ],
 
 

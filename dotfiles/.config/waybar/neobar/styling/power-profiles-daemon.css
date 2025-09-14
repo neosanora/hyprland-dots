@@ -1,7 +1,7 @@
 label#power-profiles-daemon {
   margin: 5px;
   padding: 0 6px;
-  background-color: alpha(@background, 0.75);
+  background-color: alpha(@primary_container, 0.75);
   border-radius: 15px;
 }
 

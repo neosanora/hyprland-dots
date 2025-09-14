@@ -1,7 +1,7 @@
 @import "../colors-waybar.css";
 
 label#custom-dot-alt {
-  color: @primary;
+  color: @tertiary;
 }
 
 label#custom-dot {
@@ -10,7 +10,7 @@ label#custom-dot {
 
 label#custom-right-arrw,
 label#custom-left-arrw {
-  color: @primary;
+  color: @tertiary;
   margin-left: 4px;
   margin-right: 4px;
   font-size: 15px;
@@ -20,5 +20,5 @@ label#custom-left-arrw {
 #custom-arrow-dec {
   margin-left: 2px;
   font-size: 15px;
-  color: @primary;
+  color: @tertiary;
 }

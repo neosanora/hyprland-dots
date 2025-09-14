@@ -40,7 +40,7 @@
 label#network {
   margin: 5px;
   padding: 0 6px;
-  background-color: alpha(@background, 0.75);
+  background-color: alpha(@primary_container, 0.75);
   border-radius: 15px;
 }
 
@@ -48,12 +48,12 @@ label#network {
 * Network
 * ----------------------------------------------------- */
 #network {
-  color: @on_background;
+  color: @on_primary_container;
   font-size: 14px;
 }
 
 #network.ethernet {
-  color: @pastel_green;
+  color: @pastel-green;
 }
 
 #network.disconnected {
