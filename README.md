@@ -121,4 +121,8 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 
 `ntfs-3g`, `bluez`, `bluez-utils`, `blueman`
 
+## AUR
+
+  `python-screeninfo`,`waypaper-git`,`grimblast-git`,`hyprshade`,`wlogout`
+  
 ---
