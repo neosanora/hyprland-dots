@@ -122,7 +122,7 @@ fi
 # Detect Theme
 # -----------------------------------------------------
 
-SETTINGS_FILE="$HOME/.config/gtk-4.0/settings.ini"
+SETTINGS_FILE="$HOME/.config/gtk-3.0/settings.ini"
 THEME_PREF=$(grep -E '^gtk-application-prefer-dark-theme=' "$SETTINGS_FILE" | awk -F'=' '{print $2}')
 
 # -----------------------------------------------------
@@ -137,23 +137,11 @@ else
 fi
 
 # -----------------------------------------------------
-# Execute wallust
-# -----------------------------------------------------
-
-_writeLog "Execute wallust with $used_wallpaper"
-if [ "$THEME_PREF" -eq 1 ]; then
-    $HOME/.local/bin/wallust run $used_wallpaper --check-contrast --palette dark
-else
-    $HOME/.local/bin/wallust run $used_wallpaper --check-contrast --palette light
-fi
-
-# -----------------------------------------------------
 # Reload Waybar
 # -----------------------------------------------------
 
 sleep 1
-# $HOME/.config/waybar/launch.sh
-$HOME/.config/hypr/scripts/toggle/change-waybar.sh
+$HOME/.config/waybar/launch.sh
 
 # -----------------------------------------------------
 # Reload nwg-dock-hyprland
