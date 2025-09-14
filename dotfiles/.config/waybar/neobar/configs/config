@@ -1,5 +1,6 @@
 {
   "include": [
+    // "~/.config/waybar/neobar/configs/tray_container",
     "~/.config/waybar/neobar/configs/custom_modules/start_menu",
     "~/.config/waybar/neobar/configs/custom_modules/app_title",
     "~/.config/waybar/neobar/configs/custom_modules/firewall",
@@ -7,7 +8,8 @@
     "~/.config/waybar/neobar/configs/custom_modules/modules",
     "~/.config/waybar/neobar/configs/custom_modules/privacy_container",
     "~/.config/waybar/neobar/configs/custom_modules/system_container",
-    "~/.config/waybar/neobar/configs/custom_modules/tools_container",    
+    "~/.config/waybar/neobar/configs/custom_modules/notification_container",
+    "~/.config/waybar/neobar/configs/custom_modules/tools_container",
     "~/.config/waybar/neobar/configs/custom_modules/performance_container"
   ],
 
@@ -27,7 +29,7 @@
   ],
 
   "modules-center": [
-    "group/launcher",
+    "group/notification-container",
     "custom/right-arrw",
     "group/privacy-container",
     "custom/left-arrw",
@@ -35,18 +37,20 @@
   ],
   
   "modules-right": [
-    "tray",
     "custom/dot",
     "power-profiles-daemon",
     "custom/left-arrw",
     "group/performance",
     "custom/left-arrw",
     "group/tools",
+    // "custom/left-arrw",
+    // "group/tray-container",
     "custom/dot",
     "network",
     "custom/dot",
     "group/system-container",
-    "custom/dot"
+    "custom/dot",
+    "group/launcher"
   ],
 
 
@@ -96,16 +100,6 @@
     "separate-outputs": true,
     "max-length": 70
   },
-
-"group/tray": {
-  "orientation": "horizontal",
-  "modules": ["tray"],
-  "drawer": {
-    "transition-duration": 200,
-    "click-to-open": false,
-    "show-on-hover": true
-  }
-},
 
   // Network
   "network": {

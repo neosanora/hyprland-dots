@@ -3,18 +3,16 @@
         "orientation": "horizontal",
         "drawer": {
             "transition-duration": 300,
-            "children-class": "launcher",
-            "transition-left-to-right": true
+            "children-class": "exit",
+            "transition-left-to-right": false
         },
         "modules": [
-            "custom/launcher",
-            "custom/exit"
-            // "custom/power",
-            // "custom/quit",
-            // "custom/reboot"
+            "custom/exit",
+            "custom/power",
+            "custom/quit",
+            "custom/reboot"
         ]
     },
-   /* 
     "custom/quit": {
         "format": "󪦐",
         "tooltip": false,
@@ -30,7 +28,6 @@
         "tooltip": false,
         "on-click": "shutdown now"
     },
-    */
 
     // Power Menu
     "custom/exit": {
@@ -38,27 +35,5 @@
         "on-click": "~/.config/ml4w/scripts/wlogout.sh",
         "on-click-right": "hyprlock",
         "tooltip-format": "Left: Power menu\nRight: Lock screen"
-    },
-
-    // SwayNC
-    "custom/launcher": {
-    "tooltip-format": "Left: Notifications\nRight: Do not disturb",
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "notifications_active",
-      "none": "notifications",
-      "dnd-notification": "notifications_active",
-      "dnd-none": "notifications_paused",
-      "inhibited-notification": "notification_important",
-      "inhibited-none": "notification_important",
-      "dnd-inhibited-notification": "notification_off",
-      "dnd-inhibited-none": "notifications_off"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  }
+    }
 }

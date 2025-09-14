@@ -2,8 +2,11 @@
 @import "workspace.css";
 @import "custom/dec.css";
 @import "bar.css";
+@import "tray.css";
 @import "general.css";
 @import "stock.css";
+@import "power-profiles-daemon.css";
+@import "tooltips.css";
 @import "custom/startmenu.css";
 @import "custom/launcher.css";
 @import "custom/battery.css";
@@ -11,12 +14,10 @@
 @import "custom/clock.css";
 @import "custom/privacycontainer.css";
 @import "custom/systemcontainer.css";
-
+@import "custom/notificationcontainer.css";
 @import "custom/firewallcontainer.css";
 @import "custom/toolscontainer.css";
 @import "custom/performancecontainer.css";
-@import "power-profiles-daemon.css";
-@import "tooltips.css";
 
 
 * {

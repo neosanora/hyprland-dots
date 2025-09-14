@@ -23,19 +23,8 @@
 }
 
 /* -----------------------------------------------------
-* Tray
+* Network
 * ----------------------------------------------------- */
-#tray {
-    /* padding: 0px 15px 0px 0px; */
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-}
 
 label#network {
   margin: 5px;
@@ -43,10 +32,6 @@ label#network {
   background-color: alpha(@primary_container, 0.75);
   border-radius: 15px;
 }
-
-/* -----------------------------------------------------
-* Network
-* ----------------------------------------------------- */
 #network {
   color: @on_primary_container;
   font-size: 14px;
