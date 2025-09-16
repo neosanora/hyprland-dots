@@ -182,11 +182,6 @@ source "$SCRIPT_DIR/_fonts.sh" || true
 source "$SCRIPT_DIR/_fontIcon.sh" || true
 source "$SCRIPT_DIR/_ml4w-apps.sh" || true
 
-echo
-echo ":: Installation complete."
-echo ":: Ready to install the dotfiles with the Dotfiles Installer."
-echo ":: IF NOT, INSTALL GIT FIRST AND THEN RUN THE SCRIPT AGAIN."
-
 if [[ ${#NOT_FOUND_PKGS[@]} -gt 0 ]]; then
     echo
     echo "⚠️  Summary: Paket berikut tidak ditemukan di repository pacman:"
@@ -198,3 +193,9 @@ if [[ ${#FAILED_AUR_PKGS[@]} -gt 0 ]]; then
     echo "⚠️  Summary: Beberapa paket AUR gagal diinstall:"
     printf "%s\n" "${FAILED_AUR_PKGS[@]}"
 fi
+
+# --------------------------------------------------------------
+# Finish
+# --------------------------------------------------------------
+
+_finishMessage
