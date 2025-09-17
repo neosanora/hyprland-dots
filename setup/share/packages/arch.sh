@@ -106,6 +106,8 @@ packages=(
   #///////////////////////////////////#
   "kitty"           # Terminal modern dan cepat
   "alacritty"       # Terminal GPU-accelerated
+  "zsh"             # A very advanced and programmable command interpreter (shell) for UNIX
+  "fzf"             # Command-line fuzzy finder
 
   #////////////////////////////////#
   ### |      GUI | System      | ###
