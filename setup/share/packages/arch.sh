@@ -21,6 +21,7 @@ packages=(
   "jq"              # JSON processor
   "gum"             # command line UI toolkit
   "fastfetch"       # system information tool
+  "yt-dlp"          # A youtube-dl fork with additional features and fixes
   ### have GUI ###
   "loupe"           # A simple image viewer for GNOME
 
