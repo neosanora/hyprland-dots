@@ -77,9 +77,13 @@ download_and_install_font "FiraCode" "https://github.com/tonsky/FiraCode/release
 download_and_install_font "Fira_Sans" "https://github.com/mozilla/Fira/releases/latest/download/Fira_Sans.zip"
 
 # Install Niconne & Satisfy from local (no download)
+install_font_local "Dela_Gothic_One" "$SCRIPT_DIR/fonts"
 install_font_local "Material-Icons" "$SCRIPT_DIR/fonts"
 install_font_local "Niconne" "$SCRIPT_DIR/fonts"
 install_font_local "Satisfy" "$SCRIPT_DIR/fonts"
+install_font_local "Noto_Sans_JP" "$SCRIPT_DIR/fonts"
+install_font_local "Noto_Sarif_JP" "$SCRIPT_DIR/fonts"
+install_font_local "Potta_One" "$SCRIPT_DIR/fonts"
 
 echo "✅ Font installation complete."
 
