@@ -12,7 +12,6 @@
 /* ---- Configuration ---- */
 configuration {
     modi:                       "drun,filebrowser,window,run";
-    font:                       "Fira Sans 11";
     show-icons:                 true;
     display-drun:                " ";
     display-run:                 " ";

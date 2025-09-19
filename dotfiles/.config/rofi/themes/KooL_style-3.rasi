@@ -9,12 +9,6 @@ configuration {
 	drun-display-format:        "{name}";
 }
 
-/*****----- Global Properties -----*****/
-/* @theme "~/.config/rofi/wallust/colors-rofi.rasi" */
-
-/* ---- Load font ---- */
-/* @import "~/.config/ml4w/settings/rofi-font.rasi" */
-
 /* ---- Load colors ---- */
 @theme "~/.config/rofi/matugen/colors.rasi"
 
