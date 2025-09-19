@@ -73,14 +73,11 @@ packages=(
   #//////////////#
   "otf-font-awesome"
   "ttf-firacode-nerd"
-#  "ttf-fira-sans"
-#  "ttf-fira-code"
-#  "ttf-dejavu"
 
-#  "noto-fonts"
-#  "noto-fonts-emoji"
-#  "noto-fonts-cjk"
-#  "noto-fonts-extra"
+  "noto-fonts"
+  "noto-fonts-emoji"
+  "noto-fonts-cjk"
+  "noto-fonts-extra"
 
   ### FONT EDITOR/SETTINGS ###
   "font-manager"        #A simple font management application for GTK+ Desktop Environments
