@@ -111,7 +111,9 @@ read -p "Lanjutkan chmod +x & update-index untuk semua di atas? (y/n): " CONFIRM
 if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
   for f in "${FILES_TO_UPDATE[@]}"; do
     chmod +x "$f"
-    git update-index --chmod=+x "$f" || true
+    if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+      git update-index --chmod=+x "$f"
+    fi
   done
   echo ":: Done."
 else
