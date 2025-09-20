@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
 # 🌈 Rainbow Border toggle dengan awareness gamemode + window.conf (low CPU + safe)
+PIDFILE="/tmp/rainbow-border.pid"
 
 WATCH_DIR="$HOME/.config/ml4w/settings"
 TRIGGER_FILE="gamemode-enabled"
-INTERVAL=0.2
-PIDFILE="/tmp/rainbow-border.pid"
 
-WINDOW_CONF="$HOME/.config/hypr/conf/window.conf"
+INTERVAL=0.2
+
+# --- Configs ---
+WINDOW_CONFS=(
+    "$HOME/.config/hypr/conf/window.conf"
+)
+
+BLOCK_KEYWORDS=(
+    "no-border"
+    "gamemode"
+    "border=0"
+    "border:none"
+)
 
 # --- Helpers ---
 random_hex() {
@@ -35,8 +46,12 @@ start_rainbow() {
 
 stop_rainbow() {
     if [[ -f "$PIDFILE" ]]; then
-        kill "$(cat "$PIDFILE")" 2>/dev/null || true
-        wait "$(cat "$PIDFILE")" 2>/dev/null || true
+        local pid
+        pid=$(cat "$PIDFILE")
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid"
+            wait "$pid" 2>/dev/null || true
+        fi
         rm -f "$PIDFILE"
         echo "🌈 Rainbow border stopped"
     fi
@@ -45,19 +60,25 @@ stop_rainbow() {
 
 # --- State Manager ---
 update_state() {
-    if [[ ! -s "$WINDOW_CONF" ]]; then
-        # File tidak ada / kosong
-        echo "🚫 window.conf kosong atau hilang → rainbow border dimatikan."
-        stop_rainbow
-        return
-    fi
+    # cek semua file conf
+    for conf in "${WINDOW_CONFS[@]}"; do
+        if [[ ! -s "$conf" ]]; then
+            echo "🚫 $conf kosong atau hilang → rainbow border dimatikan."
+            stop_rainbow
+            return
+        fi
 
-    if grep -q "no-border" "$WINDOW_CONF"; then
-        echo "🚫 window.conf mengandung 'no-border' → rainbow border dimatikan."
-        stop_rainbow
-        return
-    fi
+        # cek semua keyword
+        for key in "${BLOCK_KEYWORDS[@]}"; do
+            if grep -q "$key" "$conf"; then
+                echo "🚫 $conf mengandung '$key' → rainbow border dimatikan."
+                stop_rainbow
+                return
+            fi
+        done
+    done
 
+    # cek gamemode
     if [[ -f "$WATCH_DIR/$TRIGGER_FILE" ]]; then
         echo "🎮 gamemode aktif → rainbow border dimatikan."
         stop_rainbow
@@ -72,6 +93,7 @@ cleanup() {
     stop_rainbow
     exit 0
 }
+
 trap cleanup EXIT INT TERM
 
 # --- Cek dependensi ---
@@ -88,9 +110,14 @@ update_state
 # --- Monitor window.conf + gamemode-enabled ---
 inotifywait -m -q \
     -e create,delete "$WATCH_DIR" \
-    -e close_write "$WINDOW_CONF" |
+    -e close_write "${WINDOW_CONFS[@]}" |
 while read -r path events filename; do
-    if [[ "$path$filename" == "$WINDOW_CONF" ]] || [[ "$filename" == "$TRIGGER_FILE" ]]; then
+    fullpath="$path$filename"
+    if [[ "$filename" == "$TRIGGER_FILE" ]]; then
         update_state
+    else
+        for conf in "${WINDOW_CONFS[@]}"; do
+            [[ "$fullpath" == "$conf" ]] && update_state
+        done
     fi
 done
