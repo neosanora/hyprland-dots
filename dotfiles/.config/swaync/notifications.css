@@ -20,7 +20,7 @@
   color: @text;
   font-size: 1rem;
   font-weight: 900;
-  font-family: Potta One, "Fira Sans Semibold",
+  font-family: "SF Pro Display", "SF Pro Text",
                "Font Awesome 7 Free", "Font Awesome 7 Brands",
                "Font Awesome 6 Free", "Font Awesome 6 Brands",
                FontAwesome, Roboto, Helvetica, Arial, sans-serif;

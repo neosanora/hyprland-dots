@@ -73,8 +73,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "[DEBUG] SCRIPT_DIR set to: $SCRIPT_DIR"
 
 # Install FiraCode & Fira Sans from web if not exists
-download_and_install_font "FiraCode" "https://github.com/tonsky/FiraCode/releases/latest/download/Fira_Code_v6.2.zip"
-download_and_install_font "Fira_Sans" "https://github.com/mozilla/Fira/releases/latest/download/Fira_Sans.zip"
+# download_and_install_font "FiraCode" "https://github.com/tonsky/FiraCode/releases/latest/download/Fira_Code_v6.2.zip"
+# download_and_install_font "Fira_Sans" "https://github.com/mozilla/Fira/releases/latest/download/Fira_Sans.zip"
 
 # Install Niconne & Satisfy from local (no download)
 install_font_local "Material-Icons" "$SCRIPT_DIR/fonts"
