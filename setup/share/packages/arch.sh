@@ -74,11 +74,6 @@ packages=(
   "otf-font-awesome"
   "ttf-firacode-nerd"
 
-  "noto-fonts"
-  "noto-fonts-emoji"
-  "noto-fonts-cjk"
-  "noto-fonts-extra"
-
   ### FONT EDITOR/SETTINGS ###
   "font-manager"        #A simple font management application for GTK+ Desktop Environments
 
