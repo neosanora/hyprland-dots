@@ -1,7 +1,6 @@
 @import "colors-waybar.css";
 
 #workspaces label {
-  font-size: 13px;
   margin-left: 0px;
   margin-right: 0px;
 }

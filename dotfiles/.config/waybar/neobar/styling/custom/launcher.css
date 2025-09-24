@@ -4,7 +4,6 @@
 #custom-reboot,
 #custom-quit,
 #custom-exit {
-  font-size: 13px;
   margin: 5px;
   padding-left: 3px;
   padding-right: 3px;
@@ -13,7 +12,6 @@
 
 #custom-launcher {
   font-family: "Material Icons";
-  font-size: 13px;
   margin: 2px;
   padding-left: 5px;
   padding-right: 5px;

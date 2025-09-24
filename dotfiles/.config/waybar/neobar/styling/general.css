@@ -13,7 +13,6 @@
 #idle_inhibitor {
   padding: 0 6px;
   color:  @on_primary_container;
-  font-size: 14px;
 }
 
 #cpu,
@@ -34,7 +33,6 @@ label#network {
 }
 #network {
   color: @on_primary_container;
-  font-size: 14px;
 }
 
 #network.ethernet {

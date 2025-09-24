@@ -1,13 +1,10 @@
 @import "../colors-waybar.css";
 
 #battery {
-  font-size: 15px;
   color: @red;
 }
 
 #battery.text {
-  font-size: 12px;
-  font-weight: 800;
   color: @on_background;
 }
 

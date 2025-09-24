@@ -13,12 +13,10 @@ label#custom-left-arrw {
   color: @tertiary;
   margin-left: 4px;
   margin-right: 4px;
-  font-size: 15px;
 }
 
 
 #custom-arrow-dec {
   margin-left: 2px;
-  font-size: 15px;
   color: @tertiary;
 }
