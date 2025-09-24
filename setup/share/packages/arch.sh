@@ -15,6 +15,7 @@ packages=(
   ###  can be execute ###
   "cliphist"        # wayland clipboard manager
   "unzip"           # For extracting and viewing files in .zip archives
+  "cpio"            # A tool to copy files into or out of a cpio or tar archive
   "xclip"           # Command line interface to the X11 clipboard
   "figlet"          # A program for making large letters out of ordinary text
   "git"             # version control
