@@ -8,7 +8,7 @@
 # LISTENERS["short-name"]="full/path/to/script.sh"
 declare -A LISTENERS
 LISTENERS["gtk-theme-switcher"]="$HOME/.config/ml4w/listeners/gtk-theme-switcher.sh"
-LISTENERS["rainbow-border"]="$HOME/.config/ml4w/listeners/rainbow-border.sh"
+# LISTENERS["rainbow-border"]="$HOME/.config/ml4w/listeners/rainbow-border.sh"
 # Example for another listener:
 # LISTENERS["another-listener"]="$HOME/.config/ml4w/listeners/another-listener.sh"
 
