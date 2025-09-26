@@ -15,7 +15,8 @@
   "clock": {
     "format": "󪥶 <b>{:%I:%M %p}</b>",
     "format-alt": "󪥶 <b>{:%a.%d,%b}</b>",
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    "on-click-right": "flatpak run com.ml4w.calendar"
   },
   "custom/priv-speaker": {
     "format": "<b>{}</b>",

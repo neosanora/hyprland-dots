@@ -6,8 +6,7 @@
 
 window#waybar {
   margin: 6px 12px;                 /* jarak biar nggak nempel layar */
-  padding: 4px 10px;                /* isi modul */
-  font-size: 12px;
+  padding: 10px 10px;                /* isi modul */
   font-weight: 800;
   background-color: alpha(@background, 0.4);
   transition: background-color .5s; /* lebih ringkas */

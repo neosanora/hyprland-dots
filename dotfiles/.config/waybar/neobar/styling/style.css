@@ -23,6 +23,16 @@
 * {
   border: none;
   font-family: Potta One,"SF Pro Display", "SF Pro Text", "SF Pro", "SF Mono", "SF Serif", sans-serif, "FiraCode", "Material Icons Round";
-  font-size: 12px;
+  font-size: 8px;
   border-radius: 0px;
 }
+/* 
+.modules-left > * ,
+.modules-center > * ,
+.modules-right > * {
+    border: 12px solid #888;
+    border-radius: 4px;
+    padding: 0 5px;
+    margin: 2px;
+}
+ */
