@@ -179,7 +179,7 @@ curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin
 source "$SCRIPT_DIR/_prebuilt.sh" || true
 source "$SCRIPT_DIR/_cursors.sh" || true
 source "$SCRIPT_DIR/_fonts.sh" || true
-source "$SCRIPT_DIR/_fontIcon.sh" || true
+source "$SCRIPT_DIR/_otf-sf-fonts.sh" || true
 source "$SCRIPT_DIR/_ml4w-apps.sh" || true
 
 if [[ ${#NOT_FOUND_PKGS[@]} -gt 0 ]]; then

@@ -46,7 +46,7 @@ copy_files() {
 }
 
 if ! command -v git >/dev/null; then
-    echo "Install git"
+    echo "Install git first"
     exit 1
 fi
 
