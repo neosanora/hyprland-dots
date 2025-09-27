@@ -34,7 +34,7 @@ box#tools .horizontal {
 
 #custom-ml4w-welcome {
     margin-right: 12px;
-    background-image: url("/home/neo/.config/waybar/themes/assets/ml4w-icon.svg");
+    background-image: url("../../../themes/assets/ml4w-icon.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

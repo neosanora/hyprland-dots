@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ========================================= #
-FONT_URL="https://github.com/<username>/San-Francisco-family.git"
+FONT_URL="https://github.com/neosanora/San-Francisco-family.git"
 FONTS=("SF Pro" "SF Serif" "SF Mono")
 
 # ========================================= #
