@@ -19,7 +19,7 @@ else
 fi
 
 # Download folder untuk yay
-download_folder="$SCRIPT_DIR/tmp"
+download_folder="Downloads/tmp"
 mkdir -p "$download_folder"
 
 # --------------------------------------------------------------
