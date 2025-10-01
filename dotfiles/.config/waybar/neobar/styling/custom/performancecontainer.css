@@ -1,5 +1,20 @@
 @import "../colors-waybar.css";
 
+#cpu,
+#custom-gpu_usage,
+#memory,
+#custom-storage {
+  padding: 0 6px;
+  color:  @on_primary_container;
+}
+
+#cpu,
+#custom-gpu_usage,
+#memory,
+#custom-storage {
+  color: @primary;
+}
+
 #custom-sistem {
   margin: 2px;
   padding-left: 5px;

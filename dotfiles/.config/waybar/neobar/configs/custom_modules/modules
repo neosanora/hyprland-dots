@@ -18,5 +18,14 @@
   "custom/arrow-dec": {
     "format": " 󪥜 ",
     "tooltip": false
+  },
+
+  "custom/sp1": {
+    "format": " | ",
+    "tooltip": false
+  },
+  "custom/sp2": {
+    "format": " |",
+    "tooltip": false
   }
 }

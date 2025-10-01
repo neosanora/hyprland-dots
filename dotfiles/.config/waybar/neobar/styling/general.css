@@ -4,21 +4,12 @@
 * ANOTHER
 * ----------------------------------------------------- */
 
-#memory,
-#cpu,
 #disk,
 #temperature,
-#custom-gpu_usage,
 #mode,
 #idle_inhibitor {
   padding: 0 6px;
   color:  @on_primary_container;
-}
-
-#cpu,
-#memory,
-#custom-gpu_usage {
-  color: @primary;
 }
 
 /* -----------------------------------------------------

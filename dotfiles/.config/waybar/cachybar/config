@@ -18,17 +18,17 @@
     "modules-left": [
         //"custom/rofi",
         "hyprland/workspaces",
-        //"hyprland/submap",
+        "hyprland/submap",
         "temperature",
-        //"idle_inhibitor",
-        //"mpd"
+        "idle_inhibitor",
+        // "mpd",
         "custom/spotify"
     ],
     "modules-center": [
         //"hyprland/window"
         "clock#date",
         "custom/weather"
-        //"custom/gammastep"
+        // "custom/gammastep"
     ],
     "modules-right": [
         "backlight",
@@ -36,7 +36,7 @@
         "memory",
         "cpu",
         "battery",
-        //"pulseaudio",
+        "pulseaudio",
         "wireplumber",
         "custom/screenshot_t",
         "tray",
@@ -144,7 +144,7 @@
         "format-alt-click": "click-right",
         "return-type": "json",
         "interval": 60,
-        "exec": "~/.config/waybar/modules/storage.sh"
+        "exec": "~/.config/waybar/cachybar/modules/storage.sh"
     },
 
     "backlight": {
@@ -310,12 +310,12 @@
             "7": "七",
             "8": "八",
             "9": "九",
-            "10": "十",
+            "10": "十"
         },
         "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
         "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
         "sort-by-number": true,
-        "active-only": false,
+        "active-only": false
     },
 
     "hyprland/window": {
