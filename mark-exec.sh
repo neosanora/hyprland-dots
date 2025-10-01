@@ -17,7 +17,6 @@ declare -A EXCLUDES
 EXCLUDES["dotfiles"]="
                       .config/ml4w/settings
                       .config/ml4w/version
-                      .config/waybar/themes
                      "
 
 EXCLUDES["setup"]="
