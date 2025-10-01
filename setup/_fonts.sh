@@ -233,7 +233,6 @@ LOCAL_FONTS=(
             "Niconne"
             "Satisfy"
             "Potta_One"
-            "fontIcon"
             )
 
 # Execute remote installs
