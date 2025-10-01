@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 ########################################
 # 0. KONFIRMASI AWAL (dari script pertama)

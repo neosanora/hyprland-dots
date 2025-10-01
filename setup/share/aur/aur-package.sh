@@ -4,7 +4,6 @@
 
 aur_packages=(
   # "timeshift-autosnap"     # Timeshift auto-snapshot script which runs before package upgrade using Pacman hook.
-  "checkupdates-with-aur"  # Helper script to check updates, including AUR updates
 
   "wlogout"                # GUI logout menu
   "waypaper-git"           # Dynamic wallpaper changer for Wayland
