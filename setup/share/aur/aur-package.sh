@@ -3,12 +3,15 @@
 # ----------------------------------------------------------
 
 aur_packages=(
+  # "timeshift-autosnap"     # Timeshift auto-snapshot script which runs before package upgrade using Pacman hook.
   "checkupdates-with-aur"  # Helper script to check updates, including AUR updates
-  "python-screeninfo"      # Python library to fetch location and size of physical screens
+
+  "wlogout"                # GUI logout menu
   "waypaper-git"           # Dynamic wallpaper changer for Wayland
   "grimblast-git"          # A helper for screenshots within Hyprland.
   "hyprshade"              # Hyprland shade configuration tool
-  "wlogout"                # GUI logout menu
+
+  "python-screeninfo"      # Python library to fetch location and size of physical screens
 
   #//////////////#
   ### | Font | ###

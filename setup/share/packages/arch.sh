@@ -62,12 +62,11 @@ packages=(
   "qt6ct"               # Qt 6 Configuration Utility
   "nwg-look"            # GTK settings editor adapted to work on wlroots-based compositors
   ### widget theme ###
-  "adwaita-icon-theme"  # GNOME standard icons
   "adw-gtk-theme"       # Unofficial GTK 3 port of the libadwaita theme
   "adapta-gtk-theme"    # Adapta is a material design-inspired
   "breeze"              # Breeze widget theme for GTK 2 and 3
   ### Icon Theme ###
-  "papirus-icon-theme"  # Papirus icon theme
+  "adwaita-icon-theme"  # GNOME standard icons
   
   #//////////////#
   ### | Font | ###
