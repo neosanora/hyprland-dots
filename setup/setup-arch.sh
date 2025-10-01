@@ -183,6 +183,8 @@ source "$SCRIPT_DIR/_otf-sf-fonts.sh" || true
 source "$SCRIPT_DIR/_icons.sh" || true
 source "$SCRIPT_DIR/_ml4w-apps.sh" || true
 
+source "$SCRIPT_DIR/_custom.sh" || true
+
 # -------------------------------------------------------------
 # DEBUGING
 # -------------------------------------------------------------
