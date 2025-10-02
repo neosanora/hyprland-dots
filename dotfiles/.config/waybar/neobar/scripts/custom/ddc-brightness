@@ -1,42 +1,66 @@
 #!/usr/bin/env bash
-
+# brightness control for monitors using ddcutil
+# requires: ddcutil, notify-send
 ICON="$HOME/.config/hypr/scripts/assets/brightness.svg"
 
-# Ambil brightness dari monitor (0–100)
-get_hw_brightness_percent() {
-    local out cur max
+# Ensure ddcutil exists
+command -v ddcutil >/dev/null 2>&1 || { echo "ddcutil not found in PATH"; exit 1; }
+
+# Read raw current and max VCP values (for VCP code 10 = brightness)
+get_hw_values() {
+    local out
     out=$(ddcutil getvcp 10 2>/dev/null) || return 1
+    # parse current and max (case-insensitive)
     cur=$(printf '%s' "$out" | sed -n 's/.*[Cc]urrent value *= *\([0-9][0-9]*\).*/\1/p' | head -n1)
     max=$(printf '%s' "$out" | sed -n 's/.*max value *= *\([0-9][0-9]*\).*/\1/p' | head -n1)
 
     if [ -z "$cur" ] || [ -z "$max" ] || [ "$max" -le 0 ]; then
         return 1
     fi
+    return 0
+}
 
-    # Pembulatan sederhana
+# Ambil brightness sebagai persentase (0–100)
+get_hw_brightness_percent() {
+    if ! get_hw_values; then
+        return 1
+    fi
+    # percentage with simple rounding
     printf '%d\n' $(( (cur * 100 + max/2) / max ))
 }
 
-
-# Hitung step berdasarkan persentase (default 5%)
+# Hitung step berdasarkan persentase (default 5% dari nilai sekarang)
 get_step() {
     local val=$1
-    step=$((val / 20))   # 5% dari nilai sekarang
+    local step=$((val / 20))   # 5% of current percent
     [ "$step" -lt 1 ] && step=1
     echo "$step"
 }
 
-# Set brightness di monitor
+# Set brightness in monitor using percentage (0-100).
+# Converts percent -> raw VCP value using monitor max.
 apply_brightness() {
-    local val=$1
-    [ "$val" -lt 0 ] && val=0
-    [ "$val" -gt 100 ] && val=100
-    ddcutil setvcp 10 "$val" &>/dev/null &
+    local percent=$1
+    [ -z "$percent" ] && return 1
+    [ "$percent" -lt 0 ] && percent=0
+    [ "$percent" -gt 100 ] && percent=100
+
+    # Get max to convert percentage -> raw
+    if ! get_hw_values; then
+        return 1
+    fi
+
+    # raw value with rounding
+    raw=$(( (percent * max + 50) / 100 ))
+    # apply (run in background to not block UI)
+    ddcutil setvcp 10 "$raw" &>/dev/null &
+    return 0
 }
 
-# Notifikasi slider
+# Notifikasi slider (notify-send)
 notify_brightness() {
     local val=$1
+    # use hint for progress sliders where supported
     notify-send -h int:value:"$val" \
                 -h string:x-canonical-private-synchronous:brightness \
                 -u low "󰃠 Brightness" "$val%" \
@@ -45,25 +69,32 @@ notify_brightness() {
 
 case "$1" in
     get)
-        get_hw_brightness_percent
+        get_hw_brightness_percent || { echo "error"; exit 1; }
         ;;
     up)
-        current=$(get_hw_brightness)
+        current=$(get_hw_brightness_percent) || { echo "failed to read brightness"; exit 1; }
         step=$(get_step "$current")
         new=$((current + step))
-        apply_brightness "$new"
+        [ "$new" -gt 100 ] && new=100
+        apply_brightness "$new" || echo "failed to set brightness"
         notify_brightness "$new"
         ;;
     down)
-        current=$(get_hw_brightness)
+        current=$(get_hw_brightness_percent) || { echo "failed to read brightness"; exit 1; }
         step=$(get_step "$current")
         new=$((current - step))
-        apply_brightness "$new"
+        [ "$new" -lt 0 ] && new=0
+        apply_brightness "$new" || echo "failed to set brightness"
         notify_brightness "$new"
         ;;
     set)
         val="$2"
-        apply_brightness "$val"
+        # validate numeric
+        if ! printf '%s' "$val" | grep -Eq '^[0-9]+$'; then
+            echo "set requires integer 0-100"
+            exit 1
+        fi
+        apply_brightness "$val" || { echo "failed to set brightness"; exit 1; }
         notify_brightness "$val"
         ;;
     *)
