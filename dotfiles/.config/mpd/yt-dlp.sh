@@ -1,0 +1,1 @@
+yt-dlp -f bestaudio -o "~/Music/%(playlist_title)s/%(playlist_index)02d - %(title)s.%(ext)s" "YOURE_URL"

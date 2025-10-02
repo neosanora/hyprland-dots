@@ -136,6 +136,8 @@ packages=(
   "mpv"             # a free, open source, and cross-platform media player
   "mpv-mpris"       # MPRIS plugin for mpv
   "mpd"             # Flexible, powerful, server-side application for playing music
+  "mpc"             # Minimalist command line interface to MPD
+  "ncmpcpp"         # Featureful ncurses based MPD client inspired by ncmpc
 
   #///////////////////////////#
   ### | Bar | Menu | Lock | ###
