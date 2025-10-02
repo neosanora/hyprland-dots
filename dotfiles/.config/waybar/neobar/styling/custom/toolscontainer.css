@@ -1,8 +1,9 @@
 @import "../colors-waybar.css";
 
+#custom-cliphist,
 #custom-hyprshade,
 #custom-hypridle,
-#custom-cliphist,
+#custom-gammastep,
 #custom-tools {
   margin: 2px;
   padding-left: 5px;

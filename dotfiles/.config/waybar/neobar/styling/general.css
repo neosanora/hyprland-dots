@@ -13,6 +13,21 @@
 }
 
 /* -----------------------------------------------------
+* Power-Profiles-Daemon
+* ----------------------------------------------------- */
+
+label#power-profiles-daemon {
+  margin: 5px;
+  padding: 0 6px;
+  background-color: alpha(@primary_container, 0.75);
+  border-radius: 15px;
+}
+
+#power-profiles-daemon {
+  color: @on_background;
+}
+
+/* -----------------------------------------------------
 * Network
 * ----------------------------------------------------- */
 

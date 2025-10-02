@@ -13,6 +13,7 @@
     "group/pacman-grp": {
         "orientation": "horizontal",
         "modules": [
+            // "custom/pacman",
             "custom/pacman-update",
             "custom/pacman-update#text"
         ]
@@ -42,21 +43,32 @@
             "custom/backlight#text"
         ]
     },
-
-
-
+    
+    "custom/pacman": {
+        "format": "<big>􏆲</big>  {}",
+        "interval": 3600,                     // every hour
+        "exec": "checkupdates | wc -l",       // # of updates
+        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "on-click": "alacritty -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8,
+        "max-length": 5,
+        "min-length": 3
+    },
+    
     "custom/pacman-update": {
         "format": "󪥔",
         "tooltip": false,
-        "on-click":
-        "hyprctl dispatch exec \"[float;size 800 500;center] alacritty --class update-check -e ~/.config/waybar/neobar/scripts/custom/pacman-update.sh\""
+        "on-click":"~/.config/ml4w/settings/installupdates.sh"
+        // "on-click":
+        // "hyprctl dispatch exec \"[float;size 800 500;center] alacritty --class update-check -e ~/.config/waybar/neobar/scripts/custom/pacman-update.sh\""
     },
-    
+
     "custom/pacman-update#text": {
         "format": "{}",
         "escape": true,
         "return-type": "json",
         "exec": "~/.config/ml4w/scripts/updates.sh",
+        "on-click":"~/.config/ml4w/settings/installupdates.sh",
         "interval": 1800,
         "signal": 1,
         "hide-empty-text": true,

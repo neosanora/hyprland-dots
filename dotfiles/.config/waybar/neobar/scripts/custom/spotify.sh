@@ -1,9 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/sh
+
 class=$(playerctl metadata --player=spotify --format '{{lc(status)}}')
+icon=""
 
 if [[ $class == "playing" ]]; then
-  info=$(playerctl metadata --player=spotify --format '{{title}}')
-  if [[ ${#info} > 30 ]]; then
+  info=$(playerctl metadata --player=spotify --format '{{artist}} - {{title}}')
+  if [[ ${#info} > 40 ]]; then
     info=$(echo $info | cut -c1-40)"..."
   fi
   text=$info" "$icon

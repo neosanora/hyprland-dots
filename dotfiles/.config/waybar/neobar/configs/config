@@ -1,6 +1,6 @@
 {
   "include": [
-    // "~/.config/waybar/neobar/configs/tray_container",
+    "~/.config/waybar/neobar/configs/custom_modules/more",
     "~/.config/waybar/neobar/configs/custom_modules/start_menu",
     "~/.config/waybar/neobar/configs/custom_modules/app_title",
     "~/.config/waybar/neobar/configs/custom_modules/firewall",
@@ -25,7 +25,9 @@
     "custom/dot-alt",
     "hyprland/workspaces",
     "custom/arrow-dec",
-    "group/app-title-container"
+    "group/app-title-container",
+    "custom/arrow-dec",
+    "temperature"
   ],
 
   "modules-center": [
@@ -37,6 +39,7 @@
   ],
   
   "modules-right": [
+    "mpd",
     "custom/dot",
     "power-profiles-daemon",
     "custom/left-arrw",
@@ -130,6 +133,22 @@
   //     "interval": 10
   // },
 
+
+  "temperature": {
+      // "thermal-zone": 1,
+      "interval": 4,
+      //"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+      "critical-threshold": 80,
+      // "format-critical": " {temperatureC}°C",
+      "format-critical": "  {temperatureC}°C",
+      "format": "{icon}  {temperatureC}°C",
+      "format-icons": ["", "", ""],
+      "max-length": 7,
+      "min-length": 7,
+      "on-click": "xsensors"
+  },
+
+
   // Power Profiles Daemon
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -142,5 +161,4 @@
       "power-saver": ""
     }
   }
-  
 }

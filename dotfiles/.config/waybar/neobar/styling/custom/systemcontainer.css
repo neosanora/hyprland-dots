@@ -20,17 +20,6 @@ box#system-container {
     margin-right: 2px;
 }
 
-
-/*old-conf, needs change*/
-
-/* #backlight,
-#pulseaudio,
-#custom-backlight,
-#custom-pacman-update {
-    font-size: 13px;
-} */
-
-
 #battery.text,
 #backlight.text,
 #pulseaudio.text,

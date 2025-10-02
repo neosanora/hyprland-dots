@@ -16,6 +16,8 @@
       "custom/dot",
       "custom/hypridle",
       "custom/dot",
+      "custom/gammastep",
+      "custom/dot",
       "custom/ml4w-welcome"
     ]
   },
@@ -41,6 +43,31 @@
     "interval": 60,
     "exec": "~/.config/hypr/scripts/hypridle.sh status",
     "on-click": "~/.config/hypr/scripts/hypridle.sh toggle"
+  },
+
+  "custom/gammastep": {
+      "interval": 5,
+      "return-type": "json",
+      "exec": {
+          "pre": "if unit_status=\"$(systemctl --user is-active gammastep)\"; then\nstatus=\"$unit_status ($(journalctl --user -u gammastep.service -g 'Period: ' | tail -1 | cut -d ':' -f6 | xargs))\"\nelse\nstatus=\"$unit_status\"\nfi",
+          "alt": "${status:-inactive}",
+          "tooltip": "Gammastep is $status",
+      },
+      "format": "{icon}",
+      "format-icons": {
+          "activating": "󰁪 ",
+          "deactivating": "󰁪 ",
+          "inactive": "? ",
+          "active (Night)": " ",
+          "active (Nighttime)": " ",
+          "active (Transition (Night)": " ",
+          "active (Transition (Nighttime)": " ",
+          "active (Day)": " ",
+          "active (Daytime)": " ",
+          "active (Transition (Day)": " ",
+          "active (Transition (Daytime)": " ",
+      },
+      "on-click": "systemctl --user is-active gammastep && systemctl --user stop gammastep || systemctl --user start gammastep",
   },
 
   // ML4W Welcome App

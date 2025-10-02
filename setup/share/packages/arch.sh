@@ -8,11 +8,13 @@ packages=(
   #////////////////////#
   ### |    Tools   | ###
   #////////////////////#
+  "pacman-contrib"  # Contributed scripts and tools for pacman systems
   "imagemagick"     # Software suite to create, edit, compose, or convert bitmap images
   "tumbler"         # Thumbnail service implementing the thumbnail management D-Bus specification
   "gvfs"            # Virtual filesystem implementation for GIO
   "inotify-tools"   # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
   ###  can be execute ###
+  "gammastep"       # Adjust the color temperature of your screen according to your surroundings.
   "cliphist"        # wayland clipboard manager
   "unzip"           # For extracting and viewing files in .zip archives
   "cpio"            # A tool to copy files into or out of a cpio or tar archive
@@ -23,7 +25,7 @@ packages=(
   "gum"             # command line UI toolkit
   "fastfetch"       # system information tool
   "yt-dlp"          # A youtube-dl fork with additional features and fixes
-  ### have GUI ###
+ ### have GUI ###
   "loupe"           # A simple image viewer for GNOME
 
   #//////////////#
@@ -131,8 +133,9 @@ packages=(
   "pavucontrol"     # PulseAudio Volume Control
   "qjackctl"        # A Qt front-end for the JACK low-latency audio server
   ###      ADDITIONAL      ###
-  "mpv"
-  "mpv-mpris"
+  "mpv"             # a free, open source, and cross-platform media player
+  "mpv-mpris"       # MPRIS plugin for mpv
+  "mpd"             # Flexible, powerful, server-side application for playing music
 
   #///////////////////////////#
   ### | Bar | Menu | Lock | ###

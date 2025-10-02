@@ -8,12 +8,41 @@ label:focus {
   background-color: @on_surface_variant;
 }
 
+/* -----------------------------------------------------
+* temperature
+* ----------------------------------------------------- */
+
+#temperature {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 15px;
+}
+
 #temperature {
   background-color: #f0932b;
 }
 
 #temperature.critical {
   background-color: #eb4d4b;
+}
+
+/* -----------------------------------------------------
+* Tray
+* ----------------------------------------------------- */
+box#tray-container {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: alpha(@secondary_container, 0.75);
+    border-radius: 15px;
+    /* border: 2px solid alpha(@secondary-container,0.95); */
+}
+
+#tray {
+    padding: 0px 0px 0px 0px;
 }
 
 #tray > .passive {
@@ -25,6 +54,10 @@ label:focus {
   background-color: #eb4d4b;
 }
 
+/* -----------------------------------------------------
+* Idle_Inhibitor
+* ----------------------------------------------------- */
+
 #idle_inhibitor {
   background-color: #2d3436;
 }
@@ -33,6 +66,10 @@ label:focus {
   background-color: #ecf0f1;
   color: #2d3436;
 }
+
+/* -----------------------------------------------------
+* MPD
+* ----------------------------------------------------- */
 
 #mpd {
   color: #2a5c45;
@@ -49,6 +86,10 @@ label:focus {
 #mpd.paused {
   color: #51a37a;
 }
+
+/* -----------------------------------------------------
+* keyboard
+* ----------------------------------------------------- */
 
 #language {
   background: #00b093;
