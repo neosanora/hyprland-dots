@@ -21,11 +21,13 @@ label:focus {
 }
 
 #temperature {
+  color: @pastel-green;
   background-color: #f0932b;
 }
 
 #temperature.critical {
-  background-color: #eb4d4b;
+  color: @on_error_container;
+  background-color: @error_container;
 }
 
 /* -----------------------------------------------------

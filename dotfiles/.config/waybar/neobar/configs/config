@@ -29,19 +29,19 @@
     "custom/arrow-dec",
     "temperature"
   ],
-
+  
   "modules-center": [
     "group/notification-container",
     "custom/right-arrw",
     "group/privacy-container",
     "custom/left-arrw",
-    "group/firewall"
+    "power-profiles-daemon"
   ],
   
   "modules-right": [
     "mpd",
     "custom/dot",
-    "power-profiles-daemon",
+    "group/firewall",
     "custom/left-arrw",
     "group/performance",
     "custom/left-arrw",
