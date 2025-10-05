@@ -5,15 +5,15 @@
  * ----------------------------------------------------- */
 
 window#waybar {
-  margin: 6px 12px;                 /* jarak biar nggak nempel layar */
-  padding: 10px 10px;                /* isi modul */
-  font-weight: 800;
+  min-height: 0;
+  margin: 6px 12px;
+  padding: 0px 6px;
   background-color: alpha(@background, 0.4);
-  transition: background-color .5s; /* lebih ringkas */
+  transition: background-color .5s;
 }
 
 window#waybar.empty {
-  background-color: transparent;    /* bar ilang kalau kosong */
+  background-color: transparent;
 }
 
 window#waybar.hidden {

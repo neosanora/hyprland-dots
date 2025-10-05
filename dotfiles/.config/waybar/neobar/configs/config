@@ -41,7 +41,6 @@
   "modules-right": [
     "mpd",
     "custom/dot",
-    "group/firewall",
     "custom/left-arrw",
     "group/performance",
     "custom/left-arrw",
@@ -110,27 +109,13 @@
     "format-disconnected": "Disconnected ⚠",
     "tooltip-format": " {ifname} via {gwaddri}",
     "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\nup: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
     "on-click": "~/.config/ml4w/settings/networkmanager.sh",
-    "on-click-right": "~/.config/ml4w/scripts/nm-applet.sh toggle"
+    "on-click-right": "~/.config/ml4w/scripts/nm-applet.sh toggle",
+    "interval": 10
   },
-
-  // "network": {
-  //     "format-wifi": " {essid} ({signalStrength}%)",
-  //     "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-  //     "format-linked": "{ifname} (No IP) ",
-  //     "format": "",
-  //     "format-disconnected": "",
-  //     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-  //     "on-click": "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)",
-  //     "on-click-right": "wl-copy $(ip address show up scope global | grep inet6 | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c6-)",
-  //     "tooltip-format": " {bandwidthUpBits}  {bandwidthDownBits}\n{ifname}\n{ipaddr}/{cidr}\n",
-  //     "tooltip-format-wifi": " {essid} {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n {bandwidthUpBits}  {bandwidthDownBits}",
-  //     "interval": 10
-  // },
-
 
   "temperature": {
       // "thermal-zone": 1,
