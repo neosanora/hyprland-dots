@@ -13,8 +13,11 @@
     "modules": [
       "custom/sistem",
       "cpu",
+      "custom/sp1",
       "custom/gpu_usage",
+      "custom/sp1",
       "memory",
+      "custom/sp1",
       "custom/storage"
     ]
   },

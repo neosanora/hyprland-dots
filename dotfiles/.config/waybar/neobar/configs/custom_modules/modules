@@ -27,5 +27,9 @@
   "custom/sp2": {
     "format": " |",
     "tooltip": false
+  },
+  "custom/sp3": {
+    "format": "| ",
+    "tooltip": false
   }
 }

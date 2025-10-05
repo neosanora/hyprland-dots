@@ -4,7 +4,6 @@
 #custom-gpu_usage,
 #memory,
 #custom-storage {
-  padding: 0 6px;
   color:  @on_primary_container;
 }
 
