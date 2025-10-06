@@ -2,14 +2,20 @@
 
     "custom/cava": {
         "exec": "~/.config/waybar/neobar/scripts/custom/waybarCava.sh",
-        "return-type": "json",
-        "interval": 0,
-        "restart-interval": 0,
-        "format": "{}",
-        "escape": false,
-        "tooltip": false
-        //     "on-click": "kitty -c ~/.config/dotfiles/kitty/kitty.conf nvim -c cd ~/.config/dotfiles/"
+        "interval": 0.02,
+        "return-type": "json"
     },
+
+    // "custom/cava": {
+    //     "exec": "~/.config/waybar/neobar/scripts/custom/waybarCava.sh",
+    //     "return-type": "json",
+    //     "interval": 0,
+    //     "restart-interval": 0,
+    //     "format": "{}",
+    //     "escape": false,
+    //     "tooltip": false
+    //     //     "on-click": "kitty -c ~/.config/dotfiles/kitty/kitty.conf nvim -c cd ~/.config/dotfiles/"
+    // },
 
     "mpd": {
         "max-length": 25,

@@ -27,7 +27,6 @@
     "custom/arrow-dec",
     "group/app-title-container",
     "custom/arrow-dec",
-    "temperature",
     "custom/cava"
   ],
   
@@ -41,7 +40,6 @@
   
   "modules-right": [
     "mpd",
-    "custom/dot",
     "custom/left-arrw",
     "group/performance",
     "custom/left-arrw",
@@ -117,21 +115,6 @@
     "on-click-right": "~/.config/ml4w/scripts/nm-applet.sh toggle",
     "interval": 10
   },
-
-  "temperature": {
-      // "thermal-zone": 1,
-      "interval": 4,
-      //"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-      "critical-threshold": 80,
-      // "format-critical": " {temperatureC}°C",
-      "format-critical": "  {temperatureC}°C",
-      "format": "{icon}  {temperatureC}°C",
-      "format-icons": ["", "", ""],
-      "max-length": 7,
-      "min-length": 7,
-      "on-click": "xsensors"
-  },
-
 
   // Power Profiles Daemon
   "power-profiles-daemon": {

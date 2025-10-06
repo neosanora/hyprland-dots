@@ -14,12 +14,22 @@
   color: @primary;
 }
 
-#custom-sistem {
+#temperature {
   margin: 2px;
   padding-left: 5px;
   padding-right: 5px;
+  border-radius: 15px;
 }
 
+#temperature {
+  color: @pastel-green;
+  background-color: alpha(#f0932b, 0.4);
+}
+
+#temperature.critical {
+  color: @on_error_container;
+  background-color: alpha(@error_container, 0.4);
+}
 
 box#performance {
   margin: 5px;

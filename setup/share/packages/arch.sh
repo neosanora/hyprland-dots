@@ -77,7 +77,7 @@ packages=(
   "ttf-firacode-nerd"
 
   ### FONT EDITOR/SETTINGS ###
-  "font-manager"        #A simple font management application for GTK+ Desktop Environments
+  "font-manager"        # A simple font management application for GTK+ Desktop Environments
 
   #////////////////////////////////#
   ### |         HYPRLAND       | ###
@@ -165,14 +165,18 @@ packages=(
   #////////////////////////#
   ### | VPN | FIREWALL | ###
   #////////////////////////#
-#  "nftables"                #Netfilter tables userspace tools
-#  "proton-vpn-gtk-app"      #ProtonVPN GTK app, Maintained by Community
+#  "nftables"                #  Netfilter tables userspace tools
+#  "proton-vpn-gtk-app"      #  ProtonVPN GTK app, Maintained by Community
 
+  #////////////////////#
+  ###   | SENSORS |  ###
+  #////////////////////#
+  "xsensors"                 # X11 interface to lm_sensors - Mystro256 fork
 
   #///////////////////#
   ###   | DRIVER |  ###
   #///////////////////#
-  "ntfs-3g"         #NTFS filesystem driver and utilities
+  "ntfs-3g"         # NTFS filesystem driver and utilities
   ### Bluetooth ###
   "bluez"
   "bluez-utils"

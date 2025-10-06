@@ -1,8 +1,8 @@
 sw_volume: 100
 audio_device_state:1:PipeWire Output
 state: play
-current: 7
-time: 120.08800000000001
+current: 33
+time: 119.952
 random: 0
 repeat: 0
 single: 0
@@ -42,4 +42,34 @@ playlist_begin
 27:my_playlist/13 - Old Town Road (Remix).webm
 28:my_playlist/14 - Animated Short： The Long Night of Serenity ｜ Honkai： Star Rail.webm
 29:my_playlist/15 - Est-ce que tu m'aimes ？ (Pilule bleue).webm
+30:my_playlist/01 - Wake Me Up.webm
+31:my_playlist/02 - Devil in Disguise.webm
+32:my_playlist/03 - Give and Take.webm
+33:my_playlist/04 - Feed the Machine.webm
+34:my_playlist/05 - Hell's Comin' with Me.webm
+35:my_playlist/06 - Kekka Orai - My Hero Academia： Vigilantes Opening Theme Song.webm
+36:my_playlist/07 - IRIS OUT.webm
+37:my_playlist/08 - はいよろこんで.webm
+38:my_playlist/09 - dahlah..webm
+39:my_playlist/10 - パイパイ仮面でどうかしらん？.webm
+40:my_playlist/11 - LSD - Genius ft. Sia, Diplo, Labrinth.webm
+41:my_playlist/12 - 5 Seconds of Summer - Teeth (Official Video).webm
+42:my_playlist/13 - Old Town Road (Remix).webm
+43:my_playlist/14 - Animated Short： The Long Night of Serenity ｜ Honkai： Star Rail.webm
+44:my_playlist/15 - Est-ce que tu m'aimes ？ (Pilule bleue).webm
+45:my_playlist/01 - Wake Me Up.webm
+46:my_playlist/02 - Devil in Disguise.webm
+47:my_playlist/03 - Give and Take.webm
+48:my_playlist/04 - Feed the Machine.webm
+49:my_playlist/05 - Hell's Comin' with Me.webm
+50:my_playlist/06 - Kekka Orai - My Hero Academia： Vigilantes Opening Theme Song.webm
+51:my_playlist/07 - IRIS OUT.webm
+52:my_playlist/08 - はいよろこんで.webm
+53:my_playlist/09 - dahlah..webm
+54:my_playlist/10 - パイパイ仮面でどうかしらん？.webm
+55:my_playlist/11 - LSD - Genius ft. Sia, Diplo, Labrinth.webm
+56:my_playlist/12 - 5 Seconds of Summer - Teeth (Official Video).webm
+57:my_playlist/13 - Old Town Road (Remix).webm
+58:my_playlist/14 - Animated Short： The Long Night of Serenity ｜ Honkai： Star Rail.webm
+59:my_playlist/15 - Est-ce que tu m'aimes ？ (Pilule bleue).webm
 playlist_end
