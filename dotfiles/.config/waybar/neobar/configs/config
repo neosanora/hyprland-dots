@@ -27,7 +27,8 @@
     "custom/arrow-dec",
     "group/app-title-container",
     "custom/arrow-dec",
-    "temperature"
+    "temperature",
+    "custom/cava"
   ],
   
   "modules-center": [
