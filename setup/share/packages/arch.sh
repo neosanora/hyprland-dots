@@ -43,14 +43,14 @@ packages=(
   #/////////////////////#
   ### | File Editor | ###
   #/////////////////////#
-  "vim"             # text editor
-  "neovim"          # modern text editor
+  "vim"             # Vi Improved, a highly configurable, improved version of the vi text editor
+  "neovim"          # Fork of Vim aiming to improve user experience, plugins, and GUIs
 
   #//////////////////////#
   ### | File Manager | ###
   #//////////////////////#
-  "ranger"          # File Manager Like NVIM
-  "thunar"          # File manager ringan (XFCE)
+  "ranger"          # Simple, vim-like file manager
+  "thunar"          # Modern, fast and easy-to-use file manager for Xfce
 
   #/////////////////////#
   ### | App Manager | ###
@@ -82,8 +82,8 @@ packages=(
   #///////////////////////////////////#
   ### | Terminal | Emulator | Shell ###
   #///////////////////////////////////#
-  "kitty"           # Terminal modern dan cepat
-  "alacritty"       # Terminal GPU-accelerated
+  "kitty"           # A modern, hackable, featureful, OpenGL-based terminal emulator
+  "alacritty"       # A cross-platform, GPU-accelerated terminal emulator
   "zsh"             # A very advanced and programmable command interpreter (shell) for UNIX
   "fzf"             # Command-line fuzzy finder
 
@@ -91,15 +91,16 @@ packages=(
   ### |         HYPRLAND       | ###
   #////////////////////////////////#
   # "hyprland"                      # Wayland compositor
-  "xdg-desktop-portal-hyprland"   # xdg portal untuk Hyprland
-  "qt5-wayland"                   # Qt support for Wayland
-  "qt6-wayland"                   # Qt support for Wayland
+  "xdg-desktop-portal"            # Desktop integration portals for sandboxed apps
+  "xdg-desktop-portal-hyprland"   # xdg-desktop-portal backend for hyprland
+  "qt5-wayland"                   # Provides APIs for Wayland
+  "qt6-wayland"                   # Provides APIs for Wayland
 
   "uwsm"                          # A standalone Wayland session manager
 
   "nwg-dock-hyprland"         # GTK3-based dock for Hyprland Wayland compositor
-  "hyprpaper"                 # Wallpaper manager
-  "hyprlock"                  # Lock screen Hyprland
+  "hyprpaper"                 # a blazing fast wayland wallpaper utility with IPC controls
+  "hyprlock"                  # hyprland’s GPU-accelerated screen locking utility
   "hypridle"                  # hyprland’s idle daemon
   "hyprpicker"                # A wlroots-compatible Wayland color picker that does not suck
 
@@ -111,13 +112,13 @@ packages=(
   "swaync"          # A simple GTK based notification daemon for Sway
   ### monitor ###
   "ddcutil"         # Query and change Linux monitor settings using DDC/CI and USB.
-  # "brightnessctl"   # Lightweight brightness control tool ---(laptop)---
+  # "brightnessctl"   # Lightweight brightness control
 
   #/////////////////#
   ### | Network | ###
   #/////////////////#
   "nm-connection-editor"    # NetworkManager GUI connection editor and widgets
-  "networkmanager"          # Manajemen jaringan (WiFi/Ethernet)
+  "networkmanager"          # Network connection manager and user applications
   "network-manager-applet"  # Applet for managing network connections
   "curl"                    # command line tool and library for transferring data with URLs
   "wget"                    # Network utility to retrieve files from the web
@@ -125,18 +126,18 @@ packages=(
   #///////////////////////#
   ### | Audio | Media | ###
   #///////////////////////#
-  "pipewire-jack"   # JACK support via PipeWire
-  "pipewire-alsa"   # ALSA support via PipeWire
-  "pipewire-pulse"  # PulseAudio replacement via PipeWire
-  "wireplumber"     # Session manager PipeWire
-  "pamixer"         # CLI audio mixer
+  "pipewire-jack"   # Low-latency audio/video router and processor - JACK replacement
+  "pipewire-alsa"   # Low-latency audio/video router and processor - ALSA configuration
+  "pipewire-pulse"  # Low-latency audio/video router and processor - PulseAudio replacement
+  "wireplumber"     # Session / policy manager implementation for PipeWire
+  "pamixer"         # Pulseaudio command-line mixer like amixer
   "pavucontrol"     # PulseAudio Volume Control
   "qjackctl"        # A Qt front-end for the JACK low-latency audio server
   ###      CAMERAS      ###
-  # "pipewire-libcamera"
-  # "libcamera"
-  # "libcamera-ipa"
-  # "libcamera-tools"
+  # "pipewire-libcamera"      # Low-latency audio/video router and processor - Libcamera support
+  # "libcamera"               # A complex camera support library for Linux, Android, and ChromeOS
+  # "libcamera-ipa"           # A complex camera support library for Linux, Android, and ChromeOS - signed IPA
+  # "libcamera-tools"         # A complex camera support library for Linux, Android, and ChromeOS - tools
   ###      MUSIC & VIDEO      ###
   "mpv"             # a free, open source, and cross-platform media player
   "mpv-mpris"       # MPRIS plugin for mpv
@@ -147,20 +148,20 @@ packages=(
   #///////////////////////////#
   ### | Bar | Menu | Lock | ###
   #///////////////////////////#  
-  "waybar"                    # Widget bar / status bar
-  "rofi"                      # Wayland app launcher
+  "waybar"                    # Highly customizable Wayland bar for Sway and Wlroots based compositors
+  "rofi"                      # A window switcher, application launcher and dmenu replacement
 
   #////////////////////#
   ### | Screenshot | ###
   #////////////////////#
-  "grim"            # Alat screenshot untuk Wayland
-  "slurp"           # Area selector (buat grim)
+  "grim"            # Screenshot utility for Wayland
+  "slurp"           # Select a region in a Wayland compositor
 
   #////////////////////#
   ### | Monitoring | ###
   #////////////////////#
-  "btop"
-  "nvtop"           # Monitor GPU usage (mirip htop)
+  "btop"            # A monitor of system resources, bpytop ported to C++
+  "nvtop"           # GPUs process monitoring for AMD, Intel and NVIDIA
 
   #///////////////////////#
   ### | POWER PROFILE | ###
@@ -183,8 +184,8 @@ packages=(
   #///////////////////#
   "ntfs-3g"         # NTFS filesystem driver and utilities
   ### Bluetooth ###
-  "bluez"
-  "bluez-utils"
-  "blueman"
+  # "bluez"         # Daemons for the bluetooth protocol stack
+  # "bluez-utils"   # Development and debugging utilities for the bluetooth protocol stack
+  # "blueman"       # GTK+ Bluetooth Manager
 
 )
