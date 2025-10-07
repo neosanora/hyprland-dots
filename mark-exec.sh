@@ -35,11 +35,16 @@ EXTRA_TARGETS=(
   "dotfiles/.config/waybar/neobar/scripts/custom/ddc-brightness"
 )
 
+# File yang akan di-mark assume-unchanged (tidak ikut update di git)
+ASSUME_UNCHANGED_FILES=(
+  "dotfiles/.config/mpd/log"
+  "dotfiles/.config/mpd/state"
+)
+
 #================================================================#
 # MAIN PARTS (Don't change this)
 #================================================================#
 
-# Don't change this
 FILES_TO_UPDATE=()
 
 # Build exclude args per-root
@@ -114,6 +119,18 @@ if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
       git update-index --chmod=+x "$f"
     fi
   done
+
+  echo
+  echo ":: Menandai file assume-unchanged..."
+  for f in "${ASSUME_UNCHANGED_FILES[@]}"; do
+    if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+      git update-index --assume-unchanged "$f"
+      echo "   -> $f"
+    else
+      echo "   [SKIP] $f belum di-track oleh git"
+    fi
+  done
+
   echo ":: Done."
 else
   echo ":: Dibatalkan."

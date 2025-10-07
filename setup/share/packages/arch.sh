@@ -79,6 +79,14 @@ packages=(
   ### FONT EDITOR/SETTINGS ###
   "font-manager"        # A simple font management application for GTK+ Desktop Environments
 
+  #///////////////////////////////////#
+  ### | Terminal | Emulator | Shell ###
+  #///////////////////////////////////#
+  "kitty"           # Terminal modern dan cepat
+  "alacritty"       # Terminal GPU-accelerated
+  "zsh"             # A very advanced and programmable command interpreter (shell) for UNIX
+  "fzf"             # Command-line fuzzy finder
+
   #////////////////////////////////#
   ### |         HYPRLAND       | ###
   #////////////////////////////////#
@@ -94,14 +102,6 @@ packages=(
   "hyprlock"                  # Lock screen Hyprland
   "hypridle"                  # hyprland’s idle daemon
   "hyprpicker"                # A wlroots-compatible Wayland color picker that does not suck
-
-  #///////////////////////////////////#
-  ### | Terminal | Emulator | Shell ###
-  #///////////////////////////////////#
-  "kitty"           # Terminal modern dan cepat
-  "alacritty"       # Terminal GPU-accelerated
-  "zsh"             # A very advanced and programmable command interpreter (shell) for UNIX
-  "fzf"             # Command-line fuzzy finder
 
   #////////////////////////////////#
   ### |      GUI | System      | ###
@@ -132,7 +132,12 @@ packages=(
   "pamixer"         # CLI audio mixer
   "pavucontrol"     # PulseAudio Volume Control
   "qjackctl"        # A Qt front-end for the JACK low-latency audio server
-  ###      ADDITIONAL      ###
+  ###      CAMERAS      ###
+  # "pipewire-libcamera"
+  # "libcamera"
+  # "libcamera-ipa"
+  # "libcamera-tools"
+  ###      MUSIC & VIDEO      ###
   "mpv"             # a free, open source, and cross-platform media player
   "mpv-mpris"       # MPRIS plugin for mpv
   "mpd"             # Flexible, powerful, server-side application for playing music
