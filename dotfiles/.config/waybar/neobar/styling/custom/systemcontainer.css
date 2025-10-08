@@ -1,16 +1,6 @@
 @import "../colors-waybar.css";
 
 
-box#system-container {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: alpha(@secondary_container, 0.75);
-    border-radius: 15px;
-    /* border: 2px solid alpha(@secondary-container,0.95); */
-}
-
 #battery,
 #backlight,
 #pulseaudio,
@@ -32,4 +22,15 @@ box#system-container {
 
 #custom-pacman-update.uptodate.text {
     color: @green;
+}
+
+
+box#system-container {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: alpha(@secondary_container, 0.75);
+    border-radius: 15px;
+    /* border: 2px solid alpha(@secondary-container,0.95); */
 }

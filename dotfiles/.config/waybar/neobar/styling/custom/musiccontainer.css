@@ -1,3 +1,5 @@
+@import "../colors-waybar.css";
+
 #custom-cava {
   font-family: "Noto Sans Mono", "monospace";
   font-size: 12px;
@@ -19,10 +21,12 @@
     transition: transform 0.1s ease-in-out;
 }
 
-/* 
-#mpd-prev:hover, #mpd-toggle:hover, #mpd-next:hover {
-    transform: scale(1.2);
-} */
+
+#custom-mpd-prev:hover,
+#custom-mpd-toggle:hover,
+#custom-mpd-next:hover {
+    color: @on_primary_container;
+}
 
 #mpd {
     padding-left: 6px;

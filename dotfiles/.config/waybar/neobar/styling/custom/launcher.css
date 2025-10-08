@@ -10,17 +10,21 @@
   color: @on_primary_container;
 }
 
-#custom-launcher {
-  font-family: "Material Icons";
-  margin: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
+#custom-power:hover,
+#custom-reboot:hover,
+#custom-quit:hover,
+#custom-exit:hover {
+  color: @on_error_container;
 }
 
 box#launcher {
   margin: 5px;
   border-radius: 15px;
   background-color: alpha(@primary_container,0.65);
+}
+
+box#launcher:hover {
+  background-color: alpha(@error_container,0.65);
 }
 
 box#launcher .horizontal {
