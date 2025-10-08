@@ -1,11 +1,11 @@
 {
   "include": [
-    "~/.config/waybar/neobar/configs/custom_modules/more",
     "~/.config/waybar/neobar/configs/custom_modules/start_menu",
     "~/.config/waybar/neobar/configs/custom_modules/app_title",
     "~/.config/waybar/neobar/configs/custom_modules/firewall",
     "~/.config/waybar/neobar/configs/custom_modules/launcher",
     "~/.config/waybar/neobar/configs/custom_modules/modules",
+    "~/.config/waybar/neobar/configs/custom_modules/music_container",
     "~/.config/waybar/neobar/configs/custom_modules/privacy_container",
     "~/.config/waybar/neobar/configs/custom_modules/system_container",
     "~/.config/waybar/neobar/configs/custom_modules/notification_container",
@@ -26,8 +26,9 @@
     "hyprland/workspaces",
     "custom/arrow-dec",
     "group/app-title-container",
-    "custom/arrow-dec",
-    "custom/cava"
+    "custom/arrow-dec-left",
+    "group/mpd-group"
+    // "custom/cava"
   ],
   
   "modules-center": [
@@ -39,7 +40,6 @@
   ],
   
   "modules-right": [
-    "mpd",
     "custom/left-arrw",
     "group/performance",
     "custom/left-arrw",

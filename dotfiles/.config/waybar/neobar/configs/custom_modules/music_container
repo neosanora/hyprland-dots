@@ -1,0 +1,57 @@
+{
+
+    "group/mpd-group": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/mpd-prev",
+            "custom/mpd-toggle",
+            "custom/mpd-next",
+            "mpd"
+        ],
+        "children-class": "mpd-child"
+    },
+
+    "custom/mpd-prev": {
+        "format": "􁋯",
+        "on-click": "mpc --quiet prev",
+        "tooltip-format": "Previous Track"
+    },
+
+    "custom/mpd-toggle": {
+        "format": "􀞉",
+        "format-paused": "􀜫",
+        "format-stopped": "􁚟",
+        "on-click": "mpc --quiet toggle",
+        "tooltip-format": "Play / Pause"
+    },
+
+    "custom/mpd-next": {
+        "format": "􁋱",
+        "on-click": "mpc --quiet next",
+        "tooltip-format": "Next Track"
+    },
+
+    "mpd": {
+        "max-length": 30,
+        "format": "􀞉 {title} — {artist}",
+        "format-paused": "􀰉 {title}",
+        "format-stopped": "􀜫 ",
+        "format-disconnected": "No MPD",
+        "on-click": "alacritty -e ncmpcpp",
+        "tooltip-format": "<b>{title}</b>\n{artist}\n{elapsedTime:%M:%S} / {totalTime:%M:%S}"
+    },
+
+    // "custom/cava": {
+    //     // "exec": "~/.config/waybar/neobar/scripts/custom/waybarCava.sh",
+    //     "interval": 0.02,
+    //     "return-type": "json"
+    //     // "on-click": "kitty -c ~/.config/dotfiles/kitty/kitty.conf nvim -c cd ~/.config/dotfiles/"
+    // },
+
+    "custom/cava": {
+        "exec": "~/.config/waybar/neobar/scripts/custom/waybarCava.sh",
+        "interval": 0.02,
+        "return-type": "json",
+        "format": "{text}"
+    }
+}

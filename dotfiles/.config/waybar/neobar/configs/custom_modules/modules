@@ -20,6 +20,11 @@
     "tooltip": false
   },
 
+  "custom/arrow-dec-left": {
+    "format": " 󪥙 ",
+    "tooltip": false
+  },
+
   "custom/sp1": {
     "format": " | ",
     "tooltip": false

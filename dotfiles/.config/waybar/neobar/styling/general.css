@@ -11,17 +11,6 @@
   color:  @on_primary_container;
 }
 
-#custom-cava {
-  font-family: "Noto Sans Mono", "monospace";
-  font-size: 12px;
-}
-.cava {
-  padding: 2px 6px;
-}
-.cava .level0 { opacity: 0.6; }
-.cava .level7 { font-weight: 700; }
-
-
 /* -----------------------------------------------------
 * Power-Profiles-Daemon
 * ----------------------------------------------------- */

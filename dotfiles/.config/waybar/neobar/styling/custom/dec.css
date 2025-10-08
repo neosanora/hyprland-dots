@@ -19,7 +19,8 @@ label#custom-left-arrw {
 }
 
 
-#custom-arrow-dec {
+#custom-arrow-dec
+#custom-arrow-dec-left {
   margin-left: 2px;
   color: @tertiary;
 }
