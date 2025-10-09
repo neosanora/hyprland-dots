@@ -1,14 +1,10 @@
 @import "../colors-waybar.css";
 
+#custom-firewall,
 #custom-dns {
   margin: 2px;
   padding: 0 6px;
   color: @on_primary_container;
-}
-
-#custom-firewall {
-  margin: 2px;
-  padding: 0 6px;
 }
 
 box#firewall {

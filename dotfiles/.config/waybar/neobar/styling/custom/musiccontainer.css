@@ -25,7 +25,7 @@
 #custom-mpd-prev:hover,
 #custom-mpd-toggle:hover,
 #custom-mpd-next:hover {
-    color: @on_primary_container;
+    color: @on_secondary_container;
 }
 
 #mpd {
@@ -34,7 +34,7 @@
 }
     
 #mpd-group:hover {
-    background: @background;
+    background: @secondary_container;
 }
 
 box#mpd-group {

@@ -5,6 +5,7 @@
   margin: 2px;
   padding-left: 5px;
   padding-right: 5px;
+  color: @on_primary_container;
 }
 
 box#notification-container {

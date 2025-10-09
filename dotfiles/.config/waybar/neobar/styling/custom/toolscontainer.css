@@ -18,6 +18,15 @@
   color: @error;
 }
 
+#custom-ml4w-welcome {
+    margin-right: 12px;
+    background-image: url("../../../themes/assets/ml4w-icon.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-right: 20px;
+}
+
 box#tools {
   margin: 5px;
   border-radius: 15px;
@@ -31,13 +40,4 @@ box#tools .horizontal {
   margin-right: 5px;
   border-radius: 15px;
   background-color: alpha(@primary_container, 0.98);
-}
-
-#custom-ml4w-welcome {
-    margin-right: 12px;
-    background-image: url("../../../themes/assets/ml4w-icon.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    padding-right: 20px;
 }

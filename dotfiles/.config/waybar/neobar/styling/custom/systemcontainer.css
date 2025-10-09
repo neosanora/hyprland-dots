@@ -1,16 +1,14 @@
 @import "../colors-waybar.css";
 
-
-#battery,
 #backlight,
 #pulseaudio,
 #custom-backlight,
 #custom-pacman-update {
     margin-left: 2px;
     margin-right: 2px;
+    color: @on_secondary_container;
 }
 
-#battery.text,
 #backlight.text,
 #pulseaudio.text,
 #custom-backlight.text,
@@ -20,8 +18,38 @@
     color: @on_secondary_container;
 }
 
+#battery {
+  color: @red;
+}
+
+#battery.text {
+  color: @on_secondary_container;
+}
+
+#battery.charging,
+#battery.full,
+#battery.plugged {
+  color: @green;
+  /* background-color: #26a65b; */
+}
+
+#battery.text.charging,
+#battery.text.full,
+#battery.text.plugged {
+  color: @on_secondary_container;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
 #custom-pacman-update.uptodate.text {
-    color: @green;
+    color: green;
 }
 
 

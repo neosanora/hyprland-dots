@@ -11,17 +11,18 @@
   padding-bottom: 2px;
 }
 
+#custom-app-title-icon.Idea { color: alpha(@pastel-green,0.65) }
+
 #custom-app-title-icon.Spotify { color: alpha(@green,0.75) }
 #custom-app-title-icon.VsCode { color: alpha(@pastel-green,0.55) }
 #custom-app-title-icon.Firefox { 
   color: alpha(@pastel-firefox-orange,0.75);
   background-color: alpha(@pastel-firefox-orange,0.25)
  }
- #custom-app-title-icon.Thorium { 
-  color: alpha(@pastel-chrome-blue,0.85);
-  background-color: alpha(@pastel-chrome-blue,0.25)
- }
-#custom-app-title-icon.Idea { color: alpha(@pastel-green,0.65) }
+#custom-app-title-icon.Thorium { 
+color: alpha(@pastel-chrome-blue,0.85);
+background-color: alpha(@pastel-chrome-blue,0.25)
+}
 #custom-app-title-icon.Chrome { color: alpha(@pastel-chrome-yellow,0.75) }
 #custom-app-title-icon.Telegram { 
   color: alpha(@pastel-telegram-blue,0.75);

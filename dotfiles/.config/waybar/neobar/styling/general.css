@@ -23,7 +23,7 @@ label#power-profiles-daemon {
 }
 
 #power-profiles-daemon {
-  color: @on_background;
+  color: @on_primary_container;
 }
 
 /* -----------------------------------------------------
