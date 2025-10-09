@@ -37,8 +37,21 @@ EXTRA_TARGETS=(
 
 # File yang akan di-mark assume-unchanged (tidak ikut update di git)
 ASSUME_UNCHANGED_FILES=(
+  "dotfiles/.config/gtk-3.0/colors.css"
+  "dotfiles/.config/gtk-4.0/colors.css"
+  "dotfiles/.config/hypr/colors.conf"
+  "dotfiles/.config/kitty/colors-matugen.conf"
+  "dotfiles/.config/nwg-dock-hyprland/colors.css"
+  "dotfiles/.config/ohmyposh/colors.json"
+  "dotfiles/.config/ohmyposh/EDM115-newline.omp.json"
+  "dotfiles/.config/rofi/matugen/colors.rasi"
+  "dotfiles/.config/swaync/colors.css"
+  "dotfiles/.config/waybar/colors.css"
+  "dotfiles/.config/wlogout/colors.css"
+
   "dotfiles/.config/mpd/log"
   "dotfiles/.config/mpd/state"
+  "dotfiles/.config/waypaper/config.ini"
 )
 
 #================================================================#
