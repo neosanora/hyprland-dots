@@ -6,15 +6,15 @@
 }
 
 #workspaces button {
-  color: alpha(@on_secondary_container, 0.35);
+  color: alpha(@on_primary_container, 0.35);
   background-color: transparent;
   border-radius: 15px;
 }
 
 #workspaces button:hover {
-  color: @on_secondary_container;
+  color: @on_primary_container;
   /* cursor: pointer; */
-  background: alpha(@on_secondary_container, 0.5);
+  background: alpha(@on_primary_container, 0.5);
   border-radius: 15px;
 }
 
@@ -35,5 +35,5 @@ box#workspaces {
   margin-top: 3px;
   margin-bottom: 5px;
   border-radius: 15px;
-  background-color:  alpha(@secondary_container,0.7);
+  background-color:  alpha(@primary_container,0.7);
 }

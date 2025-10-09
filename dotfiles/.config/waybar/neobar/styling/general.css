@@ -36,6 +36,7 @@ label#network {
   background-color: alpha(@primary_container, 0.75);
   border-radius: 15px;
 }
+
 #network {
   color: @on_primary_container;
 }

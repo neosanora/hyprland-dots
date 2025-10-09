@@ -13,11 +13,8 @@
     "modules": [
       "temperature",
       "cpu",
-      "custom/sp1",
       "custom/gpu_usage",
-      "custom/sp1",
       "memory",
-      "custom/sp1",
       "custom/storage"
     ]
   },
