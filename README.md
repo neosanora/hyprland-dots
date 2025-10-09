@@ -25,8 +25,6 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 
 ## Screenshot
 
-<!-- ![First Preview](https://raw.githubusercontent.com/UnFunnyGuy/hyprland-dots/main/screenshots/current_bar.png) -->
-
 ![First Preview](https://raw.githubusercontent.com/neosanora/hyprland-dots/main/screenshots/HOME.png)
 
 <br/>
@@ -41,88 +39,14 @@ https://raw.githubusercontent.com/neosanora/hyprland-dots/main/install-dotfile.d
 
 ---
 
-## PACKAGE
+## LIST OF PACKAGE
 
-### 🛠 Tools
+# PACMAN
 
-`imagemagick`, `loupe`, `tumbler`, `cliphist`, `unzip`, `gvfs`, `xclip`, `figlet`, `git`, `jq`, `gum`, `inotify-tools`, `fastfetch`
+[setup/share/packages/arch.sh](https://github.com/neosanora/hyprland-dots/blob/e13d600fa8f999eae869c3c6f8e255b2cac4ac78/setup/share/packages/arch.sh)
 
-### 🐍 Python
+<br/>
 
-`python-pip`, `python-gobject`
+# AUR
 
-### 🌐 Apps
-
-`firefox`, `nautilus`
-
-### 📑 File Editor
-
-`vim`, `neovim`
-
-### 📂 File Manager
-
-`ranger`, `thunar`
-
-### 📦 App Manager
-
-`flatpak`
-
-### 🎨 Theme & Icon
-
-`qt6ct`, `nwg-look`, `papirus-icon-theme`, `adapta-gtk-theme`, `breeze`
-
-### 🔤 Fonts
-
-`otf-font-awesome`, `ttf-fira-sans`, `ttf-fira-code`, `ttf-firacode-nerd`,
-`ttf-dejavu`, `noto-fonts`, `noto-fonts-emoji`, `noto-fonts-cjk`, `noto-fonts-extra`, `font-manager`
-
-### 🖥 Hyprland
-
-`xdg-desktop-portal-hyprland`, `qt5-wayland`, `qt6-wayland`,
-`uwsm`, `nwg-dock-hyprland`, `hyprpaper`, `hyprlock`, `hypridle`, `hyprpicker`
-
-### 🖥 Terminal
-
-`kitty`, `alacritty`
-
-### ⚙️ GUI / System
-
-`libnotify`, `polkit-gnome`, `swaync`, `ddcutil`
-
-### 🌐 Network
-
-`nm-connection-editor`, `networkmanager`, `network-manager-applet`, `curl`, `wget`
-
-### 🔊 Audio / Media
-
-`pipewire-jack`, `pipewire-alsa`, `pipewire-pulse`, `wireplumber`, `pamixer`, `pavucontrol`, `qjackctl`
-
-### 📊 Bar / Menu / Lock
-
-`waybar`, `rofi`, `wlogout`
-
-### 📸 Screenshot
-
-`grim`, `slurp`
-
-### 📈 Monitoring
-
-`btop`, `nvtop`
-
-### 🔋 Power Profiles
-
-`power-profiles-daemon`
-
-### 🔒 VPN / Firewall (opsional / dikomen)
-
-`nftables`, `proton-vpn-gtk-app`
-
-### 💽 Driver & Bluetooth
-
-`ntfs-3g`, `bluez`, `bluez-utils`, `blueman`
-
-## AUR
-
-  `python-screeninfo`,`waypaper-git`,`grimblast-git`,`hyprshade`,`wlogout`
-  
----
+[setup/share/aur/aur-package.sh](https://github.com/neosanora/hyprland-dots/blob/e13d600fa8f999eae869c3c6f8e255b2cac4ac78/setup/share/aur/aur-package.sh)

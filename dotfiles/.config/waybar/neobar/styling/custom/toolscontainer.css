@@ -19,12 +19,12 @@
 }
 
 #custom-ml4w-welcome {
-    margin-right: 12px;
-    background-image: url("../../../themes/assets/ml4w-icon.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    padding-right: 20px;
+  margin-right: 12px;
+  background-image: url("../../../themes/assets/ml4w-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-right: 20px;
 }
 
 box#tools {

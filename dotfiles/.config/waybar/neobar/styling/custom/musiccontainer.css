@@ -1,26 +1,17 @@
 @import "../colors-waybar.css";
 
-#custom-cava {
-  font-family: "Noto Sans Mono", "monospace";
-  font-size: 12px;
-}
-
-.cava {
-  padding: 2px 6px;
+#custom-cava,
+#custom-mpd-prev,
+#custom-mpd-toggle,
+#custom-mpd-next {
+  margin: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  transition: transform 0.1s ease-in-out;
 }
 
 .cava .level0 { opacity: 0.6; }
 .cava .level7 { font-weight: 700; }
-
-
-
-#custom-mpd-prev,
-#custom-mpd-toggle,
-#custom-mpd-next {
-    padding: 0 6px;
-    transition: transform 0.1s ease-in-out;
-}
-
 
 #custom-mpd-prev:hover,
 #custom-mpd-toggle:hover,
@@ -29,12 +20,14 @@
 }
 
 #mpd {
-    padding-left: 6px;
-    color: #c0caf5;
+  margin: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #c0caf5;
 }
     
 #mpd-group:hover {
-    background: @secondary_container;
+  background: @secondary_container;
 }
 
 box#mpd-group {

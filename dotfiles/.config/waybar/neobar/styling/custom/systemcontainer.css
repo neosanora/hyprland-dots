@@ -4,18 +4,18 @@
 #pulseaudio,
 #custom-backlight,
 #custom-pacman-update {
-    margin-left: 2px;
-    margin-right: 2px;
-    color: @on_secondary_container;
+  margin-left: 2px;
+  margin-right: 2px;
+  color: @on_secondary_container;
 }
 
 #backlight.text,
 #pulseaudio.text,
 #custom-backlight.text,
 #custom-pacman-update.text {
-    margin-left: 3px;
-    margin-right: 3px;
-    color: @on_secondary_container;
+  margin-left: 3px;
+  margin-right: 3px;
+  color: @on_secondary_container;
 }
 
 #battery {
@@ -54,11 +54,11 @@
 
 
 box#system-container {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: alpha(@secondary_container, 0.75);
-    border-radius: 15px;
-    /* border: 2px solid alpha(@secondary-container,0.95); */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: alpha(@secondary_container, 0.75);
+  border-radius: 15px;
+  /* border: 2px solid alpha(@secondary-container,0.95); */
 }
