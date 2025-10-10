@@ -29,7 +29,6 @@
 
 box#tools {
   margin: 5px;
-  border-radius: 15px;
   background-color: alpha(@primary_container, 0.65);
 }
 
@@ -38,6 +37,5 @@ box#tools .horizontal {
   margin-bottom: 4px;
   margin-left: 5px;
   margin-right: 5px;
-  border-radius: 15px;
   background-color: alpha(@primary_container, 0.98);
 }

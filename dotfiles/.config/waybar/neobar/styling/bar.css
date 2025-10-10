@@ -5,10 +5,10 @@
  * ----------------------------------------------------- */
 
 window#waybar {
-  min-height: 0;
   margin: 6px 12px;
   padding: 0px 6px;
-  background-color: alpha(@background, 0.4);
+  /* background-color: alpha(@background, 0.4); */
+  background-color: transparent;
   transition: background-color .5s;
 }
 

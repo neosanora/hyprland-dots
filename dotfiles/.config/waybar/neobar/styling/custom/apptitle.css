@@ -4,7 +4,6 @@
 #custom-app-title-icon {
   color: alpha(@on_secondary_container,0.75);
   background-color: alpha(@secondary_container, 0.55);
-  border-radius: 15px;
   padding-left: 7px;
   padding-right: 7px;
   padding-top: 2px;
@@ -41,5 +40,4 @@ box#app-title-container {
   margin: 5px;
   padding: 5px;
   background-color: alpha(@secondary_container, 0.25);
-  border-radius: 15px;
 }

@@ -9,7 +9,6 @@
 
 box#start-menu {
   margin: 5px;
-  border-radius: 100%;
   background-color: alpha(@primary_container,0.65);
 }
 
@@ -18,6 +17,5 @@ box#launcher .horizontal {
   margin-bottom: 4px;
   margin-left: 5px;
   margin-right: 5px;
-  border-radius: 100%;
   background-color: alpha(@primary_container,0.98);
 }
