@@ -4,7 +4,6 @@
 @import "bar.css";
 @import "general.css";
 @import "stock.css";
-@import "tooltips.css";
 @import "custom/startmenu.css";
 @import "custom/launcher.css";
 @import "custom/musiccontainer.css";
@@ -16,21 +15,36 @@
 @import "custom/toolscontainer.css";
 @import "custom/performancecontainer.css";
 
+/*
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ##
+## ┃~ ~ ~ ~ ~ ~ ~ ~ ~ ~ STYLE FOR ALL CONTENT & CONTAINER ~ ~ ~ ~ ~ ~ ~ ~ ~ ~┃  ##
+## ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ##
+*/
 
 * {
+
   border: none;
+
   font-family: "SF Pro Display", "SF Pro Text", "SF Pro", "SF Mono", "SF Serif", sans-serif, "FiraCode", "Material Icons Round";
+
   font-size: 12px;
   font-weight: 800;
+
   border-radius: 15px;
+
 }
-/* 
-.modules-left > * ,
-.modules-center > * ,
-.modules-right > * {
-    border: 12px solid #888;
-    border-radius: 4px;
-    padding: 0 5px;
-    margin: 2px;
+
+/* -----------------------------------------------------
+ * Tooltips
+ * ----------------------------------------------------- */
+
+
+tooltip {
+    background-color: @surface;
+    padding: 5px;
+    margin: 0px;
 }
- */
+
+tooltip label {
+    color: @on_surface;
+}

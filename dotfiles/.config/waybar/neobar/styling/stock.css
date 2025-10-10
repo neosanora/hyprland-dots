@@ -1,36 +1,13 @@
 @import "colors-waybar.css";
 
+/*
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ##
+## ┃~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ STOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~┃  ##
+## ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ##
+*/
+
 label:focus {
   background-color: #000000;
-}
-
-#disk {
-  background-color: @on_surface_variant;
-}
-
-/* -----------------------------------------------------
-* Tray
-* ----------------------------------------------------- */
-box#tray-container {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  background-color: alpha(@secondary_container, 0.75);
-  /* border: 2px solid alpha(@secondary-container,0.95); */
-}
-
-#tray {
-    padding: 0px 0px 0px 0px;
-}
-
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background-color: #eb4d4b;
 }
 
 /* -----------------------------------------------------

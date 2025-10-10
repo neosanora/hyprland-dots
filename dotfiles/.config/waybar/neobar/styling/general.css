@@ -1,5 +1,11 @@
 @import "colors-waybar.css";
 
+/*
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ##
+## ┃~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ GENERAL ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~┃  ##
+## ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ##
+*/
+
 /* -----------------------------------------------------
 * ANOTHER
 * ----------------------------------------------------- */
@@ -9,6 +15,10 @@
 #idle_inhibitor {
   padding: 0 6px;
   color:  @on_primary_container;
+}
+
+#disk {
+  background-color: @on_surface_variant;
 }
 
 /* -----------------------------------------------------
@@ -45,14 +55,4 @@ label#network {
 
 #network.disconnected {
   color: @secondary;
-}
-
-/* ------------------------------------------------------
- * Workspaces positioning fix 
- * ---------------------------------------------------- */
-.modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
-}
-.modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
 }

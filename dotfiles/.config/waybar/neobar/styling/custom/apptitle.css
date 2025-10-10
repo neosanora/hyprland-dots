@@ -1,14 +1,10 @@
 @import "../colors-waybar.css";
 
-
-#custom-app-title-icon {
-  color: alpha(@on_secondary_container,0.75);
-  background-color: alpha(@secondary_container, 0.55);
-  padding-left: 7px;
-  padding-right: 7px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
+/*
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ##
+## ┃~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ custom-app-title-icon ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~┃  ##
+## ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ##
+*/
 
 #custom-app-title-icon.Idea { color: alpha(@pastel-green,0.65) }
 #custom-app-title-icon.Spotify { color: alpha(@green,0.75) }
@@ -28,12 +24,25 @@ background-color: alpha(@pastel-chrome-blue,0.25)
  }
 
 
-
+/*
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ##
+## ┃~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ MODULES ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~┃  ##
+## ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ##
+*/
 
 label#custom-app-name {
   margin-left: 7px;
   margin-right: 5px;
   color: alpha(@on_secondary_container,0.88);
+}
+
+#custom-app-title-icon {
+  color: alpha(@on_secondary_container,0.75);
+  background-color: alpha(@secondary_container, 0.55);
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 box#app-title-container {
