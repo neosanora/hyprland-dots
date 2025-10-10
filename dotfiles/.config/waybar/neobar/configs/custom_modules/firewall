@@ -1,8 +1,5 @@
 {
-    "include": [
-        "~/.config/waybar/neobar/configs/custom_modules/modules"
-    ],
-
+  
   "group/firewall": {
     "orientation": "horizontal",
     "drawer": {
