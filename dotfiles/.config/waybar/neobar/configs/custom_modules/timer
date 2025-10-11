@@ -1,0 +1,13 @@
+{
+  "custom/pomodoro": {
+    "format": "{}",
+    "exec": "~/.config/waybar/neobar/scripts/custom/timer_dynamic.sh status",
+    "interval": 1,
+    "on-click": "~/.config/waybar/neobar/scripts/custom/timer_dynamic.sh start",
+    "on-click-right": "~/.config/waybar/neobar/scripts/custom/timer_dynamic.sh stop",
+    "on-click-middle": "~/.config/waybar/neobar/scripts/custom/timer_dynamic.sh reset",
+    "on-scroll-up": "~/.config/waybar/neobar/scripts/custom/timer_dynamic.sh switch",
+    "max-length": 50,
+    "signal": 10
+  }
+}

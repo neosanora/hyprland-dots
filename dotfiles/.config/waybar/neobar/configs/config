@@ -1,5 +1,6 @@
 {
   "include": [
+    "~/.config/waybar/neobar/configs/custom_modules/timer",
     "~/.config/waybar/neobar/configs/custom_modules/start_menu",
     "~/.config/waybar/neobar/configs/custom_modules/app_title",
     "~/.config/waybar/neobar/configs/custom_modules/firewall",
@@ -39,6 +40,7 @@
   ],
   
   "modules-right": [
+    "custom/pomodoro",
     "custom/left-arrw",
     "group/performance",
     "custom/left-arrw",
